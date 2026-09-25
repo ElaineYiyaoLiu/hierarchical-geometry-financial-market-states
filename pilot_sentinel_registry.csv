@@ -1,0 +1,9 @@
+sentinel_id,required_role,status,branch_a_condition_reference,notes
+S1,exact_balanced_tree_positive_control,open,restricted,Branch A implementation/golden gate open
+S2,favorable_observable_hierarchy_control,pending_branch_b,,Requires valuation Geometry Card invariant and criterion frozen before Branch B inspects control
+S3,low_noise_low_leakage_partial_hierarchy,frozen,restricted,Condition mapping and parameters held in private Branch A
+S4,intermediate_partial_hierarchy,open,restricted,Exact condition must be frozen in private Branch A before generation
+S5,high_noise_high_leakage_partial_hierarchy,needs_reconciliation,restricted,Condition mapping and parameters held in private Branch A
+S6,pilot_null_N1,frozen,restricted,Restricted Branch A control mapping
+S7,pilot_null_N2,frozen,restricted,Restricted Branch A control mapping
+S8,large_n_compute_stress,optional,,Include only if needed and frozen before generation

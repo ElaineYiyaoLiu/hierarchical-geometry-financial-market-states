@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "branch_b_output.schema.json",
+  "title": "Branch B Output",
+  "type": "object",
+  "required": [
+    "dataset_id", "split", "geometry_id", "common_fitter_id", "schema_version",
+    "parameters", "diagnostics", "runtime_seconds", "peak_memory_bytes",
+    "software_environment", "random_seeds", "status"
+  ],
+  "properties": {
+    "dataset_id": {"type": "string", "minLength": 1},
+    "split": {"enum": ["train", "validation", "test"]},
+    "geometry_id": {"type": "string", "minLength": 1},
+    "common_fitter_id": {"type": "string", "minLength": 1},
+    "schema_version": {"type": "string", "minLength": 1},
+    "configuration_file": {"type": "string", "minLength": 1},
+    "sample_order": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "dissimilarity_matrix": {"$ref": "#/$defs/matrix"},
+    "ultrametric_matrix": {"anyOf": [{"$ref": "#/$defs/matrix"}, {"type": "null"}]},
+    "recovered_tree": {"$ref": "#/$defs/tree"},
+    "terminal_cluster_assignments": {"type": ["object", "null"], "additionalProperties": {"type": ["string", "integer"]}},
+    "hierarchy_support": {
+      "type": "object",
+      "required": ["score", "decision"],
+      "properties": {
+        "score": {"type": "number"},
+        "decision": {"enum": ["supported", "not supported", "indeterminate"]}
+      },
+      "additionalProperties": true
+    },
+    "bootstrap_stability": {"type": ["number", "null"]},
+    "parameters": {
+      "type": "object",
+      "required": ["geometry", "common_fitter", "preprocessing"],
+      "properties": {
+        "geometry": {"type": "object"},
+        "common_fitter": {"type": "object"},
+        "preprocessing": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "diagnostics": {"type": "object"},
+    "runtime_seconds": {"type": "number", "minimum": 0},
+    "peak_memory_bytes": {"type": "integer", "minimum": 0},
+    "software_environment": {"type": "object"},
+    "random_seeds": {"type": "object"},
+    "creation_timestamp": {"type": "string", "format": "date-time"},
+    "checksum": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "status": {"enum": ["complete", "failure"]},
+    "failure_code": {"type": ["string", "null"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "complete"}}, "required": ["status"]},
+      "then": {
+        "required": ["sample_order", "dissimilarity_matrix", "recovered_tree", "hierarchy_support", "bootstrap_stability"],
+        "properties": {"failure_code": {"type": "null"}}
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "failure"}}, "required": ["status"]},
+      "then": {
+        "required": ["failure_code"],
+        "properties": {"failure_code": {"type": "string", "minLength": 1}}
+      }
+    }
+  ],
+  "$defs": {
+    "matrix": {"type": "array", "items": {"type": "array", "items": {"type": "number"}}},
+    "tree": {
+      "type": "object",
+      "required": ["tree_format_version", "root", "internal_nodes", "leaves", "edges"],
+      "properties": {
+        "tree_format_version": {"type": "string", "minLength": 1},
+        "root": {"type": "string", "minLength": 1},
+        "internal_nodes": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "leaves": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["parent", "child", "branch_length"],
+            "properties": {
+              "parent": {"type": "string", "minLength": 1},
+              "child": {"type": "string", "minLength": 1},
+              "branch_length": {"type": "number", "minimum": 0},
+              "unresolved": {"type": "boolean", "default": false}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

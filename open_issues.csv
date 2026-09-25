@@ -1,0 +1,10 @@
+issue_id,owner,week,status,blocking_gate,description
+W3-A-SEED,Project Lead/Branch A,3,closed,pilot_generation,Formal pilot root seed approved and frozen in restricted Branch A before formal pilot generation
+W3-A-POSCTRL,Branch A,3,closed,pilot_generator_gate,Exact balanced-tree pilot positive control implemented and regression tested
+W3-PL-SENTINEL,Project Lead,3,closed,pilot_exchange,Seven-sentinel pilot registry reconciled approved and frozen with condition mappings restricted to Branch A
+W3-B-VAL,Branch B,3,pending_external,pilot_exchange,Valuation-geometry implementation sanity gate
+W3-B-FITTER,Branch B,3,pending_external,pilot_exchange,Common-Fitter cards and geometry-neutral selection rule
+W3-B-GOLDEN,Branch B,3,pending_external,pilot_exchange,Branch B golden tests and pilot processing package
+W3-FACULTY,Faculty Advisor,3,pending_external,pilot_exchange,Faculty pilot-exchange approval
+W1-ACK,Branch B,1,pending_external,week1_handoff,Branch B acknowledgement of handoff package
+W2-FACULTY,Faculty Advisor,2,pending_external,week2_concept,Faculty concept/governance approval

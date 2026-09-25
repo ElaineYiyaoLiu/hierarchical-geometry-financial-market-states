@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+.DS_Store
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+coverage.xml
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# Local data and restricted material
+data/
+sealed_truth/
+restricted/
+*.sealed
+
+# Generated artifacts
+artifacts/
+reports/generated/

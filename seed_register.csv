@@ -1,0 +1,6 @@
+namespace,owner,status,notes
+branch_a_generator,Branch A,frozen_algorithm_seed_release_pending,Formal pilot root seed remains restricted and pending PL release
+branch_b_bootstrap,Branch B,pending_branch_b,Branch B-owned
+branch_b_geometry,Branch B,pending_branch_b,Branch B-owned
+branch_b_fitter,Branch B,pending_branch_b,Branch B-owned
+evaluation_triplets,Evaluator,pending_evaluator,Evaluation-only namespace

@@ -1,0 +1,29 @@
+{
+  "dataset_id": "pilot_dataset_001",
+  "split": "test",
+  "geometry_id": "geometry_example",
+  "common_fitter_id": "fitter_example",
+  "schema_version": "0.1",
+  "sample_order": ["s001", "s002"],
+  "dissimilarity_matrix": [[0, 1], [2, 0]],
+  "ultrametric_matrix": null,
+  "recovered_tree": {
+    "tree_format_version": "0.1",
+    "root": "n0",
+    "internal_nodes": ["n0"],
+    "leaves": ["s001", "s002"],
+    "edges": [
+      {"parent": "n0", "child": "s001", "branch_length": 1.0},
+      {"parent": "n0", "child": "s002", "branch_length": 1.0}
+    ]
+  },
+  "hierarchy_support": {"score": 0.5, "decision": "indeterminate"},
+  "bootstrap_stability": 0.5,
+  "parameters": {"geometry": {}, "common_fitter": {}, "preprocessing": {}},
+  "diagnostics": {},
+  "runtime_seconds": 0.1,
+  "peak_memory_bytes": 1024,
+  "software_environment": {},
+  "random_seeds": {},
+  "status": "complete"
+}

@@ -1,0 +1,18 @@
+{
+  "version": "week3-closeout",
+  "branch_a_h1_h6": "frozen",
+  "observable_schema": "present",
+  "manifest_schema": "present",
+  "branch_b_output_schema": "present",
+  "shared_validator": "present",
+  "branch_a_environment": "python-3.14.7-numpy-2.5.3",
+  "branch_a_pilot_seed_release": "frozen",
+  "branch_a_exact_balanced_positive_control": "pass",
+  "pl_pilot_sentinel_registry": "frozen",
+  "branch_a_pl_direct_control_closeout": "complete",
+  "branch_b_method_cards": "pending_external",
+  "branch_b_valuation_sanity": "pending_external",
+  "faculty_pilot_exchange_approval": "pending_external",
+  "pilot_exchange_recommended": false,
+  "locked_test_authorized": false
+}

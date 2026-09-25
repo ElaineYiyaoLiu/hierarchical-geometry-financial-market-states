@@ -1,0 +1,15 @@
+{
+  "dataset_id": "pilot_dataset_002",
+  "split": "test",
+  "geometry_id": "geometry_example",
+  "common_fitter_id": "fitter_example",
+  "schema_version": "0.1",
+  "parameters": {"geometry": {}, "common_fitter": {}, "preprocessing": {}},
+  "diagnostics": {"stage": "fit"},
+  "runtime_seconds": 0.1,
+  "peak_memory_bytes": 1048576,
+  "software_environment": {"python": "3.14"},
+  "random_seeds": {"fit": 102},
+  "status": "failure",
+  "failure_code": "fit_failed"
+}

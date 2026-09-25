@@ -1,0 +1,16 @@
+version: pilot-v1
+status: pre_exchange
+initial_replicates_per_sentinel: 5
+bootstrap_repetitions_per_dataset: 20
+uniform_escalation_max_replicates_per_sentinel: 10
+sealed_service_required: true
+project_lead_raw_pilot_truth_access: prohibited
+pilot_scientific_performance_for_method_tuning: prohibited
+pilot_dependent_quantities:
+  - minimum_successful_bootstrap_requirement
+  - common_observation_requirement
+  - confidence_interval_method
+  - timeout
+  - treatment_of_failed_fits
+  - final_monte_carlo_repetition_count
+notes: Final values for pilot-dependent quantities are determined only through the protocol-permitted pilot feasibility process.

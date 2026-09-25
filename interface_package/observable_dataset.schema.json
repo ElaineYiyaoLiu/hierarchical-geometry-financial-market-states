@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "observable_dataset.schema.json",
+  "title": "Observable Dataset Manifest",
+  "type": "object",
+  "required": [
+    "dataset_id",
+    "split",
+    "feature_columns",
+    "aux_feature_type",
+    "feature_units",
+    "feature_order_version",
+    "schema_version",
+    "row_count",
+    "column_count",
+    "sample_order_checksum",
+    "file_checksum"
+  ],
+  "properties": {
+    "dataset_id": {"type": "string", "pattern": "^D[0-9A-F]{16}$"},
+    "split": {"enum": ["train", "validation", "test"]},
+    "feature_columns": {
+      "const": ["3M", "6M", "1Y", "2Y", "3Y", "5Y", "7Y", "10Y", "15Y", "20Y", "30Y", "AUX"]
+    },
+    "aux_feature_type": {"enum": ["volatility", "liquidity"]},
+    "feature_units": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "feature_order_version": {"type": "string", "minLength": 1},
+    "schema_version": {"type": "string", "minLength": 1},
+    "row_count": {"type": "integer", "minimum": 1},
+    "column_count": {"const": 12},
+    "sample_order_checksum": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "file_checksum": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "additionalProperties": false
+}

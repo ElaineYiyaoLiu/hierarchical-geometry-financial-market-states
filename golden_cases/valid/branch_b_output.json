@@ -1,0 +1,32 @@
+{
+  "dataset_id": "pilot_dataset_001",
+  "split": "test",
+  "geometry_id": "geometry_example",
+  "common_fitter_id": "fitter_example",
+  "schema_version": "0.1",
+  "configuration_file": "config.json",
+  "sample_order": ["s001", "s002", "s003"],
+  "dissimilarity_matrix": [[0, 1, 2], [1, 0, 1.5], [2, 1.5, 0]],
+  "ultrametric_matrix": [[0, 2, 2], [2, 0, 1.5], [2, 1.5, 0]],
+  "recovered_tree": {
+    "tree_format_version": "0.1",
+    "root": "n0",
+    "internal_nodes": ["n0", "n1"],
+    "leaves": ["s001", "s002", "s003"],
+    "edges": [
+      {"parent": "n0", "child": "s001", "branch_length": 1.0},
+      {"parent": "n0", "child": "n1", "branch_length": 0.5},
+      {"parent": "n1", "child": "s002", "branch_length": 0.75},
+      {"parent": "n1", "child": "s003", "branch_length": 0.75}
+    ]
+  },
+  "hierarchy_support": {"score": 0.8, "decision": "supported"},
+  "bootstrap_stability": 0.9,
+  "parameters": {"geometry": {}, "common_fitter": {}, "preprocessing": {}},
+  "diagnostics": {},
+  "runtime_seconds": 0.2,
+  "peak_memory_bytes": 1048576,
+  "software_environment": {"python": "3.14"},
+  "random_seeds": {"bootstrap": 101},
+  "status": "complete"
+}

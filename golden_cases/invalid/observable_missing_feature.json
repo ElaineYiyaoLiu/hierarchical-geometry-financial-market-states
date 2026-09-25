@@ -1,0 +1,13 @@
+{
+  "dataset_id": "pilot_dataset_bad_features",
+  "split": "test",
+  "feature_columns": ["3M", "6M", "1Y", "2Y", "3Y", "5Y", "7Y", "10Y", "15Y", "20Y", "30Y"],
+  "aux_feature_type": "volatility",
+  "feature_units": ["rate", "rate", "rate", "rate", "rate", "rate", "rate", "rate", "rate", "rate", "rate", "index"],
+  "feature_order_version": "0.1",
+  "schema_version": "0.1",
+  "row_count": 3,
+  "column_count": 12,
+  "sample_order_checksum": "c204434cd6746af2f0275f8488bebac0e20a27f73662067751d6145477e05402",
+  "file_checksum": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+}

@@ -1,0 +1,33 @@
+name: Branch B Python 3.14 checks
+
+on:
+  push:
+    paths:
+      - "branch_b/**"
+      - "validator/**"
+      - "interface_package/**"
+      - "golden_cases/**"
+      - ".github/workflows/branch-b-python314.yml"
+  pull_request:
+    paths:
+      - "branch_b/**"
+      - "validator/**"
+      - "interface_package/**"
+      - "golden_cases/**"
+      - ".github/workflows/branch-b-python314.yml"
+  workflow_dispatch:
+
+jobs:
+  validator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: Record interpreter
+        run: python --version
+      - name: Install validator test dependencies
+        run: python -m pip install pytest jsonschema
+      - name: Run shared validator tests
+        run: python -m pytest validator -q

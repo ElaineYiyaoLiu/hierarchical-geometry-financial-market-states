@@ -20,9 +20,18 @@ This checklist records the current Week 1-3 integration status for the project.
 - [x] Python 3.14.7 / NumPy 2.5.3 pilot environment verified by CI
 - [x] Branch A / Project Lead Week 1-3 direct-control close-out recorded
 
-## Waiting on external gates
+## Completed — Branch B Week 1 setup
 
 - [x] Branch B handoff acknowledgement recorded
+- [x] Branch B geometry and candidate-fitter registry present
+- [x] Branch B draft method cards present
+- [x] Branch B seed namespace policy present
+- [x] Branch B Python 3.14.7 repository-CI environment verified
+- [x] Branch B shared-validator conformance suite passes (15/15)
+- [x] Week 1 Branch B registration/environment setup gate complete
+
+## Waiting on external gates
+
 - [ ] Faculty concept/governance approval recorded
 - [ ] Branch B valuation-geometry sanity gate passes
 - [ ] Branch B Common-Fitter and pilot pipeline pre-exchange gates pass

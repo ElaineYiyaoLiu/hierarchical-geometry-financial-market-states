@@ -1,0 +1,22 @@
+version: 1
+owner: branch_b
+status: development
+policy:
+  branch_a_or_generator_owned_seeds: prohibited
+  hidden_or_evaluation_only_seeds: prohibited
+  record_all_stochastic_steps: true
+  freeze_before_locked_testing: true
+namespaces:
+  implementation_tests:
+    purpose: deterministic Branch B development and unit tests
+  geometry_selection:
+    purpose: Branch B-owned stochastic geometry-selection steps, if any
+  fitter_initialization:
+    purpose: stochastic initialization of registered Common Fitter candidates, if any
+  bootstrap:
+    purpose: Branch B bootstrap resampling
+  robustness:
+    purpose: prespecified Branch B robustness analyses
+base_seed_values:
+  status: unset
+  note: Branch B-owned numerical seed values will be recorded when the Python 3.14 implementation environment is instantiated; no generator-owned seed may be used.

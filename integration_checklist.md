@@ -1,4 +1,4 @@
-# Integration checklist — as of 2026-09-22
+# Integration checklist — updated 2026-09-28
 
 This checklist records the current Week 1-3 integration status for the project.
 
@@ -22,7 +22,7 @@ This checklist records the current Week 1-3 integration status for the project.
 
 ## Waiting on external gates
 
-- [ ] Branch B handoff acknowledgement recorded
+- [x] Branch B handoff acknowledgement recorded
 - [ ] Faculty concept/governance approval recorded
 - [ ] Branch B valuation-geometry sanity gate passes
 - [ ] Branch B Common-Fitter and pilot pipeline pre-exchange gates pass

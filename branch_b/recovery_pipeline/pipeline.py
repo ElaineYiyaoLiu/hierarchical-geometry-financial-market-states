@@ -1,14 +1,22 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable
+from typing import Callable, Protocol
 
 import numpy as np
 
 from branch_b.failures import ConfigurationRequired
 from branch_b.fitters import CommonFitter
 from branch_b.normalization import normalize_dissimilarity
-from branch_b.preprocessing import Standardizer, as_finite_matrix
+from branch_b.preprocessing import as_finite_matrix
+
+
+class FittedPreprocessor(Protocol):
+    def transform(self, values: object) -> np.ndarray:
+        ...
+
+    def to_record(self) -> dict:
+        ...
 
 
 @dataclass(frozen=True)
@@ -21,20 +29,23 @@ class PipelineConfiguration:
 class RecoveryPipeline:
     """Observable-only train/validation/test orchestration skeleton.
 
-    Geometry-specific hyperparameter selection is injected as a callback so the
-    pipeline does not invent a selection rule. Common normalization and fitting are
-    explicit dependencies and therefore remain fail-closed while unresolved.
+    Preprocessing, geometry-specific hyperparameter selection, common normalization,
+    and Common Fitter execution are separate stages. Preprocessing is injected rather
+    than assumed so an unresolved valuation preprocessing choice cannot be silently
+    replaced with standardized preprocessing.
     """
 
     def __init__(
         self,
         *,
         config: PipelineConfiguration,
+        fit_preprocessor: Callable[[np.ndarray], FittedPreprocessor],
         geometry_factory: Callable[[np.ndarray, dict], np.ndarray],
         select_geometry_parameters: Callable[[np.ndarray, np.ndarray], dict],
         fitter: CommonFitter,
     ):
         self.config = config
+        self.fit_preprocessor = fit_preprocessor
         self.geometry_factory = geometry_factory
         self.select_geometry_parameters = select_geometry_parameters
         self.fitter = fitter
@@ -51,16 +62,16 @@ class RecoveryPipeline:
         validation = as_finite_matrix(validation_values)
         test = as_finite_matrix(test_values)
 
-        standardizer = Standardizer.fit(train)
-        z_train = standardizer.transform(train)
-        z_validation = standardizer.transform(validation)
-        z_test = standardizer.transform(test)
+        preprocessor = self.fit_preprocessor(train)
+        x_train = preprocessor.transform(train)
+        x_validation = preprocessor.transform(validation)
+        x_test = preprocessor.transform(test)
 
-        parameters = self.select_geometry_parameters(z_train, z_validation)
+        parameters = self.select_geometry_parameters(x_train, x_validation)
         if parameters is None:
             raise ConfigurationRequired("geometry-specific selection callback returned no parameter record")
 
-        test_native = self.geometry_factory(z_test, parameters)
+        test_native = self.geometry_factory(x_test, parameters)
         test_dissimilarity = normalize_dissimilarity(
             test_native,
             rule=self.config.normalization_rule,
@@ -70,7 +81,7 @@ class RecoveryPipeline:
         return {
             "geometry_id": self.config.geometry_id,
             "common_fitter_id": self.config.common_fitter_id,
-            "preprocessing": standardizer.to_record(),
+            "preprocessing": preprocessor.to_record(),
             "geometry_parameters": parameters,
             "dissimilarity_matrix": test_dissimilarity,
             "ultrametric_matrix": fit.ultrametric_matrix,

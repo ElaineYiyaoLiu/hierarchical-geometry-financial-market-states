@@ -6,5 +6,5 @@ W3-B-VAL,Branch B,3,pending_external,pilot_exchange,Valuation-geometry implement
 W3-B-FITTER,Branch B,3,pending_external,pilot_exchange,Common-Fitter cards and geometry-neutral selection rule
 W3-B-GOLDEN,Branch B,3,pending_external,pilot_exchange,Branch B golden tests and pilot processing package
 W3-FACULTY,Faculty Advisor,3,pending_external,pilot_exchange,Faculty pilot-exchange approval
-W1-ACK,Branch B,1,pending_external,week1_handoff,Branch B acknowledgement of handoff package
+W1-ACK,Branch B,1,closed,week1_handoff,Branch B acknowledgement of handoff package
 W2-FACULTY,Faculty Advisor,2,pending_external,week2_concept,Faculty concept/governance approval

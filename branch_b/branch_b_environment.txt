@@ -1,12 +1,16 @@
 Branch B environment record
-Status: Week 1 setup record; execution environment verification pending
+Status: Week 1 setup record; Branch B execution verification pending
 
 Required Python version: 3.14
+Repository CI target: Python 3.14
 Scientific computation under other Python versions: not authorized
 Machine OS/CPU/RAM: TBD from Branch B execution host
-Python executable/version verification: pending on Branch B execution host
-Dependency lock: pending implementation environment creation
+Python executable/version verification on Branch B host: pending
+Dependency lock for Branch B scientific implementation: pending
 Shared interface package: present in repository
 Shared validator: present in repository
+Shared golden cases: present in repository
+
+Project-level evidence: the integration checklist records a verified Python 3.14.7 / NumPy 2.5.3 pilot environment for Project Lead / Branch A. This is not treated as verification of the Branch B execution host.
 
 This file does not claim that Branch B tests have been executed. The actual Python 3.14 environment, dependency versions, and machine details must be recorded from the host used for Branch B development before environment setup is marked complete.

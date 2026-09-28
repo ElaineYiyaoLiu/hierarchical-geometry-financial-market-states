@@ -29,7 +29,12 @@ Status: Week 1 registration record. Entries are proposed for development and are
 ### gradient_descent_ultrametric
 - Role: candidate Common Fitter
 - Method family: gradient-descent ultrametric fitting
+- Source: Chierchia & Perret, *Ultrametric Fitting by Gradient Descent*
+- Registered objective: Dasgupta relaxation with differentiable soft-cardinality construction
+- Ultrametric parameterization: min-max / subdominant-ultrametric operator
+- Source-backed initialization: working edge weights initialized to input edge weights
+- Optimizer family reported by source: AMSGrad
 - Status: registered for development; not selected
-- Open specification items: exact objective, initialization, stopping rule, randomness/seed rule, tie and zero-branch conventions, degeneracy handling, timeout, and numerical-failure behavior
+- Open project-specific items: graph-construction rule, learning-rate rule, convergence tolerance/stopping rule, iteration limit, near-zero reciprocal-weight handling, seed rule, tie/zero-branch conventions, degeneracy handling, timeout, and exact software versions
 
 The final executable Geometry Cards, Common Fitter Cards, geometry-specific selection rules, and geometry-neutral Common-Fitter selection rule are completed and frozen at their protocol-defined later gates.

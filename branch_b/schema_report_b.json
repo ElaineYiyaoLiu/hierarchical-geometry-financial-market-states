@@ -1,8 +1,17 @@
 {
-  "report_version": "week1-setup-v1",
+  "report_version": "week1-setup-v2",
   "branch": "B",
-  "status": "pending_execution",
+  "status": "pass",
   "python_requirement": "3.14",
+  "verified_environment": {
+    "execution_surface": "GitHub Actions repository CI",
+    "python_version": "3.14.7",
+    "operating_system": "Ubuntu 24.04",
+    "runner_version": "2.337.0",
+    "workflow": ".github/workflows/branch-b-python314.yml",
+    "workflow_run_id": 36464905360,
+    "workflow_conclusion": "success"
+  },
   "interface_artifacts": {
     "observable_dataset_schema": "present",
     "manifest_schema": "present",
@@ -11,12 +20,18 @@
     "golden_cases": "present"
   },
   "branch_b_conformance_run": {
-    "status": "not_run",
-    "reason": "Requires execution on the actual Branch B Python 3.14 environment.",
-    "claim_of_pass": false
+    "status": "pass",
+    "command": "python -m pytest validator -q",
+    "tests_passed": 15,
+    "tests_failed": 0,
+    "elapsed_seconds": 0.1,
+    "pytest_version": "9.1.1",
+    "jsonschema_version": "4.26.0",
+    "claim_of_pass": true
   },
   "blindness_check": {
     "restricted_generator_information_used": false,
-    "notes": "Week 1 setup files use only public shared-interface and Branch B method-registration information."
+    "truth_dependent_information_used": false,
+    "notes": "Week 1 setup and conformance verification use only public shared-interface, validator, golden-case, and Branch B method-registration information."
   }
 }

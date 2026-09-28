@@ -5,6 +5,8 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from branch_b.failures import BranchBFailure
+
 
 @dataclass(frozen=True)
 class BootstrapReplicate:
@@ -22,6 +24,16 @@ def bootstrap_split_indices(n: int, rng: np.random.Generator) -> np.ndarray:
     return rng.integers(0, n, size=n, endpoint=False)
 
 
+def _failure_record(exc: Exception) -> dict:
+    record = {
+        "exception_type": type(exc).__name__,
+        "message": str(exc),
+    }
+    if isinstance(exc, BranchBFailure):
+        record["failure_code"] = str(exc.code)
+    return record
+
+
 def run_full_pipeline_bootstrap(
     *,
     n_replicates: int,
@@ -31,10 +43,11 @@ def run_full_pipeline_bootstrap(
     base_seed: int,
     evaluate_replicate: Callable[[np.ndarray, np.ndarray, np.ndarray, int], object],
 ) -> list[BootstrapReplicate]:
-    """Resample train/validation/test independently and preserve failed replicates.
+    """Resample train/validation/test independently and preserve every failed replicate.
 
     Scientific decisions such as the minimum successful-replicate count, confidence
-    interval method, and failed-fit treatment are intentionally not imposed here.
+    interval method, timeout rule, and failed-fit sensitivity convention are intentionally
+    not imposed here because the protocol assigns them to the bounded pilot revision.
     """
     if n_replicates <= 0:
         raise ValueError("n_replicates must be positive")
@@ -53,10 +66,7 @@ def run_full_pipeline_bootstrap(
             failure = None
         except Exception as exc:
             result = None
-            failure = {
-                "exception_type": type(exc).__name__,
-                "message": str(exc),
-            }
+            failure = _failure_record(exc)
         out.append(
             BootstrapReplicate(
                 replicate_index=b,

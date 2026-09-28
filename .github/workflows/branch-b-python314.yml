@@ -18,7 +18,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  validator:
+  validator-and-branch-b:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +27,9 @@ jobs:
           python-version: "3.14"
       - name: Record interpreter
         run: python --version
-      - name: Install validator test dependencies
-        run: python -m pip install pytest jsonschema
+      - name: Install test dependencies
+        run: python -m pip install pytest==9.1.1 jsonschema==4.26.0 numpy==2.5.3
       - name: Run shared validator tests
         run: python -m pytest validator -q
+      - name: Run Branch B Week 2 tests
+        run: python -m pytest branch_b/support_tests branch_b/recovery_tests branch_b/failure_tests -q

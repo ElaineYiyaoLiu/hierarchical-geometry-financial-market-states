@@ -1,12 +1,9 @@
-import pytest
-
 from branch_b.paired import paired_replicate_contrasts
 
 
-def test_paired_replicate_contrast_is_valuation_minus_comparator():
-    result = paired_replicate_contrasts(
-        {"r1": 0.8, "r2": 0.5},
-        {"r1": 0.6, "r2": 0.7},
+def test_paired_contrast_is_computed_at_replicate_level():
+    out = paired_replicate_contrasts(
+        {"r1": 0.75, "r2": 0.50},
+        {"r1": 0.25, "r2": 0.50},
     )
-    assert result["r1"] == pytest.approx(0.2)
-    assert result["r2"] == pytest.approx(-0.2)
+    assert out == {"r1": 0.5, "r2": 0.0}

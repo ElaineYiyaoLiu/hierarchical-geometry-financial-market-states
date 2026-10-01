@@ -1,0 +1,58 @@
+{
+  "report_version": "week2-preflight-v1",
+  "branch": "B",
+  "date": "2026-09-30",
+  "week1_gate": "complete",
+  "week2_technical_gate": "blocked",
+  "blocking_items": [
+    {
+      "id": "common_normalization",
+      "status": "decision_required",
+      "required": "one identical order-preserving post-geometry normalization rule"
+    },
+    {
+      "id": "correlation_admissibility",
+      "status": "decision_required",
+      "required": [
+        "tau_nc",
+        "tau_deg",
+        "s_min",
+        "quantile_interpolation_method",
+        "numerical_tolerance",
+        "deterministic_degeneracy_handling"
+      ]
+    },
+    {
+      "id": "gradient_descent_common_fitter",
+      "status": "decision_required",
+      "source_backed": {
+        "objective": "Dasgupta soft-cardinal relaxation",
+        "parameterization": "min-max/subdominant ultrametric",
+        "initialization": "working weights equal input weights",
+        "optimizer_family": "AMSGrad"
+      },
+      "required": [
+        "graph_rule",
+        "learning_rate_rule",
+        "convergence_tolerance",
+        "maximum_iterations",
+        "near_zero_weight_handling",
+        "tie_rule",
+        "zero_branch_rule",
+        "degenerate_tree_rule"
+      ],
+      "pilot_fixed_later": [
+        "timeout"
+      ]
+    }
+  ],
+  "external_gate": {
+    "id": "W2-FACULTY",
+    "status": "pending_external"
+  },
+  "not_week2_blockers": [
+    "valuation favorable-control sanity gate",
+    "final Common-Fitter selection during blind validation",
+    "full Week 3 golden-test freeze package"
+  ]
+}

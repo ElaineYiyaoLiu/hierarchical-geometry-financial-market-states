@@ -5,6 +5,7 @@ Status: draft; not frozen.
 - Role: proposed comparison geometry.
 - Input: observable 12-feature profiles only.
 - Native dissimilarity family: Pearson-correlation-based distance.
+- Preprocessing: none. Use the released 12-feature profile directly; do not standardize coordinates before computing Pearson correlation.
 - Confirmatory eligibility: conditional on the prespecified quantitative admissibility rule.
 - Robust spread definition: `R(z) = Q_0.95(z) - Q_0.05(z)`.
 - Relative robust spread: `R_rel(z) = R(z) / max(median(|z|), s_min)`.

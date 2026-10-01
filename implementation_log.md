@@ -5,3 +5,24 @@
 The shared observable schema, manifest schema, Branch B output schema, validator, golden fixtures, naming/checksum rules, access matrix, and freeze registry are in place. Branch A has frozen H1-H6 for pilot use and completed a development handoff rehearsal against a pinned copy of the shared validator.
 
 Branch B scientific implementation has not been performed by the Project Lead. Branch B method cards, valuation-geometry sanity evidence, Common-Fitter rule, and pilot processing artifacts remain Branch B-owned gates.
+
+
+## Branch B Week 2 implementation status — 2026-09-30
+
+Branch B Week 1 setup is complete and Python 3.14 CI is passing.
+
+Implemented Week 2 infrastructure currently includes:
+- geometry-specific preprocessing interfaces;
+- train-fit standardization and identity preprocessing;
+- Euclidean, Chebyshev, and correlation geometry machinery;
+- common-normalization interface with fail-closed unresolved configuration;
+- candidate Common-Fitter interface and source-backed gradient-descent configuration record;
+- train/validation/test recovery-pipeline scaffold;
+- full-split bootstrap resampling scaffold with failed-fit retention;
+- hierarchy-support distortion, LCA-depth stability, Q statistic, and support-decision plumbing;
+- rooted-triplet recovery;
+- paired replicate-level contrast infrastructure;
+- tree edge-list validation and output-record plumbing;
+- protocol failure-code handling and Python 3.14 tests.
+
+Remaining Week 2 technical blockers are the unresolved common normalization rule, complete correlation admissibility settings, and complete project-specific Common-Fitter settings. Faculty concept/governance approval is a separate external Week 2 gate.

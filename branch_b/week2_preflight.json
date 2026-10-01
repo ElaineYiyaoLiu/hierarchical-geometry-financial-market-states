@@ -11,6 +11,11 @@
       "required": "one identical order-preserving post-geometry normalization rule"
     },
     {
+      "id": "standardization_ddof",
+      "status": "decision_required",
+      "required": "explicit degrees-of-freedom convention for the training-split standard deviation used by Euclidean and Chebyshev preprocessing"
+    },
+    {
       "id": "correlation_admissibility",
       "status": "decision_required",
       "required": [
@@ -68,5 +73,12 @@
     "positive branch-length magnitudes do not affect rooted-triplet topology",
     "Branch B output builders are tested against the shared output schema",
     "bootstrap reproducibility is tested from a Branch B-owned development seed"
+  ],
+  "verification_items": [
+    {
+      "id": "correlation_quantile_provenance",
+      "status": "source_verification_required",
+      "note": "Confirm that Q0.05/Q0.95 belong to the near-constant robust-spread rule and were not inferred from the separate 0.95 CI/support discussion."
+    }
   ]
 }

@@ -5,8 +5,9 @@ Status: draft; not frozen.
 - Role: proposed primary comparison geometry.
 - Input: 12 observable features.
 - Preprocessing: coordinate-wise z-score standardization.
-- Preprocessing fit scope: for each coordinate, estimate mean and population standard deviation from the training split only.
+- Preprocessing fit scope: for each coordinate, estimate the mean and standard deviation from the training split only.
 - Preprocessing application: apply the frozen training mean and standard deviation unchanged to validation and test.
+- Standard-deviation convention: degrees-of-freedom (`ddof`) remains to be explicitly fixed by Branch B; implementation fails closed if omitted.
 - Standardized coordinate: `z_ik = (x_ik - mu_k_train) / sigma_k_train`.
 - Native dissimilarity: Euclidean distance on standardized coordinates, `Delta_ij = sqrt(sum_k (z_ik - z_jk)^2)`.
 - Zero training coordinate scale: explicit degeneracy/failure; do not silently regularize or use validation/test information.

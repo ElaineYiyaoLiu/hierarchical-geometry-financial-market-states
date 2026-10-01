@@ -20,3 +20,35 @@ def test_lca_depth_stability_uses_common_relations_only():
     full = {("A", "B"): 3, ("A", "C"): 1, ("B", "C"): 1}
     boot = {("A", "B"): 4, ("A", "C"): 2, ("X", "Y"): 9}
     assert lca_depth_stability(full, boot) == pytest.approx(1.0)
+
+
+def test_lca_depths_contract_zero_and_unresolved_edges():
+    from branch_b.recovery import lca_depths
+
+    resolved = {
+        "tree_format_version": "1",
+        "root": "R",
+        "internal_nodes": ["R", "I"],
+        "leaves": ["A", "B", "C"],
+        "edges": [
+            {"parent": "R", "child": "I", "branch_length": 2.0},
+            {"parent": "R", "child": "C", "branch_length": 7.0},
+            {"parent": "I", "child": "A", "branch_length": 3.0},
+            {"parent": "I", "child": "B", "branch_length": 4.0},
+        ],
+    }
+    contracted = {
+        "tree_format_version": "1",
+        "root": "R",
+        "internal_nodes": ["R", "I"],
+        "leaves": ["A", "B", "C"],
+        "edges": [
+            {"parent": "R", "child": "I", "branch_length": 0.0},
+            {"parent": "R", "child": "C", "branch_length": 7.0},
+            {"parent": "I", "child": "A", "branch_length": 3.0},
+            {"parent": "I", "child": "B", "branch_length": 4.0},
+        ],
+    }
+
+    assert lca_depths(resolved, ["A", "B", "C"])[("A", "B")] == 1
+    assert lca_depths(contracted, ["A", "B", "C"])[("A", "B")] == 0

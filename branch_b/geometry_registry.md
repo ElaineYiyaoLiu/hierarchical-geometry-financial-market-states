@@ -24,6 +24,7 @@ Status: Week 1 registration record. Entries are proposed for development and are
 - Role: proposed comparison geometry, confirmatory only if its prespecified admissibility rule passes
 - Native dissimilarity family: Pearson-correlation-based distance
 - Preprocessing: none; Pearson correlation is computed on the released 12-feature profiles without coordinate standardization or other transformation
+- Preprocessing: none; Pearson correlation is computed on the released 12-feature profiles without coordinate standardization or other transformation
 - Near-constant statistic: relative robust spread R_rel(z) = [Q_0.95(z) - Q_0.05(z)] / max(median(|z|), s_min)
 - Quantile levels: Q_0.05 and Q_0.95 adopted by Branch B on 2026-09-30
 - Status: registered for development

@@ -1,3 +1,8 @@
+import json
+from pathlib import Path
+
+from jsonschema import Draft202012Validator, FormatChecker
+
 from branch_b.output import build_complete_result, build_failure_result
 
 
@@ -17,7 +22,12 @@ def _common_kwargs():
     }
 
 
-def test_complete_record_has_complete_status():
+def _schema_validator():
+    schema = json.loads(Path("interface_package/branch_b_output.schema.json").read_text())
+    return Draft202012Validator(schema, format_checker=FormatChecker())
+
+
+def test_complete_record_has_complete_status_and_matches_shared_schema():
     record = build_complete_result(
         **_common_kwargs(),
         sample_order=["A", "B"],
@@ -38,9 +48,10 @@ def test_complete_record_has_complete_status():
     )
     assert record["status"] == "complete"
     assert record["failure_code"] is None
+    _schema_validator().validate(record)
 
 
-def test_failure_record_keeps_failure_separate_from_support_decision():
+def test_failure_record_keeps_failure_separate_from_support_decision_and_matches_schema():
     record = build_failure_result(
         **_common_kwargs(),
         failure_code="NUMERICAL_FIT",
@@ -48,3 +59,4 @@ def test_failure_record_keeps_failure_separate_from_support_decision():
     assert record["status"] == "failure"
     assert record["failure_code"] == "NUMERICAL_FIT"
     assert "hierarchy_support" not in record
+    _schema_validator().validate(record)

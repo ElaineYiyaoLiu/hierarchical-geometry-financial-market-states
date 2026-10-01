@@ -1,5 +1,5 @@
 {
-  "report_version": "week2-preflight-v1",
+  "report_version": "week2-preflight-v2",
   "branch": "B",
   "date": "2026-09-30",
   "week1_gate": "complete",
@@ -54,5 +54,19 @@
     "valuation favorable-control sanity gate",
     "final Common-Fitter selection during blind validation",
     "full Week 3 golden-test freeze package"
+  ],
+  "last_verified_ci": {
+    "python_version": "3.14.7",
+    "workflow_run_id": 36808137703,
+    "shared_validator_passed": 15,
+    "branch_b_tests_passed": 34,
+    "conclusion": "success"
+  },
+  "completed_nondecision_repairs": [
+    "rooted-triplet depth uses contracted resolved topology",
+    "LCA-depth stability uses the same contracted resolved topology",
+    "positive branch-length magnitudes do not affect rooted-triplet topology",
+    "Branch B output builders are tested against the shared output schema",
+    "bootstrap reproducibility is tested from a Branch B-owned development seed"
   ]
 }

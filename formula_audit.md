@@ -16,7 +16,8 @@ Verified implementation/specification points:
 - correlation uses the released 12-feature profiles directly with no coordinate standardization before Pearson-correlation distance;
 - hierarchy-support distortion and Q = S - min(D, 1) follow the controlling packet;
 - bootstrap train/validation/test resampling and failed-fit retention are implemented as separate stages;
-- rooted-triplet evaluation treats unresolved estimated relations as incorrect and zero-length/unresolved branches as unresolved;
+- LCA-depth stability uses the same contracted resolved topology as rooted-triplet evaluation;
+- rooted-triplet evaluation uses resolved topological depth after contracting zero-length/unresolved edges; positive branch-length magnitudes do not affect topology, and unresolved estimated relations count as incorrect;
 - the registered gradient-descent candidate is source-backed by Chierchia & Perret, *Ultrametric Fitting by Gradient Descent*.
 
 Source-backed Common-Fitter details:
@@ -36,3 +37,14 @@ The following Branch B scientific/project-specific choices are still not formula
 - valuation favorable-feature sanity invariant and minimum criterion at its later gate.
 
 The 0.95/0.05 quantiles used in the current near-constant robust-spread draft are a profile-spread construction and must not be conflated with a 95% confidence level or the packet's empirical 95th-percentile support calibration threshold.
+
+
+### 2026-09-30 structural-depth correction
+
+A Week 2 audit found that rooted-triplet evaluation had been using cumulative positive branch lengths as an effective depth. That was corrected because rooted-triplet recovery is topological: positive branch-length magnitudes must not change which pair has the strictly deeper common ancestor. The implementation now counts resolved structural levels, assigning zero increment to zero-length or explicitly unresolved edges. LCA-depth stability uses the same convention.
+
+Python 3.14 CI after this correction:
+- shared validator: 15 passed;
+- Branch B tests: 34 passed;
+- workflow run: 36808137703;
+- conclusion: success.

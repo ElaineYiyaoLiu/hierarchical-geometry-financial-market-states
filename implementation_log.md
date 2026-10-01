@@ -26,3 +26,15 @@ Implemented Week 2 infrastructure currently includes:
 - protocol failure-code handling and Python 3.14 tests.
 
 Remaining Week 2 technical blockers are the unresolved common normalization rule, complete correlation admissibility settings, and complete project-specific Common-Fitter settings. Faculty concept/governance approval is a separate external Week 2 gate.
+
+
+### Week 2 structural recovery correction — 2026-09-30
+
+The recovery audit identified an inconsistency between rooted-triplet evaluation and LCA-depth stability around zero-length/unresolved branches. Both now use resolved topological depth after contracting zero-length or explicitly unresolved edges. Positive branch-length magnitudes no longer affect rooted-triplet topology.
+
+Verification under Python 3.14.7:
+- shared validator: 15 passed;
+- Branch B test suite: 34 passed;
+- workflow run 36808137703: success.
+
+This correction did not alter any frozen scientific threshold or access boundary.

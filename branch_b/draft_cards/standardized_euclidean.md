@@ -4,8 +4,12 @@ Status: draft; not frozen.
 
 - Role: proposed primary comparison geometry.
 - Input: 12 observable features.
-- Preprocessing: train-estimated standardization; parameters are applied unchanged to validation and test.
-- Native dissimilarity: Euclidean distance on the standardized observable representation.
+- Preprocessing: coordinate-wise z-score standardization.
+- Preprocessing fit scope: for each coordinate, estimate mean and population standard deviation from the training split only.
+- Preprocessing application: apply the frozen training mean and standard deviation unchanged to validation and test.
+- Standardized coordinate: `z_ik = (x_ik - mu_k_train) / sigma_k_train`.
+- Native dissimilarity: Euclidean distance on standardized coordinates, `Delta_ij = sqrt(sum_k (z_ik - z_jk)^2)`.
+- Zero training coordinate scale: explicit degeneracy/failure; do not silently regularize or use validation/test information.
 - Hidden information: prohibited.
-- Geometry-specific selection rule: to be completed if any geometry-specific hyperparameters are introduced.
+- Geometry-specific selection rule: none currently specified for the native standardized Euclidean mapping.
 - Common post-geometry normalization: project-level rule, exact formula pending confirmation.

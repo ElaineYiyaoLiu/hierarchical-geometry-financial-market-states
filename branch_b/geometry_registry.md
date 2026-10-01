@@ -21,8 +21,10 @@ Status: Week 1 registration record. Entries are proposed for development and are
 ### correlation_distance
 - Role: proposed comparison geometry, confirmatory only if its prespecified admissibility rule passes
 - Native dissimilarity family: Pearson-correlation-based distance
+- Near-constant statistic: relative robust spread R_rel(z) = [Q_0.95(z) - Q_0.05(z)] / max(median(|z|), s_min)
+- Quantile levels: Q_0.05 and Q_0.95 adopted by Branch B on 2026-09-30
 - Status: registered for development
-- Open specification items: quantitative constant/near-constant admissibility rule and deterministic failure/ineligibility behavior
+- Open specification items: tau_nc, tau_deg, s_min, quantile interpolation convention, numerical tolerance, and deterministic degeneracy handling
 
 ## Candidate Common Fitters
 

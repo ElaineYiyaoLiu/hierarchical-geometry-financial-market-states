@@ -54,3 +54,14 @@ Implemented without changing the pending correlation-degeneracy specification:
 - recovery pipeline default now points to the approved common normalization.
 
 The remaining fitter engineering task is the executable Python 3.14 implementation of the approved paper-based Dasgupta soft-cardinal/min-max optimization kernel. Correlation degeneracy/admissibility remains intentionally unresolved.
+
+
+## Audit correction — correlation and remaining Week 2 integration gaps — 2026-10-01
+
+The earlier correlation robust-spread draft (Q0.05/Q0.95 relative spread) was removed from executable Branch B methodology because Branch B explicitly deferred the correlation-degeneracy/admissibility decision to a later meeting. The repository now retains only the raw Pearson-distance primitive, no coordinate preprocessing, and an exact-constant mathematical failure guard.
+
+Additional Week 2 integration gaps identified by audit:
+- the Common Fitter configuration is approved but its executable Dasgupta/min-max kernel is still missing;
+- the recovery pipeline does not yet implement the full validation-hierarchy selection -> frozen-parameter test-hierarchy sequence;
+- the bootstrap engine resamples all three splits but still needs end-to-end integration proving preprocessing refit, validation reselection, test fitting, duplicate multiplicity handling, and LCA common-observation matching inside each replicate;
+- general matrix/tree numerical comparison tolerances remain separate unresolved choices and are not inferred from the approved 1e-12 normalization/weight guards.

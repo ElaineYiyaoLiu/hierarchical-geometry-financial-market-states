@@ -7,7 +7,7 @@ Status: draft; not frozen.
 - Preprocessing: coordinate-wise z-score standardization.
 - Preprocessing fit scope: for each coordinate, estimate the mean and standard deviation from the training split only.
 - Preprocessing application: apply the frozen training mean and standard deviation unchanged to validation and test.
-- Standard-deviation convention: degrees-of-freedom (`ddof`) remains to be explicitly fixed by Branch B; implementation fails closed if omitted.
+- Standard-deviation convention: `ddof=0` (population-form training-split standard deviation) for the registered preprocessing rule.
 - Standardized coordinate: `z_ik = (x_ik - mu_k_train) / sigma_k_train`.
 - Native dissimilarity: Chebyshev distance on standardized coordinates, `Delta_ij = max_k |z_ik - z_jk|`.
 - Zero training coordinate scale: explicit degeneracy/failure; do not silently regularize or use validation/test information.
@@ -15,4 +15,4 @@ Status: draft; not frozen.
 - Preliminary hierarchy used to define native dissimilarity: prohibited.
 - Geometry-specific selection: none currently specified for the native Chebyshev mapping.
 - Favorable-feature sanity invariant and minimum criterion: pending prespecification before the designated control is inspected.
-- Common post-geometry normalization: project-level rule, exact formula pending confirmation.
+- Common post-geometry normalization: divide by the maximum finite off-diagonal native dissimilarity; if that maximum is `<= 1e-12`, return `DEGENERATE_DISTANCE`.

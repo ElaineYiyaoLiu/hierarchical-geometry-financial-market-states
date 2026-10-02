@@ -61,3 +61,25 @@ def test_candidate_fitter_rejects_near_zero_reciprocal_weight():
 def test_relative_objective_improvement_rule():
     fitter = GradientDescentUltrametricFitter()
     assert fitter.relative_objective_improvement(100.0, 99.0) == pytest.approx(0.01)
+
+
+def test_complete_graph_uses_every_pair_once():
+    fitter = GradientDescentUltrametricFitter()
+    d = np.array([
+        [0.0, 0.25, 0.5],
+        [0.25, 0.0, 1.0],
+        [0.5, 1.0, 0.0],
+    ])
+    edges, weights = fitter.complete_graph_edges(d)
+    assert edges.tolist() == [[0, 1], [0, 2], [1, 2]]
+    assert np.allclose(weights, [0.25, 0.5, 1.0])
+
+
+def test_registered_convergence_requires_ten_consecutive_small_improvements():
+    fitter = GradientDescentUltrametricFitter()
+    flat = [1.0] + [1.0 - 1e-10 * k for k in range(1, 11)]
+    assert fitter.convergence_reached(flat)
+
+    interrupted = list(flat)
+    interrupted[-1] = interrupted[-2] - 1e-4
+    assert not fitter.convergence_reached(interrupted)

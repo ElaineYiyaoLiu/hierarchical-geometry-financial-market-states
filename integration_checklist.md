@@ -34,15 +34,16 @@ This checklist records the current Week 1-3 integration status for the project.
 
 - [x] Geometry-specific preprocessing interfaces implemented
 - [x] Train-only standardization for Euclidean/Chebyshev implemented
+- [x] ddof=0 preprocessing convention approved and implemented
 - [x] Identity preprocessing for correlation implemented
 - [x] Geometry primitives implemented
 - [x] Recovery-pipeline, bootstrap, support, rooted-triplet, paired-contrast, serialization, and failure scaffolds implemented
 - [x] Rooted-triplet and LCA-depth zero/unresolved-branch handling made topologically consistent
 - [x] Shared output-schema compatibility tested
 - [x] Python 3.14.7 CI passes shared validator (15) and Branch B tests (34)
-- [ ] Common post-geometry normalization frozen and implemented
+- [x] Common post-geometry normalization approved and implemented
 - [ ] Correlation admissibility constants/conventions frozen
-- [ ] Gradient-descent Common-Fitter project settings frozen and executable
+- [~] Gradient-descent Common-Fitter project settings approved; executable optimizer kernel still required
 - [ ] Week 2 recovery pipeline integration-ready gate complete
 
 ## Waiting on external gates

@@ -1,5 +1,5 @@
 {
-  "report_version": "week2-preflight-v6",
+  "report_version": "week2-preflight-v7",
   "branch": "B",
   "date": "2026-10-02",
   "week1_gate": "complete",
@@ -54,10 +54,10 @@
     },
     {
       "id": "full_pipeline_bootstrap_integration",
-      "status": "partial_implementation",
+      "status": "implementation_complete_pending_ci",
       "required": [
-        "connect distinct original bootstrap-test observations to LCA-depth stability evaluation",
-        "golden test for duplicate-draw LCA common-observation matching"
+        "Python 3.14 CI verification of original-identity LCA stability hookup",
+        "Python 3.14 CI verification of duplicate-draw common-observation golden tests"
       ],
       "completed": [
         "independent train/validation/test resampling",
@@ -65,7 +65,10 @@
         "validation candidate fitting and reselection inside each replicate",
         "selected-parameter bootstrap test fitting",
         "duplicate draw multiplicities retained against original row identities",
-        "failed replicate preservation with protocol failure code when available"
+        "failed replicate preservation with protocol failure code when available",
+        "distinct original bootstrap-test observations projected to one LCA-depth relation per original pair",
+        "LCA-depth stability computed against full-test relations on shared original identities",
+        "inconsistent duplicate-copy relations fail closed as DEGENERATE_TREE"
       ]
     },
     {

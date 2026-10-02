@@ -1,5 +1,5 @@
 {
-  "report_version": "week2-preflight-v3",
+  "report_version": "week2-preflight-v4",
   "branch": "B",
   "date": "2026-10-01",
   "week1_gate": "complete",
@@ -9,13 +9,13 @@
       "id": "correlation_admissibility",
       "status": "decision_required",
       "required": [
-        "tau_nc",
-        "tau_deg",
-        "s_min",
-        "quantile_interpolation_method",
-        "numerical_tolerance",
-        "deterministic_degeneracy_handling"
-      ]
+        "quantitative near-constant/admissibility statistic",
+        "thresholds and scale constants",
+        "quantile/interpolation rule if quantiles are used",
+        "numerical tolerance",
+        "deterministic degeneracy/ineligibility handling"
+      ],
+      "note": "Earlier Q0.05/Q0.95 robust-spread draft was rolled back; no near-constant construction is currently frozen."
     },
     {
       "id": "gradient_descent_common_fitter",
@@ -26,14 +26,6 @@
         "initialization": "working weights equal input weights",
         "optimizer_family": "AMSGrad"
       },
-      "required": [
-        "Python 3.14 executable Dasgupta soft-cardinal/min-max optimizer kernel",
-        "source-conformance tests",
-        "actual compatible dependency versions"
-      ],
-      "pilot_fixed_later": [
-        "timeout"
-      ],
       "approved_settings": {
         "graph_rule": "complete_graph",
         "optimizer": "AMSGrad",
@@ -48,7 +40,46 @@
         "degenerate_tree_rule": "structural_invalidity_only",
         "random_restarts": 0,
         "deterministic_primary": true
-      }
+      },
+      "required": [
+        "Python 3.14 executable Dasgupta soft-cardinal/min-max optimizer kernel",
+        "source-conformance tests",
+        "actual compatible dependency versions"
+      ],
+      "pilot_fixed_later": [
+        "timeout"
+      ]
+    },
+    {
+      "id": "split_selection_pipeline",
+      "status": "implementation_required",
+      "required": [
+        "recover validation hierarchy under each candidate geometry parameter setting",
+        "apply only the prespecified ground-truth-free validation criterion",
+        "carry the selected geometry parameters unchanged into final test processing",
+        "retain split-specific diagnostics and failure records"
+      ]
+    },
+    {
+      "id": "full_pipeline_bootstrap_integration",
+      "status": "implementation_required",
+      "required": [
+        "refit preprocessing on bootstrap training",
+        "rerun geometry-parameter selection on bootstrap validation",
+        "fit bootstrap test hierarchy",
+        "preserve duplicate bootstrap draws as multiplicities while matching distinct original observations for LCA stability",
+        "record failed replicate codes without silent deletion"
+      ]
+    },
+    {
+      "id": "general_numerical_tolerances",
+      "status": "decision_required",
+      "required": [
+        "matrix symmetry/zero-diagonal comparison tolerance",
+        "ultrametric-inequality comparison tolerance",
+        "tree height-equivalence/tie comparison tolerance"
+      ],
+      "note": "The approved 1e-12 normalization and reciprocal-weight thresholds do not automatically freeze these separate numerical comparison tolerances."
     }
   ],
   "external_gate": {
@@ -72,13 +103,14 @@
     "LCA-depth stability uses the same contracted resolved topology",
     "positive branch-length magnitudes do not affect rooted-triplet topology",
     "Branch B output builders are tested against the shared output schema",
-    "bootstrap reproducibility is tested from a Branch B-owned development seed"
+    "bootstrap reproducibility is tested from a Branch B-owned development seed",
+    "unapproved Q0.05/Q0.95 correlation near-constant construction rolled back"
   ],
   "verification_items": [
     {
-      "id": "correlation_quantile_provenance",
-      "status": "deferred_with_correlation_meeting",
-      "note": "Correlation degeneracy/admissibility specification is intentionally left unchanged pending the explicit Branch B meeting."
+      "id": "correlation_meeting",
+      "status": "pending",
+      "note": "Correlation admissibility/degeneracy specification must be decided explicitly by Branch B."
     }
   ],
   "completed_decisions": [

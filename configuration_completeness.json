@@ -1,18 +1,34 @@
 {
-  "version": "week3-closeout",
-  "branch_a_h1_h6": "frozen",
-  "observable_schema": "present",
-  "manifest_schema": "present",
-  "branch_b_output_schema": "present",
-  "shared_validator": "present",
-  "branch_a_environment": "python-3.14.7-numpy-2.5.3",
-  "branch_a_pilot_seed_release": "frozen",
-  "branch_a_exact_balanced_positive_control": "pass",
-  "pl_pilot_sentinel_registry": "frozen",
-  "branch_a_pl_direct_control_closeout": "complete",
-  "branch_b_method_cards": "pending_external",
-  "branch_b_valuation_sanity": "pending_external",
-  "faculty_pilot_exchange_approval": "pending_external",
+  "version": "week3-closeout-2026-10-02",
+  "review_date": "2026-10-02",
+  "project_lead_scope": {
+    "observable_only_boundary": "pass",
+    "project_lead_raw_truth_prohibition": "recorded",
+    "sealed_service_custodian_path": "recorded",
+    "pilot_precision_plan": "present",
+    "pilot_sentinel_registry": "frozen_public_safe_view",
+    "pilot_exchange_decision": "blocked"
+  },
+  "branch_a": {
+    "pilot_configuration": "frozen_restricted",
+    "pilot_root_seed": "approved_and_frozen_restricted",
+    "exact_balanced_positive_control": "pass",
+    "shared_contract_alignment": "pass",
+    "formal_pilot_generation": "not_started"
+  },
+  "branch_b": {
+    "bootstrap_lca_original_identity_integration": "implementation_complete_pending_python314_ci",
+    "correlation_admissibility": "proposal_ready_for_review",
+    "general_numerical_tolerances": "proposal_ready_for_review",
+    "common_fitter_source_conformance": "review_complete_decisions_required",
+    "common_fitter_executable_kernel": "blocked_on_decisions_and_python314_dependency_evidence",
+    "valuation_favorable_feature_sanity_criterion": "decision_required",
+    "pilot_pipeline_gate": "not_complete"
+  },
+  "external": {
+    "faculty_concept_governance": "pending_external",
+    "faculty_pilot_exchange_approval": "pending_external"
+  },
   "pilot_exchange_recommended": false,
   "locked_test_authorized": false
 }

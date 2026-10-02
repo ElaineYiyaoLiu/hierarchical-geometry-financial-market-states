@@ -93,3 +93,16 @@ Implemented the remaining bootstrap stability hookup from Appendix D.2 without c
 - dedicated golden tests cover duplicate-copy collapse, inconsistency failure, and rank-agreement recovery.
 
 The bootstrap integration blocker is now implementation-complete pending Python 3.14 CI verification.
+
+
+## Common Fitter source-conformance review - 2026-10-02
+
+Reviewed the paper against the authors' public reference implementation before writing the executable kernel.
+
+New source evidence:
+- the public Dasgupta loss implementation exposes a soft-area sigmoid parameter with default value 5;
+- paper Algorithm 1 initializes working weights from the input weights;
+- the public software instead defaults to initializing the optimization variable from the subdominant ultrametric when no explicit initialization is supplied;
+- the public software also applies a non-negativity projection, with softplus as its default projection path.
+
+No project choice was silently changed. The sigmoid, initialization, and positivity details are now explicit pre-freeze review items. Python 3.14 dependency compatibility remains a hard execution gate.

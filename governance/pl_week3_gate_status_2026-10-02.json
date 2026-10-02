@@ -1,0 +1,36 @@
+{
+  "record": "pl_week3_gate_status",
+  "date": "2026-10-02",
+  "decision": "BLOCKED",
+  "pl_checks": {
+    "configuration_completeness_audit": "updated",
+    "observable_only_boundary": "pass",
+    "pilot_sentinel_registry": "frozen_public_safe_view",
+    "sealed_service_custodian_path": "recorded",
+    "pilot_precision_plan": "present",
+    "raw_truth_prohibition": "recorded"
+  },
+  "blocking_groups": {
+    "branch_b_decisions": [
+      "correlation_admissibility",
+      "general_numerical_tolerances",
+      "common_fitter_sigmoid",
+      "common_fitter_initialization",
+      "common_fitter_positivity",
+      "valuation_favorable_feature_sanity"
+    ],
+    "branch_b_execution": [
+      "common_fitter_python314_executable_kernel",
+      "common_fitter_source_conformance_and_golden_tests",
+      "python314_dependency_evidence",
+      "bootstrap_lca_integration_python314_ci",
+      "complete_pre_pilot_method_package"
+    ],
+    "external_approvals": [
+      "faculty_concept_governance",
+      "faculty_pilot_exchange"
+    ]
+  },
+  "pilot_observable_exchange_authorized": false,
+  "locked_test_authorized": false
+}

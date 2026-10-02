@@ -65,3 +65,17 @@ Additional Week 2 integration gaps identified by audit:
 - the recovery pipeline does not yet implement the full validation-hierarchy selection -> frozen-parameter test-hierarchy sequence;
 - the bootstrap engine resamples all three splits but still needs end-to-end integration proving preprocessing refit, validation reselection, test fitting, duplicate multiplicity handling, and LCA common-observation matching inside each replicate;
 - general matrix/tree numerical comparison tolerances remain separate unresolved choices and are not inferred from the approved 1e-12 normalization/weight guards.
+
+
+## Week 2 orchestration progress — 2026-10-01
+
+Implemented and verified under Python 3.14.7:
+- validation candidates are now actually fit on the validation split with common normalization and the Common Fitter interface;
+- the scientific validation criterion remains an injected ground-truth-free selector rather than a hard-coded invented rule;
+- the selected geometry-parameter record is carried unchanged to test processing;
+- the recovery pipeline is invoked inside each bootstrap replicate, so preprocessing is refit on bootstrap training and validation selection is rerun before bootstrap test fitting;
+- duplicate bootstrap draws are recorded as multiplicities of original observations rather than being treated as new identities.
+
+Latest verification: workflow 36957977998, shared validator 15 passed, Branch B tests 44 passed.
+
+Remaining bootstrap integration work is the LCA-depth stability hookup using distinct original bootstrap-test observations shared with the full test fit.

@@ -2,13 +2,21 @@
   "record": "pl_week3_gate_status",
   "date": "2026-10-02",
   "decision": "BLOCKED",
-  "pl_checks": {
-    "configuration_completeness_audit": "updated",
+  "evidence_reconciled": true,
+  "satisfied_or_recorded": {
     "observable_only_boundary": "pass",
+    "shared_public_disclosure_boundary": "pass",
+    "project_lead_raw_truth_prohibition": "pass_recorded",
     "pilot_sentinel_registry": "frozen_public_safe_view",
-    "sealed_service_custodian_path": "recorded",
-    "pilot_precision_plan": "present",
-    "raw_truth_prohibition": "recorded"
+    "branch_a_pilot_configuration": "frozen_restricted",
+    "branch_a_pilot_root_seed": "approved_and_frozen_restricted",
+    "branch_a_existing_python314_golden_record": "present",
+    "formal_pilot_generation": "not_started"
+  },
+  "requires_final_verification": {
+    "sealed_service_custodian_operational_availability": "pending_final_release_check",
+    "branch_a_exact_current_commit_python314_run": "pending",
+    "shared_and_branch_b_current_commit_python314_ci": "pending"
   },
   "blocking_groups": {
     "branch_b_decisions": [
@@ -24,13 +32,22 @@
       "common_fitter_source_conformance_and_golden_tests",
       "python314_dependency_evidence",
       "bootstrap_lca_integration_python314_ci",
-      "complete_pre_pilot_method_package"
+      "complete_pre_pilot_method_package",
+      "final_current_code_schema_output_conformance"
     ],
     "external_approvals": [
       "faculty_concept_governance",
       "faculty_pilot_exchange"
     ]
   },
+  "evidence_paths": [
+    "governance/pl_pilot_exchange_signoff_checklist.md",
+    "configuration_completeness.json",
+    "pilot_access_audit.md",
+    "pilot_precision_plan.yaml",
+    "pilot_sentinel_registry.csv",
+    "branch_b/week2_preflight.json"
+  ],
   "pilot_observable_exchange_authorized": false,
   "locked_test_authorized": false
 }

@@ -43,7 +43,7 @@ This checklist records the current Week 1-3 integration status for the project.
 - [x] Python 3.14.7 CI passes shared validator (15) and Branch B tests (34)
 - [x] Common post-geometry normalization approved and implemented
 - [ ] Correlation admissibility constants/conventions frozen
-- [~] Gradient-descent Common-Fitter project settings approved; executable optimizer kernel still required
+- [ ] Gradient-descent Common-Fitter project settings approved; executable optimizer kernel still required
 - [ ] Week 2 recovery pipeline integration-ready gate complete
 
 ## Waiting on external gates

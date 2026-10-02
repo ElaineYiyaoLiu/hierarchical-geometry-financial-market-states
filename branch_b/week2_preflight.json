@@ -1,20 +1,10 @@
 {
-  "report_version": "week2-preflight-v2",
+  "report_version": "week2-preflight-v3",
   "branch": "B",
-  "date": "2026-09-30",
+  "date": "2026-10-01",
   "week1_gate": "complete",
   "week2_technical_gate": "blocked",
   "blocking_items": [
-    {
-      "id": "common_normalization",
-      "status": "decision_required",
-      "required": "one identical order-preserving post-geometry normalization rule"
-    },
-    {
-      "id": "standardization_ddof",
-      "status": "decision_required",
-      "required": "explicit degrees-of-freedom convention for the training-split standard deviation used by Euclidean and Chebyshev preprocessing"
-    },
     {
       "id": "correlation_admissibility",
       "status": "decision_required",
@@ -29,7 +19,7 @@
     },
     {
       "id": "gradient_descent_common_fitter",
-      "status": "decision_required",
+      "status": "implementation_required",
       "source_backed": {
         "objective": "Dasgupta soft-cardinal relaxation",
         "parameterization": "min-max/subdominant ultrametric",
@@ -37,18 +27,28 @@
         "optimizer_family": "AMSGrad"
       },
       "required": [
-        "graph_rule",
-        "learning_rate_rule",
-        "convergence_tolerance",
-        "maximum_iterations",
-        "near_zero_weight_handling",
-        "tie_rule",
-        "zero_branch_rule",
-        "degenerate_tree_rule"
+        "Python 3.14 executable Dasgupta soft-cardinal/min-max optimizer kernel",
+        "source-conformance tests",
+        "actual compatible dependency versions"
       ],
       "pilot_fixed_later": [
         "timeout"
-      ]
+      ],
+      "approved_settings": {
+        "graph_rule": "complete_graph",
+        "optimizer": "AMSGrad",
+        "learning_rate": 0.01,
+        "convergence_tolerance": 1e-8,
+        "convergence_patience": 10,
+        "maximum_iterations": 1000,
+        "near_zero_weight_tolerance": 1e-12,
+        "near_zero_weight_handling": "DEGENERATE_DISTANCE",
+        "tie_rule": "unresolved_multifurcation",
+        "zero_branch_rule": "preserve_and_treat_unresolved_structurally",
+        "degenerate_tree_rule": "structural_invalidity_only",
+        "random_restarts": 0,
+        "deterministic_primary": true
+      }
     }
   ],
   "external_gate": {
@@ -77,8 +77,22 @@
   "verification_items": [
     {
       "id": "correlation_quantile_provenance",
-      "status": "source_verification_required",
-      "note": "Confirm that Q0.05/Q0.95 belong to the near-constant robust-spread rule and were not inferred from the separate 0.95 CI/support discussion."
+      "status": "deferred_with_correlation_meeting",
+      "note": "Correlation degeneracy/admissibility specification is intentionally left unchanged pending the explicit Branch B meeting."
     }
+  ],
+  "completed_decisions": [
+    "common normalization = divide by maximum finite off-diagonal dissimilarity",
+    "common normalization degeneracy threshold = 1e-12",
+    "Euclidean/Chebyshev standardization ddof = 0",
+    "complete-graph Common-Fitter input",
+    "AMSGrad learning rate = 0.01",
+    "relative-objective tolerance = 1e-8 for 10 consecutive iterations",
+    "maximum iterations = 1000",
+    "normalized fitter edge weight <= 1e-12 -> DEGENERATE_DISTANCE",
+    "equal-height ties -> unresolved multifurcations",
+    "zero-length branches preserved and structurally unresolved",
+    "DEGENERATE_TREE reserved for structural invalidity",
+    "deterministic primary fitter with no random restarts"
   ]
 }

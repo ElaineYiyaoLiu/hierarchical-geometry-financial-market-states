@@ -66,6 +66,26 @@ class GradientDescentUltrametricFitter:
         if c.timeout_seconds is not None and (not np.isfinite(c.timeout_seconds) or c.timeout_seconds <= 0):
             raise ValueError("timeout_seconds must be positive when pilot-fixed")
 
+    def complete_graph_edges(self, dissimilarity: object) -> tuple[np.ndarray, np.ndarray]:
+        """Return complete-graph endpoint pairs and corresponding normalized weights."""
+        d = self.validate_normalized_input(dissimilarity)
+        i, j = np.triu_indices(d.shape[0], k=1)
+        edges = np.column_stack((i, j)).astype(int, copy=False)
+        weights = d[i, j].copy()
+        return edges, weights
+
+    def convergence_reached(self, objective_history: list[float]) -> bool:
+        """Apply the registered 10-consecutive-iteration relative-improvement rule."""
+        needed = self.config.convergence_patience + 1
+        if len(objective_history) < needed:
+            return False
+        recent = objective_history[-needed:]
+        improvements = [
+            self.relative_objective_improvement(previous, current)
+            for previous, current in zip(recent[:-1], recent[1:], strict=True)
+        ]
+        return all(value < self.config.convergence_tolerance for value in improvements)
+
     def source_specification(self) -> dict:
         return {
             "method_source": "Chierchia & Perret (2019), Ultrametric Fitting by Gradient Descent",

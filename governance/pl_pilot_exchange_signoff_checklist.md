@@ -1,26 +1,38 @@
 # Project Lead pilot-exchange signoff checklist
 
-Status: template only. No pilot-exchange approval is granted by this file.
+Status: **current evidence reconciliation - 2026-10-02**. No pilot-exchange approval is granted by this file.
 
-Use this checklist only after Branch B has completed the unresolved pre-pilot decisions and implementation evidence and the required Faculty approvals are available.
+Legend:
+- [x] evidence currently supports this item
+- [ ] still requires evidence or approval before READY
+- [~] recorded but requires final operational/current-commit verification
 
 ## A. Configuration and boundary checks
 
 - [ ] `configuration_completeness.json` has no unresolved pre-pilot field.
-- [ ] Observable-only handoff boundary remains intact.
-- [ ] Shared repository contains no Branch A restricted material.
-- [ ] Project Lead raw pilot-truth prohibition remains recorded.
-- [ ] Sealed-service / independent-custodian path remains operationally available.
-- [ ] Public-safe seven-sentinel registry is unchanged unless a versioned protocol decision authorizes a change.
-- [ ] No formal pilot observable package has been exchanged before this signoff.
+  - Current state: unresolved Branch B and Faculty gates remain.
+- [x] Observable-only handoff boundary remains intact.
+  - Evidence: `pilot_access_audit.md`.
+- [x] Shared-repository public-disclosure boundary is recorded as passing.
+  - Evidence: `pilot_access_audit.md`.
+- [x] Project Lead raw pilot-truth prohibition remains recorded.
+  - Evidence: `pilot_access_audit.md`, `pilot_precision_plan.yaml`.
+- [~] Sealed-service / independent-custodian path is recorded.
+  - Final release still requires operational availability verification.
+- [x] Public-safe seven-sentinel registry is frozen.
+  - Evidence: `pilot_sentinel_registry.csv`.
+- [x] No formal pilot observable package has been generated/exchanged according to the current Branch A golden record and PL exchange packet.
+  - Evidence: private Branch A `generator_golden_report.json`; shared `pilot_exchange_packet.md`.
 
 ## B. Branch A evidence
 
-- [ ] Pilot configuration remains frozen in the restricted Branch A repository.
-- [ ] Formal pilot root seed remains approved and frozen in the restricted Branch A repository.
-- [ ] Generator golden / reproduction evidence is current for the exact Branch A commit.
-- [ ] Required Branch A execution evidence was produced under the authorized Python 3.14 environment.
-- [ ] Exact condition mappings, seeds, latent labels, truth, and generator implementation remain restricted.
+- [x] Pilot configuration remains frozen in the restricted Branch A repository.
+- [x] Formal pilot root seed remains approved and frozen in the restricted Branch A repository.
+- [ ] Generator golden / reproduction evidence is current for the exact latest Branch A commit.
+  - Current issue: the private repository received reconciliation/documentation commits after the existing golden report; rerun/current-commit evidence is still required.
+- [~] Existing Branch A golden evidence records Python 3.14.7 / NumPy 2.5.3.
+  - Final signoff requires the current exact-commit run, not metadata-only carry-forward.
+- [x] Exact condition mappings, seed values, latent labels, truth, and generator implementation remain restricted by the recorded access boundary.
 
 ## C. Branch B decision closure
 
@@ -37,31 +49,27 @@ Use this checklist only after Branch B has completed the unresolved pre-pilot de
 - [ ] Common Fitter source-conformance tests pass.
 - [ ] Actual Python 3.14-compatible scientific dependency versions are recorded.
 - [ ] Bootstrap original-identity LCA stability integration passes Python 3.14 CI.
-- [ ] Geometry / Common Fitter / support / interval / tree / triplet / bootstrap / failure / serialization golden tests pass.
+  - Implementation is complete; current-commit CI evidence is pending.
+- [ ] Geometry / Common Fitter / support / interval / tree / triplet / bootstrap / failure / serialization golden tests pass on the final pre-pilot code.
 - [ ] Executable Geometry Cards are complete.
 - [ ] Candidate Common Fitter Cards are complete.
 - [ ] Geometry-specific search rules are frozen where required.
 - [ ] Geometry-neutral Common-Fitter selection rule is frozen where required.
 - [ ] Pilot processing configuration is complete.
-- [ ] Shared schema / output conformance passes on current code.
+- [ ] Shared schema / output conformance passes on the final current code.
+  - Earlier Python 3.14 CI evidence passed, but later bootstrap changes require current-commit verification.
 
 ## E. Faculty approvals
 
 - [ ] Faculty concept / governance approval is recorded.
 - [ ] Faculty pilot-exchange approval is recorded.
 
-## F. Final Project Lead decision
+## F. Current Project Lead decision
+
+**BLOCKED**
+
+The evidence reconciliation supports the access boundary, public-safe sentinel registry, restricted Branch A pilot configuration/seed status, and existing Branch A Python 3.14 golden record. READY is not yet available because current-commit Branch A execution evidence, Branch B method decisions/implementation/CI evidence, and Faculty approvals remain open.
 
 READY may be recorded only when every applicable item above is satisfied with evidence references.
 
-If any applicable item remains unresolved:
-
-- decision = `BLOCKED`
-- pilot observable exchange authorized = `false`
-
-If every applicable item is satisfied:
-
-- decision = `READY`
-- pilot observable exchange authorized = `true`
-
-A READY decision authorizes only the protocol-defined pilot observable exchange. It does not authorize locked-test generation, locked-test processing, unblinding, or any post-pilot scientific redesign.
+A future READY decision authorizes only the protocol-defined pilot observable exchange. It does not authorize locked-test generation, locked-test processing, unblinding, or any post-pilot scientific redesign.

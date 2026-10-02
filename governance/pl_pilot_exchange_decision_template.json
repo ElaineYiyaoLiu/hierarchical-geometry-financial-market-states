@@ -1,0 +1,36 @@
+{
+  "record": "pl_pilot_exchange_decision",
+  "template_version": "2026-10-02",
+  "status": "TEMPLATE_NOT_EXECUTED",
+  "decision": null,
+  "evidence": {
+    "configuration_completeness": null,
+    "access_boundary_audit": null,
+    "branch_a_readiness": null,
+    "branch_b_decision_closure": null,
+    "branch_b_python314_ci": null,
+    "branch_b_golden_report": null,
+    "method_card_completeness": null,
+    "faculty_concept_governance_approval": null,
+    "faculty_pilot_exchange_approval": null
+  },
+  "required_checks": {
+    "observable_only_boundary": null,
+    "raw_truth_prohibition": null,
+    "sealed_service_custodian_path": null,
+    "sentinel_registry": null,
+    "branch_a_reproduction_evidence": null,
+    "correlation_admissibility": null,
+    "general_numerical_tolerances": null,
+    "common_fitter_sigmoid": null,
+    "common_fitter_initialization": null,
+    "common_fitter_positivity": null,
+    "valuation_favorable_feature_sanity": null,
+    "common_fitter_executable": null,
+    "bootstrap_lca_python314_ci": null,
+    "pre_pilot_method_package": null
+  },
+  "pilot_observable_exchange_authorized": false,
+  "locked_test_authorized": false,
+  "notes": "Populate only from recorded gate evidence. Do not infer approval from implementation alone."
+}

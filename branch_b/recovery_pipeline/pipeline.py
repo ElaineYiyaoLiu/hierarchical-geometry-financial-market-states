@@ -23,7 +23,7 @@ class FittedPreprocessor(Protocol):
 class PipelineConfiguration:
     geometry_id: str
     common_fitter_id: str
-    normalization_rule: str | None = None
+    normalization_rule: str = "max_offdiagonal"
 
 
 class RecoveryPipeline:

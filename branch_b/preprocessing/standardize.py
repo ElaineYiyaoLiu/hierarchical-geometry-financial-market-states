@@ -12,28 +12,19 @@ from branch_b.preprocessing.validation import as_finite_matrix
 class Standardizer:
     mean_: np.ndarray
     scale_: np.ndarray
-    ddof: int
+    ddof: int = 0
 
     @classmethod
-    def fit(cls, train_values: object, *, ddof: int = 0) -> "Standardizer":
-        """Fit coordinate standardization from training data only.
+    def fit(cls, train_values: object) -> "Standardizer":
+        """Fit the registered train-only coordinate z-score transformation.
 
-        Branch B fixes ddof=0 for the primary Euclidean/Chebyshev z-score
-        transformation. An explicit nonzero ddof is accepted only for development
-        diagnostics and must not be used as the confirmatory preprocessing rule.
+        Branch B fixes ddof=0. Validation/test values never influence the fitted
+        mean or scale, and the registered implementation does not expose an alternate
+        ddof through this scientific preprocessing class.
         """
-        if not isinstance(ddof, int) or isinstance(ddof, bool) or ddof < 0:
-            raise ValueError("ddof must be a non-negative integer")
-
         x = as_finite_matrix(train_values)
-        if x.shape[0] <= ddof:
-            raise BranchBFailure(
-                FailureCode.DEGENERATE_DISTANCE,
-                "standardization requires more training observations than ddof",
-            )
-
         mean = np.mean(x, axis=0)
-        scale = np.std(x, axis=0, ddof=ddof)
+        scale = np.std(x, axis=0, ddof=0)
         if not np.isfinite(mean).all() or not np.isfinite(scale).all():
             raise BranchBFailure(FailureCode.NONFINITE_INPUT, "non-finite train standardization parameters")
         if np.any(scale <= 0):
@@ -41,7 +32,7 @@ class Standardizer:
                 FailureCode.DEGENERATE_DISTANCE,
                 "standardization requires strictly positive training feature scales",
             )
-        return cls(mean_=mean, scale_=scale, ddof=ddof)
+        return cls(mean_=mean, scale_=scale)
 
     def transform(self, values: object) -> np.ndarray:
         x = as_finite_matrix(values)
@@ -55,5 +46,5 @@ class Standardizer:
             "method": "zscore_train_only",
             "mean": self.mean_.tolist(),
             "scale": self.scale_.tolist(),
-            "ddof": self.ddof,
+            "ddof": 0,
         }

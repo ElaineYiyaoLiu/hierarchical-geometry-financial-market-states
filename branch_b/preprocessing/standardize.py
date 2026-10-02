@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from branch_b.failures import BranchBFailure, ConfigurationRequired, FailureCode
+from branch_b.failures import BranchBFailure, FailureCode
 from branch_b.preprocessing.validation import as_finite_matrix
 
 
@@ -15,18 +15,13 @@ class Standardizer:
     ddof: int
 
     @classmethod
-    def fit(cls, train_values: object, *, ddof: int | None = None) -> "Standardizer":
+    def fit(cls, train_values: object, *, ddof: int = 0) -> "Standardizer":
         """Fit coordinate standardization from training data only.
 
-        The Branch B decision fixes coordinate standardization for Euclidean and
-        Chebyshev, but the project record has not yet fixed the standard-deviation
-        degrees-of-freedom convention. Execution therefore fails closed when ddof
-        is omitted rather than silently choosing population or sample scaling.
+        Branch B fixes ddof=0 for the primary Euclidean/Chebyshev z-score
+        transformation. An explicit nonzero ddof is accepted only for development
+        diagnostics and must not be used as the confirmatory preprocessing rule.
         """
-        if ddof is None:
-            raise ConfigurationRequired(
-                "standardization ddof has not yet been explicitly fixed by Branch B"
-            )
         if not isinstance(ddof, int) or isinstance(ddof, bool) or ddof < 0:
             raise ValueError("ddof must be a non-negative integer")
 

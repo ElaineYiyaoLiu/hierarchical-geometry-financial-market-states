@@ -38,3 +38,19 @@ Verification under Python 3.14.7:
 - workflow run 36808137703: success.
 
 This correction did not alter any frozen scientific threshold or access boundary.
+
+
+## Branch B approved settings implementation — 2026-10-01
+
+Implemented without changing the pending correlation-degeneracy specification:
+- max-off-diagonal common normalization with 1e-12 degeneracy guard;
+- ddof=0 train-only standardization default;
+- complete-graph/AMSGrad fitter configuration;
+- lr=0.01, relative objective tolerance 1e-8 for 10 consecutive iterations, max 1000;
+- near-zero normalized edge guard at 1e-12;
+- deterministic primary/no random restarts;
+- unresolved multifurcation and zero-branch conventions;
+- deterministic ultrametric-to-tree extraction that does not arbitrarily binary-resolve ties;
+- recovery pipeline default now points to the approved common normalization.
+
+The remaining fitter engineering task is the executable Python 3.14 implementation of the approved paper-based Dasgupta soft-cardinal/min-max optimization kernel. Correlation degeneracy/admissibility remains intentionally unresolved.

@@ -1,10 +1,15 @@
 issue_id,owner,week,status,blocking_gate,description
 W3-A-SEED,Project Lead/Branch A,3,closed,pilot_generation,Formal pilot root seed approved and frozen in restricted Branch A before formal pilot generation
 W3-A-POSCTRL,Branch A,3,closed,pilot_generator_gate,Exact balanced-tree pilot positive control implemented and regression tested
-W3-PL-SENTINEL,Project Lead,3,closed,pilot_exchange,Seven-sentinel pilot registry reconciled approved and frozen with condition mappings restricted to Branch A
-W3-B-VAL,Branch B,3,pending_external,pilot_exchange,Valuation-geometry implementation sanity gate
-W3-B-FITTER,Branch B,3,pending_external,pilot_exchange,Common-Fitter cards and geometry-neutral selection rule
-W3-B-GOLDEN,Branch B,3,pending_external,pilot_exchange,Branch B golden tests and pilot processing package
-W3-FACULTY,Faculty Advisor,3,pending_external,pilot_exchange,Faculty pilot-exchange approval
-W1-ACK,Branch B,1,closed,week1_handoff,Branch B acknowledgement of handoff package
-W2-FACULTY,Faculty Advisor,2,pending_external,week2_concept,Faculty concept/governance approval
+W3-PL-SENTINEL,Project Lead,3,closed,pilot_exchange,Seven-sentinel public-safe registry reconciled; exact condition mappings remain restricted
+W3-PL-ACCESS,Project Lead,3,closed,pilot_exchange,Observable-only boundary raw-truth prohibition and sealed-service/custodian path recorded
+W3-B-CORR,Branch B,3,proposal_ready_for_review,pilot_exchange,Correlation-distance admissibility rule requires explicit Branch B decision and freeze
+W3-B-NUMTOL,Branch B,3,proposal_ready_for_review,pilot_exchange,General numerical comparison tolerances require explicit Branch B decision and freeze
+W3-B-SIGMOID,Branch B,3,decision_required,pilot_exchange,Dasgupta soft-area sigmoid parameter requires explicit decision before executable freeze
+W3-B-INIT,Branch B,3,decision_required,pilot_exchange,Common-Fitter initialization rule requires explicit decision before executable freeze
+W3-B-POSITIVITY,Branch B,3,decision_required,pilot_exchange,Common-Fitter non-negativity parameterization requires explicit decision before executable freeze
+W3-B-VALSANITY,Branch B,3,decision_required,pilot_exchange,Valuation favorable-feature sanity invariant and minimum passing criterion must be prespecified
+W3-B-FITTER-IMPL,Branch B,3,blocked_on_decisions,pilot_exchange,Executable Python 3.14 Common-Fitter kernel source-conformance tests and compatible dependency evidence remain
+W3-B-BOOTSTRAP-CI,Branch B,3,pending_python314_ci,pilot_exchange,Bootstrap original-identity LCA integration implemented and awaits Python 3.14 CI verification
+W3-FACULTY-CONCEPT,Faculty Advisor,2,pending_external,week2_concept,Faculty concept and governance approval not yet recorded
+W3-FACULTY-EXCHANGE,Faculty Advisor,3,pending_external,pilot_exchange,Faculty pilot-exchange approval not yet recorded

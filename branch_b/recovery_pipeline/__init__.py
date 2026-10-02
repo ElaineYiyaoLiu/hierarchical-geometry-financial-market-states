@@ -1,3 +1,3 @@
-from .pipeline import PipelineConfiguration, RecoveryPipeline
+from .pipeline import PipelineConfiguration, RecoveryPipeline, ValidationCandidate
 
-__all__ = ["PipelineConfiguration", "RecoveryPipeline"]
+__all__ = ["PipelineConfiguration", "RecoveryPipeline", "ValidationCandidate"]

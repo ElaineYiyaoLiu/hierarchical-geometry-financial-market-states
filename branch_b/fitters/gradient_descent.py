@@ -136,10 +136,11 @@ class GradientDescentUltrametricFitter:
         return d
 
     @staticmethod
-    def relative_objective_improvement(previous: float, current: float, *, epsilon: float = 1e-15) -> float:
+    def relative_objective_improvement(previous: float, current: float) -> float:
         if not np.isfinite(previous) or not np.isfinite(current):
             raise BranchBFailure(FailureCode.NUMERICAL_FIT, "objective became non-finite")
-        return abs(previous - current) / max(abs(previous), epsilon)
+        numerical_floor = np.finfo(float).tiny
+        return abs(previous - current) / max(abs(previous), numerical_floor)
 
     def fit(self, dissimilarity: object, *, random_seed: int | None = None) -> FitResult:
         self.validate_normalized_input(dissimilarity)

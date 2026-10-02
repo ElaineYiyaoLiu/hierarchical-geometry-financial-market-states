@@ -1,5 +1,5 @@
 {
-  "report_version": "week2-preflight-v4",
+  "report_version": "week2-preflight-v5",
   "branch": "B",
   "date": "2026-10-01",
   "week1_gate": "complete",
@@ -44,31 +44,27 @@
       "required": [
         "Python 3.14 executable Dasgupta soft-cardinal/min-max optimizer kernel",
         "source-conformance tests",
-        "actual compatible dependency versions"
+        "actual compatible dependency versions",
+        "document exact sigmoid convention used for the paper's Heaviside relaxation before executable freeze"
       ],
       "pilot_fixed_later": [
         "timeout"
       ]
     },
     {
-      "id": "split_selection_pipeline",
-      "status": "implementation_required",
-      "required": [
-        "recover validation hierarchy under each candidate geometry parameter setting",
-        "apply only the prespecified ground-truth-free validation criterion",
-        "carry the selected geometry parameters unchanged into final test processing",
-        "retain split-specific diagnostics and failure records"
-      ]
-    },
-    {
       "id": "full_pipeline_bootstrap_integration",
-      "status": "implementation_required",
+      "status": "partial_implementation",
       "required": [
-        "refit preprocessing on bootstrap training",
-        "rerun geometry-parameter selection on bootstrap validation",
-        "fit bootstrap test hierarchy",
-        "preserve duplicate bootstrap draws as multiplicities while matching distinct original observations for LCA stability",
-        "record failed replicate codes without silent deletion"
+        "connect distinct original bootstrap-test observations to LCA-depth stability evaluation",
+        "golden test for duplicate-draw LCA common-observation matching"
+      ],
+      "completed": [
+        "independent train/validation/test resampling",
+        "preprocessing refit on bootstrap training",
+        "validation candidate fitting and reselection inside each replicate",
+        "selected-parameter bootstrap test fitting",
+        "duplicate draw multiplicities retained against original row identities",
+        "failed replicate preservation with protocol failure code when available"
       ]
     },
     {
@@ -93,9 +89,9 @@
   ],
   "last_verified_ci": {
     "python_version": "3.14.7",
-    "workflow_run_id": 36957805312,
+    "workflow_run_id": 36957977998,
     "shared_validator_passed": 15,
-    "branch_b_tests_passed": 41,
+    "branch_b_tests_passed": 44,
     "conclusion": "success"
   },
   "completed_nondecision_repairs": [
@@ -104,7 +100,10 @@
     "positive branch-length magnitudes do not affect rooted-triplet topology",
     "Branch B output builders are tested against the shared output schema",
     "bootstrap reproducibility is tested from a Branch B-owned development seed",
-    "unapproved Q0.05/Q0.95 correlation near-constant construction rolled back"
+    "unapproved Q0.05/Q0.95 correlation near-constant construction rolled back",
+    "validation candidates are now fitted on validation and selected by an injected ground-truth-free rule before unchanged test application",
+    "full recovery pipeline now reruns inside each bootstrap replicate with preprocessing refit and validation reselection",
+    "bootstrap duplicate draws are explicitly tracked as multiplicities of original observations"
   ],
   "verification_items": [
     {

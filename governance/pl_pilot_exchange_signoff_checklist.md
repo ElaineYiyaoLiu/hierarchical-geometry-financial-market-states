@@ -85,3 +85,5 @@ A future READY decision authorizes only the protocol-defined pilot observable ex
 - [ ] Minimum-effect-size frozen value and before-inspection provenance reconciled.
 
 Existing checkboxes above are historical reconciliation; these scoped records supersede only their stated execution items. Exchange remains BLOCKED. `approval_evidence_register.csv` holds the consolidated current mapping. Pending freeze-registry rows grant no authority.
+
+Current CI update: [x] code commit `30ae3602cbb7bcfc0a1d12ff99277ab11758974a` passed `validate`, run `36980323424`, under actual Python 3.14.7 / NumPy 2.5.3 with 67 tests. See `governance/current_ci_evidence_2026-10-02.json`. This closes only the execution check for that code snapshot; incomplete method and external approval gates remain blocking.

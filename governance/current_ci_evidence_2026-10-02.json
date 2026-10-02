@@ -1,0 +1,12 @@
+{
+  "audited_code_commit": "30ae3602cbb7bcfc0a1d12ff99277ab11758974a",
+  "workflow_run_id": 36980323424,
+  "job_id": 110753131707,
+  "python": "3.14.7",
+  "numpy": "2.5.3",
+  "pytest": "8.4.2",
+  "tests_passed": 67,
+  "conclusion": "success",
+  "workflow_url": "https://github.com/ElaineYiyaoLiu/hierarchical-geometry-financial-market-states/actions/runs/36980323424",
+  "scope": "shared tests and new governance guards; no formal pilot execution; no Common Fitter completion asserted"
+}

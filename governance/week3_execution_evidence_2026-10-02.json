@@ -7,7 +7,12 @@
   "formal_pilot_generated": false,
   "jsonschema": "4.26.0",
   "new_governance_guard_tests": 5,
-  "new_head_ci": "PENDING",
+  "new_head_ci": {
+    "status": "PASS",
+    "evidence_ref": "governance/current_ci_evidence_2026-10-02.json",
+    "audited_commit": "30ae3602cbb7bcfc0a1d12ff99277ab11758974a",
+    "run_id": 36980323424
+  },
   "numpy": "2.5.3",
   "prepared_shared_full_tests": 67,
   "pytest": "9.1.1",

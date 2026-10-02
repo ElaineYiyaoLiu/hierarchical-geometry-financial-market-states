@@ -14,3 +14,11 @@ pilot_dependent_quantities:
   - treatment_of_failed_fits
   - final_monte_carlo_repetition_count
 notes: Final values for pilot-dependent quantities are determined only through the protocol-permitted pilot feasibility process.
+
+operational_contract_status: blocked_pending_approved_trigger_and_release_contract
+operational_contract_template: governance/week4/sealed_precision_contract.template.json
+trigger_rule_ref: null
+trigger_rule_sha256: null
+signed_release_field_allowlist_ref: null
+signature_verification_ref: null
+before_inspection_freeze_ref: null

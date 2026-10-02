@@ -1,0 +1,1 @@
+stage,hardware_ref,config_ref,attempts_measured,successes,failures,wall_seconds_total,allocated_core_hours_total,peak_memory_gib,storage_bytes_total,queue_seconds_total,effective_throughput_per_hour,bootstrap_count,evidence_ref

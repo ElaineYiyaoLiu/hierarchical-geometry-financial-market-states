@@ -1,0 +1,23 @@
+{
+  "approval_date_utc": null,
+  "approver": null,
+  "byte_reproduction": null,
+  "configuration_integrity": null,
+  "custodian_attestation_ref": null,
+  "custodian_attestation_sha256": null,
+  "decision": "BLOCKED",
+  "environment_ref": null,
+  "metadata_blindness": null,
+  "missing_attempts": null,
+  "observable_manifest_sha256": null,
+  "permitted_diagnostics_only": null,
+  "raw_truth_accessed_by_pl": false,
+  "scheduled_attempts": null,
+  "schema_conformance": null,
+  "sentinel_coverage": null,
+  "source_commit": null,
+  "status": "NOT_EXECUTED",
+  "terminal_failures": null,
+  "terminal_successes": null,
+  "version": "preparation-v1"
+}

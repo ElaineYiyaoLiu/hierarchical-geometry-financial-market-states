@@ -1,0 +1,19 @@
+{
+  "calibration_independent_null_disjoint": null,
+  "calibration_locked_null_disjoint": null,
+  "checksum_freeze_ref": null,
+  "decision": "BLOCKED",
+  "failures": null,
+  "gate_5a_approval_ref": null,
+  "missing": null,
+  "official_calibration_from_pilot": false,
+  "pilot_calibration_realization_disjoint": null,
+  "pilot_calibration_seed_disjoint": null,
+  "planned_count": null,
+  "raw_seeds_released_to_pl": false,
+  "restricted_custodian_attestation_ref": null,
+  "scheduled_count_ref": null,
+  "seed_release_ref": null,
+  "status": "NOT_EXECUTED",
+  "successes": null
+}

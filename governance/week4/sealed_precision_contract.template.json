@@ -1,0 +1,18 @@
+{
+  "approvals": {
+    "Faculty": null,
+    "PL": null
+  },
+  "before_inspection_freeze_evidence": null,
+  "cell_targeted_expansion": false,
+  "conservative_precision_resource_rule": null,
+  "default_on_missing_or_invalid_signature": "HALT",
+  "exact_signed_release_field_allowlist": null,
+  "note": "No trigger threshold or release metric is chosen by this template.",
+  "performance_driven_condition_substitution": false,
+  "release_detailed_truth_keyed_performance": false,
+  "signer_identity_and_verification": null,
+  "status": "DRAFT_PENDING_APPROVAL",
+  "trigger_formula": null,
+  "trigger_inputs_and_aggregation": null
+}

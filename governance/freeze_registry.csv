@@ -1,1 +1,12 @@
 freeze_id,artifact,version,status,owner,approved_by,frozen_at_utc,checksum,notes
+HMG-PL-PENDING-SENTINEL_PUBLIC_VIEW,sentinel_public_view,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-CORRELATION_ADMISSIBILITY,correlation_admissibility,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-NUMERICAL_TOLERANCES,numerical_tolerances,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-COMMON_FITTER_CARD,common_fitter_card,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-VALUATION_SANITY,valuation_sanity,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-SEALED_PRECISION_CONTRACT,sealed_precision_contract,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-MINIMUM_EFFECT_PROVENANCE,minimum_effect_provenance,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-PILOT_EXCHANGE_DECISION,pilot_exchange_decision,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-PILOT_EXIT,pilot_exit,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-BOUNDED_REVISION,bounded_revision,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."
+HMG-PL-PENDING-CALIBRATION_THRESHOLDS,calibration_thresholds,pending,pending,PL coordination,,,,"Placeholder entry; not approval or freeze. Requires evidence, authority and exact-byte SHA-256."

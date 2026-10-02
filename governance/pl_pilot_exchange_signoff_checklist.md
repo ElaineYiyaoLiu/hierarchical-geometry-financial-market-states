@@ -73,3 +73,15 @@ The evidence reconciliation supports the access boundary, public-safe sentinel r
 READY may be recorded only when every applicable item above is satisfied with evidence references.
 
 A future READY decision authorizes only the protocol-defined pilot observable exchange. It does not authorize locked-test generation, locked-test processing, unblinding, or any post-pilot scientific redesign.
+
+## 2026-10-02 execution reconciliation
+
+- [x] Audited Branch A base snapshot passed 23 tests, frozen readiness and primary development observable/sealed byte reproduction under actual Python 3.14.7 / NumPy 2.5.3. Public aggregate attestation: `governance/branch_a_readiness_attestation_2026-10-02.json`. Final preparation code has separate verification. This does not close all-family formal-bank certification.
+- [x] Shared audited base passed 15 validator and 47 Branch B tests locally under Python 3.14.7. See `governance/week3_execution_evidence_2026-10-02.json`.
+- [ ] Repaired shared workflow must pass at its new head; prior CI failed during collection.
+- [ ] All-family production dispatch, accounting and packaging certification.
+- [ ] Approved/frozen sealed binary trigger, conservative calculation rule and exact signed release-field allowlist before associated inspection.
+- [ ] Operational custodian identity, signature verification and availability.
+- [ ] Minimum-effect-size frozen value and before-inspection provenance reconciled.
+
+Existing checkboxes above are historical reconciliation; these scoped records supersede only their stated execution items. Exchange remains BLOCKED. `approval_evidence_register.csv` holds the consolidated current mapping. Pending freeze-registry rows grant no authority.

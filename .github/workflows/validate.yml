@@ -12,5 +12,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.14"
-      - run: pip install -r requirements-dev.txt
-      - run: pytest -q
+      - run: python --version
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pip install numpy==2.5.3
+      - run: python -m pytest -q

@@ -79,3 +79,17 @@ Implemented and verified under Python 3.14.7:
 Latest verification: workflow 36957977998, shared validator 15 passed, Branch B tests 44 passed.
 
 Remaining bootstrap integration work is the LCA-depth stability hookup using distinct original bootstrap-test observations shared with the full test fit.
+
+
+## Bootstrap LCA original-identity integration - 2026-10-02
+
+Implemented the remaining bootstrap stability hookup from Appendix D.2 without changing any pilot-fixed numerical quantity.
+
+- bootstrap test draws remain multiplicities of original observations;
+- bootstrap tree leaves are projected back to distinct original test-row identities before stability evaluation;
+- every original-observation pair must have one unambiguous LCA-depth relation across all duplicate copies;
+- inconsistent duplicate-copy relations fail closed as `DEGENERATE_TREE`;
+- LCA-depth rank agreement is then computed against the full test fit on shared original identities;
+- dedicated golden tests cover duplicate-copy collapse, inconsistency failure, and rank-agreement recovery.
+
+The bootstrap integration blocker is now implementation-complete pending Python 3.14 CI verification.

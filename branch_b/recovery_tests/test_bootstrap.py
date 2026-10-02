@@ -42,3 +42,11 @@ def test_bootstrap_is_reproducible_from_branch_b_owned_seed():
         assert np.array_equal(a.validation_indices, b.validation_indices)
         assert np.array_equal(a.test_indices, b.test_indices)
         assert a.result == b.result
+
+
+def test_duplicate_bootstrap_draws_are_recorded_as_multiplicities():
+    from branch_b.bootstrap import distinct_original_indices, draw_multiplicities
+
+    draw = np.array([2, 2, 0, 2, 1, 1])
+    assert draw_multiplicities(draw) == {0: 1, 1: 2, 2: 3}
+    assert distinct_original_indices(draw) == [0, 1, 2]

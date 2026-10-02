@@ -1,22 +1,45 @@
 # Pilot exchange packet
 
-Status: **A / PL preparation complete; exchange blocked on external gates**.
+Status: **Project Lead preparation is substantially complete; pilot exchange remains BLOCKED.**
 
-## Ready on the PL / Branch A side
+## Project Lead checks completed
 
-- Shared schemas, validator, golden fixtures, naming/checksum rules, access matrix, and freeze registry are present.
-- Branch A H1-H6 are frozen for pilot use.
-- Branch A uses Python 3.14.7 and NumPy 2.5.3 for the frozen pilot environment.
-- Development handoff rehearsal demonstrates observable/restricted separation, deterministic row anonymization, manifests/checksums, byte regeneration, and shared-validator compatibility.
-- Formal pilot root seed is approved and frozen in the restricted Branch A repository.
-- Exact balanced-tree pilot positive control is implemented and regression tested.
-- The seven-sentinel pilot registry is approved and frozen before pilot outcomes are observed.
+- Shared schema/validator boundary is present.
+- Observable-only / restricted-material separation is recorded.
+- Project Lead raw pilot-truth access is prohibited for method or generator tuning.
+- Independent custodian / sealed-service path is recorded.
+- Public-safe seven-sentinel registry is reconciled; exact Branch A condition mappings remain restricted.
+- Pilot precision/escalation plan is present.
+- Branch A pilot configuration and formal root seed are approved/frozen in the restricted repository.
+- Formal pilot observable generation has not started.
 
-## External pre-pilot hard gates
+## Pre-pilot hard gates still open
 
-- Branch B valuation Geometry Card and favorable-feature sanity criterion.
-- Branch B Common-Fitter cards, geometry-neutral selection rule, golden suite, and pilot processing package.
-- Branch B acknowledgement of the shared handoff where still outstanding.
-- Faculty Advisor concept/governance and pilot-exchange approvals where not yet recorded.
+### Branch B decisions
 
-No pilot observable package should be exchanged until the applicable external pre-pilot hard gates close. Locked-test generation, locked-test processing, and unblinding remain unauthorized.
+- correlation-distance admissibility rule;
+- general numerical comparison tolerances;
+- Dasgupta soft-area sigmoid convention;
+- Common-Fitter initialization rule;
+- Common-Fitter non-negativity parameterization;
+- valuation favorable-feature implementation sanity invariant and minimum passing criterion.
+
+### Branch B implementation / verification
+
+- executable Python 3.14 Common-Fitter kernel;
+- source-conformance / golden tests and actual Python 3.14-compatible dependency evidence;
+- Python 3.14 CI verification of the completed bootstrap original-identity LCA stability integration;
+- complete pre-pilot method-card / processing package.
+
+### External approvals
+
+- Faculty concept/governance approval where not yet recorded;
+- Faculty pilot-exchange approval.
+
+## Exchange decision
+
+**BLOCKED.**
+
+No pilot observable package may be released to Branch B until every applicable pre-pilot hard gate above is closed and the Project Lead records the final READY decision.
+
+Locked-test generation, locked-test processing, and unblinding remain unauthorized.

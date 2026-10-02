@@ -40,7 +40,7 @@ This checklist records the current Week 1-3 integration status for the project.
 - [x] Recovery-pipeline, bootstrap, support, rooted-triplet, paired-contrast, serialization, and failure scaffolds implemented
 - [x] Rooted-triplet and LCA-depth zero/unresolved-branch handling made topologically consistent
 - [x] Shared output-schema compatibility tested
-- [x] Python 3.14.7 CI verified through the approved normalization/fitter-settings integration work; current post-correlation-rollback run pending
+- [x] Python 3.14.7 CI passes shared validator (15) and Branch B tests (41) after correlation rollback
 - [x] Common post-geometry normalization approved and implemented
 - [ ] Correlation admissibility constants/conventions frozen
 - [ ] General matrix/tree numerical comparison tolerances frozen

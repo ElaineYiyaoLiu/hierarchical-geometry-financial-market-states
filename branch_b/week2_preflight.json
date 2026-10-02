@@ -1,13 +1,13 @@
 {
-  "report_version": "week2-preflight-v5",
+  "report_version": "week2-preflight-v6",
   "branch": "B",
-  "date": "2026-10-01",
+  "date": "2026-10-02",
   "week1_gate": "complete",
   "week2_technical_gate": "blocked",
   "blocking_items": [
     {
       "id": "correlation_admissibility",
-      "status": "decision_required",
+      "status": "proposal_ready_for_review",
       "required": [
         "quantitative near-constant/admissibility statistic",
         "thresholds and scale constants",
@@ -15,7 +15,8 @@
         "numerical tolerance",
         "deterministic degeneracy/ineligibility handling"
       ],
-      "note": "Earlier Q0.05/Q0.95 robust-spread draft was rolled back; no near-constant construction is currently frozen."
+      "note": "Earlier Q0.05/Q0.95 robust-spread draft was rolled back; no near-constant construction is currently frozen.",
+      "proposal": "branch_b/decision_proposals/week3_numerical_rules_proposal.md"
     },
     {
       "id": "gradient_descent_common_fitter",
@@ -69,13 +70,14 @@
     },
     {
       "id": "general_numerical_tolerances",
-      "status": "decision_required",
+      "status": "proposal_ready_for_review",
       "required": [
         "matrix symmetry/zero-diagonal comparison tolerance",
         "ultrametric-inequality comparison tolerance",
         "tree height-equivalence/tie comparison tolerance"
       ],
-      "note": "The approved 1e-12 normalization and reciprocal-weight thresholds do not automatically freeze these separate numerical comparison tolerances."
+      "note": "The approved 1e-12 normalization and reciprocal-weight thresholds do not automatically freeze these separate numerical comparison tolerances.",
+      "proposal": "branch_b/decision_proposals/week3_numerical_rules_proposal.md"
     }
   ],
   "external_gate": {

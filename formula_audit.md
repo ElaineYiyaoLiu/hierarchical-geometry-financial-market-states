@@ -48,3 +48,25 @@ Python 3.14 CI after this correction:
 - Branch B tests: 34 passed;
 - workflow run: 36808137703;
 - conclusion: success.
+
+
+## Branch B approved Week 2 implementation choices — 2026-10-01
+
+Branch B explicitly approved the following project-owned choices:
+- common normalization: divide by the maximum finite off-diagonal native dissimilarity;
+- common-normalization degeneracy threshold: maximum off-diagonal <= 1e-12 -> DEGENERATE_DISTANCE;
+- Euclidean/Chebyshev z-score convention: ddof=0 on training only;
+- Common-Fitter graph: complete graph on all pairwise normalized dissimilarities;
+- optimizer: AMSGrad;
+- learning rate: 0.01;
+- initialization: working weights equal input weights;
+- stopping criterion: relative objective improvement below 1e-8 for 10 consecutive iterations;
+- maximum iterations: 1000;
+- normalized reciprocal-weight guard: edge weight <= 1e-12 -> DEGENERATE_DISTANCE, without silent flooring;
+- equal-height ties: unresolved multifurcations;
+- zero-length branches: preserved and treated as unresolved for rooted topology;
+- DEGENERATE_TREE: structural invalidity only;
+- primary fitter execution: deterministic, with no random restarts;
+- timeout: remains pilot-fixed.
+
+Correlation degeneracy/admissibility choices were explicitly excluded from this approval and remain pending a separate Branch B meeting.

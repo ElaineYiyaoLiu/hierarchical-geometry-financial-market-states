@@ -27,11 +27,10 @@ Status: Week 1 registration record. Entries are proposed for development and are
 - Role: proposed comparison geometry, confirmatory only if its prespecified admissibility rule passes
 - Native dissimilarity family: Pearson-correlation-based distance
 - Preprocessing: none; Pearson correlation is computed on the released 12-feature profiles without coordinate standardization or other transformation
-- Preprocessing: none; Pearson correlation is computed on the released 12-feature profiles without coordinate standardization or other transformation
-- Near-constant statistic: relative robust spread R_rel(z) = [Q_0.95(z) - Q_0.05(z)] / max(median(|z|), s_min)
-- Quantile levels: Q_0.05 and Q_0.95 adopted by Branch B on 2026-09-30
+- Exactly constant profile: explicit `DEGENERATE_DISTANCE` because Pearson correlation is undefined
+- Near-constant/admissibility rule: pending explicit Branch B meeting; no draft quantile/statistic/threshold construction is frozen
+- Common post-geometry normalization: divide by maximum finite off-diagonal dissimilarity; scale `<=1e-12` is `DEGENERATE_DISTANCE`
 - Status: registered for development
-- Open specification items: tau_nc, tau_deg, s_min, quantile interpolation convention, numerical tolerance, and deterministic degeneracy handling
 
 ## Candidate Common Fitters
 

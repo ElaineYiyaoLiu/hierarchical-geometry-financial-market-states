@@ -59,6 +59,6 @@ Timeout remains pilot-dependent under the controlling protocol and is not numeri
 
 ## Remaining implementation item
 
-The project-specific scientific settings above are now specified. The remaining engineering task is an executable Python 3.14 implementation of the paper's Dasgupta soft-cardinal objective and min-max/subdominant-ultrametric optimization kernel, followed by source-conformance and golden testing.
+The project-specific scientific settings above are now specified. The remaining engineering task is an executable Python 3.14 implementation of the paper's Dasgupta soft-cardinal objective and min-max/subdominant-ultrametric optimization kernel, followed by source-conformance and golden testing. The approved PDF describes the Heaviside relaxation as a sigmoid but does not, in the extracted specification available to Branch B, state an additional slope/temperature parameter; the exact executable sigmoid convention must therefore be documented explicitly before fitter freeze rather than silently assumed.
 
 The final Common-Fitter selection remains geometry-neutral, ground-truth-free, and subject to its later protocol freeze.

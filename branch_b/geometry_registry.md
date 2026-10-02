@@ -10,7 +10,9 @@ Status: Week 1 registration record. Entries are proposed for development and are
 - Native dissimilarity family: Chebyshev-based
 - Status: registered for development
 - Preprocessing: coordinate-wise z-score standardization estimated from training only and applied unchanged to validation/test
-- Open specification items: favorable-feature sanity invariant/minimum criterion and common post-geometry normalization
+- Standardization convention: `ddof=0`
+- Common post-geometry normalization: divide by maximum finite off-diagonal dissimilarity; scale `<=1e-12` is `DEGENERATE_DISTANCE`
+- Open specification items: favorable-feature sanity invariant/minimum criterion
 - Restriction: no latent labels, true hierarchy, generator parameters, or fitted preliminary hierarchy may define the native dissimilarity
 
 ### standardized_euclidean
@@ -18,7 +20,8 @@ Status: Week 1 registration record. Entries are proposed for development and are
 - Native dissimilarity: Euclidean distance after coordinate-wise z-score standardization
 - Preprocessing: coordinate-wise z-score standardization estimated from training only and applied unchanged to validation/test
 - Status: registered for development
-- Open specification items: common post-geometry normalization
+- Standardization convention: `ddof=0`
+- Common post-geometry normalization: divide by maximum finite off-diagonal dissimilarity; scale `<=1e-12` is `DEGENERATE_DISTANCE`
 
 ### correlation_distance
 - Role: proposed comparison geometry, confirmatory only if its prespecified admissibility rule passes
@@ -41,6 +44,7 @@ Status: Week 1 registration record. Entries are proposed for development and are
 - Source-backed initialization: working edge weights initialized to input edge weights
 - Optimizer family reported by source: AMSGrad
 - Status: registered for development; not selected
-- Open project-specific items: graph-construction rule, learning-rate rule, convergence tolerance/stopping rule, iteration limit, near-zero reciprocal-weight handling, seed rule, tie/zero-branch conventions, degeneracy handling, timeout, and exact software versions
+- Project settings: complete graph; AMSGrad; learning rate 0.01; relative-objective tolerance 1e-8 for 10 consecutive iterations; maximum 1000 iterations; normalized weight <=1e-12 -> DEGENERATE_DISTANCE; equal-height ties -> unresolved multifurcation; zero-length branches preserved and structurally unresolved; DEGENERATE_TREE reserved for structural invalidity; deterministic primary execution with no random restarts
+- Open project-specific items: pilot-fixed timeout, exact Python 3.14 dependency versions, executable optimizer-kernel validation
 
 The final executable Geometry Cards, Common Fitter Cards, geometry-specific selection rules, and geometry-neutral Common-Fitter selection rule are completed and frozen at their protocol-defined later gates.

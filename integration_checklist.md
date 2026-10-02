@@ -40,12 +40,12 @@ This checklist records the current Week 1-3 integration status for the project.
 - [x] Recovery-pipeline, bootstrap, support, rooted-triplet, paired-contrast, serialization, and failure scaffolds implemented
 - [x] Rooted-triplet and LCA-depth zero/unresolved-branch handling made topologically consistent
 - [x] Shared output-schema compatibility tested
-- [x] Python 3.14.7 CI passes shared validator (15) and Branch B tests (41) after correlation rollback
+- [x] Python 3.14.7 CI passes shared validator (15) and Branch B tests (44)
 - [x] Common post-geometry normalization approved and implemented
 - [ ] Correlation admissibility constants/conventions frozen
 - [ ] General matrix/tree numerical comparison tolerances frozen
-- [ ] Full validation-selection-to-test orchestration complete
-- [ ] Full-pipeline bootstrap integration complete
+- [x] Full validation-selection-to-test orchestration implemented with injected ground-truth-free selector
+- [ ] Full-pipeline bootstrap integration complete (refit/reselection/test path implemented; LCA common-observation hookup remains)
 - [x] Gradient-descent Common-Fitter project settings approved
 - [ ] Executable gradient-descent optimizer kernel and source-conformance tests complete
 - [ ] Week 2 recovery pipeline integration-ready gate complete

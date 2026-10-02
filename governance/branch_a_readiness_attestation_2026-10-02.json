@@ -1,0 +1,15 @@
+{
+  "attestation_id": "A-READINESS-2026-10-02-LOCAL-01",
+  "existing_tests_passed": 23,
+  "formal_pilot_generation": false,
+  "frozen_readiness_checks_passed": true,
+  "numpy": "2.5.3",
+  "preparation_source_tests_passed": 32,
+  "primary_development_observable_byte_reproduction": true,
+  "primary_development_sealed_truth_byte_reproduction_attested": true,
+  "project_lead_raw_truth_access": false,
+  "python": "3.14.7",
+  "restricted_source_identity": "retained in private evidence record",
+  "scope": "audited source snapshot; new preparation code separately tested; all-family formal pilot certification remains pending",
+  "status": "PASS_WITH_SCOPE_LIMIT"
+}

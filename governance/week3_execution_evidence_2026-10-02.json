@@ -1,0 +1,23 @@
+{
+  "bootstrap_original_identity_regression": "included_in_47_tests",
+  "branch_b_tests": 47,
+  "ci_run_36977868807": "failed_collection_missing_numpy_and_import_path",
+  "common_fitter_completion_asserted": false,
+  "execution": "actual_local_python314",
+  "formal_pilot_generated": false,
+  "jsonschema": "4.26.0",
+  "new_governance_guard_tests": 5,
+  "new_head_ci": {
+    "status": "PASS",
+    "evidence_ref": "governance/current_ci_evidence_2026-10-02.json",
+    "audited_commit": "30ae3602cbb7bcfc0a1d12ff99277ab11758974a",
+    "run_id": 36980323424
+  },
+  "numpy": "2.5.3",
+  "prepared_shared_full_tests": 67,
+  "pytest": "9.1.1",
+  "python": "3.14.7",
+  "result": "PASS",
+  "source_shared_commit": "054e4453cb741904cb30af98e8c3dba3aeb3ea09",
+  "validator_tests": 15
+}

@@ -1,0 +1,14 @@
+{
+  "allowed_evidence_refs": [],
+  "approvals": {
+    "Faculty": null,
+    "PL": null
+  },
+  "calibration_seed_release_authorized": false,
+  "changes": [],
+  "checksum_freeze_ref": null,
+  "locked_test_authorized": false,
+  "pilot_exit_approval_ref": null,
+  "prohibited_scientific_changes": [],
+  "status": "NOT_PROPOSED"
+}

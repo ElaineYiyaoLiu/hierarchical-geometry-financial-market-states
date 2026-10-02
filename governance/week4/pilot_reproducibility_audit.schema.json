@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "PASS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "approval_date_utc": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "approver": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "byte_reproduction": {
+            "const": true
+          },
+          "configuration_integrity": {
+            "const": true
+          },
+          "custodian_attestation_ref": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "custodian_attestation_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "environment_ref": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "metadata_blindness": {
+            "const": true
+          },
+          "missing_attempts": {
+            "const": 0
+          },
+          "observable_manifest_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "permitted_diagnostics_only": {
+            "const": true
+          },
+          "schema_conformance": {
+            "const": true
+          },
+          "sentinel_coverage": {
+            "const": true
+          },
+          "source_commit": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "status": {
+            "const": "COMPLETE"
+          }
+        },
+        "required": [
+          "status",
+          "schema_conformance",
+          "byte_reproduction",
+          "sentinel_coverage",
+          "configuration_integrity",
+          "metadata_blindness",
+          "permitted_diagnostics_only",
+          "missing_attempts",
+          "source_commit",
+          "environment_ref",
+          "observable_manifest_sha256",
+          "custodian_attestation_ref",
+          "custodian_attestation_sha256",
+          "approver",
+          "approval_date_utc"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "approval_date_utc": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "approver": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "byte_reproduction": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "configuration_integrity": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "custodian_attestation_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "custodian_attestation_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision": {
+      "enum": [
+        "BLOCKED",
+        "PASS"
+      ]
+    },
+    "environment_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metadata_blindness": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "missing_attempts": {
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "observable_manifest_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "permitted_diagnostics_only": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "raw_truth_accessed_by_pl": {
+      "const": false
+    },
+    "scheduled_attempts": {
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "schema_conformance": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "sentinel_coverage": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "source_commit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "NOT_EXECUTED",
+        "PENDING",
+        "COMPLETE"
+      ]
+    },
+    "terminal_failures": {
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "terminal_successes": {
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "version",
+    "status",
+    "decision",
+    "raw_truth_accessed_by_pl"
+  ],
+  "type": "object"
+}

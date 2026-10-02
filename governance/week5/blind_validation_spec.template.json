@@ -1,0 +1,11 @@
+{
+  "bank_disjointness_attestation_ref": null,
+  "frozen_geometry_neutral_selection_rule_ref": null,
+  "handoff_authorized": false,
+  "official_threshold_registry_sha256": null,
+  "permitted_input": "observable_only",
+  "registered_candidate_set_ref": null,
+  "status": "PREPARATION_ONLY",
+  "threshold_recalibration": false,
+  "truth_keyed_selection": false
+}

@@ -1,0 +1,23 @@
+{
+  "approved_precision_contract_sha256": null,
+  "approved_precision_plan_sha256": null,
+  "authorized_release_fields": [],
+  "checked_at_utc": null,
+  "custodian": null,
+  "generation_authorized_by_template": false,
+  "initial_output_frozen_at_utc": null,
+  "initial_output_manifest_sha256": null,
+  "project_lead_raw_truth_accessed": false,
+  "released_fields": {},
+  "signature_verification_ref": null,
+  "signature_verification_sha256": null,
+  "signed_release_ref": null,
+  "signed_release_sha256": null,
+  "status": "NOT_EXECUTED",
+  "supplemental_output_manifest_sha256": null,
+  "trigger": null,
+  "trigger_rule_ref": null,
+  "trigger_rule_sha256": null,
+  "uniform_total_per_sentinel": null,
+  "version": "preparation-v1"
+}

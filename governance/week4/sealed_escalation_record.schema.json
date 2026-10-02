@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approved_precision_contract_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "approved_precision_plan_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "authorized_release_fields": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "checked_at_utc": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "custodian": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "generation_authorized_by_template": {
+      "const": false
+    },
+    "initial_output_frozen_at_utc": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "initial_output_manifest_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "project_lead_raw_truth_accessed": {
+      "const": false
+    },
+    "released_fields": {
+      "type": "object"
+    },
+    "signature_verification_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "signature_verification_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "signed_release_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "signed_release_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "NOT_EXECUTED",
+        "PENDING",
+        "COMPLETE"
+      ]
+    },
+    "supplemental_output_manifest_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "trigger": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "trigger_rule_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "trigger_rule_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "uniform_total_per_sentinel": {
+      "enum": [
+        null,
+        5,
+        10
+      ]
+    },
+    "version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "approved_precision_contract_sha256",
+    "approved_precision_plan_sha256",
+    "authorized_release_fields",
+    "checked_at_utc",
+    "custodian",
+    "generation_authorized_by_template",
+    "initial_output_frozen_at_utc",
+    "initial_output_manifest_sha256",
+    "project_lead_raw_truth_accessed",
+    "released_fields",
+    "signature_verification_ref",
+    "signature_verification_sha256",
+    "signed_release_ref",
+    "signed_release_sha256",
+    "status",
+    "supplemental_output_manifest_sha256",
+    "trigger",
+    "trigger_rule_ref",
+    "trigger_rule_sha256",
+    "uniform_total_per_sentinel",
+    "version"
+  ],
+  "type": "object"
+}

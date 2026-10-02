@@ -1,23 +1,4 @@
 {
-  "record": "pl_week3_gate_status",
-  "date": "2026-10-02",
-  "decision": "BLOCKED",
-  "evidence_reconciled": true,
-  "satisfied_or_recorded": {
-    "observable_only_boundary": "pass",
-    "shared_public_disclosure_boundary": "pass",
-    "project_lead_raw_truth_prohibition": "pass_recorded",
-    "pilot_sentinel_registry": "frozen_public_safe_view",
-    "branch_a_pilot_configuration": "frozen_restricted",
-    "branch_a_pilot_root_seed": "approved_and_frozen_restricted",
-    "branch_a_existing_python314_golden_record": "present",
-    "formal_pilot_generation": "not_started"
-  },
-  "requires_final_verification": {
-    "sealed_service_custodian_operational_availability": "pending_final_release_check",
-    "branch_a_exact_current_commit_python314_run": "pending",
-    "shared_and_branch_b_current_commit_python314_ci": "pending"
-  },
   "blocking_groups": {
     "branch_b_decisions": [
       "correlation_admissibility",
@@ -38,16 +19,45 @@
     "external_approvals": [
       "faculty_concept_governance",
       "faculty_pilot_exchange"
+    ],
+    "pl_custodian_configuration": [
+      "sealed_trigger_formula_and_approved_release_allowlist",
+      "custodian_operational_signature_verification",
+      "minimum_effect_size_before_inspection_provenance_reconciliation",
+      "all_family_formal_pilot_runner_certification"
     ]
   },
+  "date": "2026-10-02",
+  "decision": "BLOCKED",
   "evidence_paths": [
     "governance/pl_pilot_exchange_signoff_checklist.md",
     "configuration_completeness.json",
     "pilot_access_audit.md",
     "pilot_precision_plan.yaml",
     "pilot_sentinel_registry.csv",
-    "branch_b/week2_preflight.json"
+    "branch_b/week2_preflight.json",
+    "governance/approval_evidence_register.csv",
+    "governance/branch_a_readiness_attestation_2026-10-02.json",
+    "governance/week3_execution_evidence_2026-10-02.json",
+    "governance/current_ci_evidence_2026-10-02.json"
   ],
+  "evidence_reconciled": true,
+  "locked_test_authorized": false,
   "pilot_observable_exchange_authorized": false,
-  "locked_test_authorized": false
+  "record": "pl_week3_gate_status",
+  "requires_final_verification": {
+    "branch_a_exact_current_commit_python314_run": "audited_base_pass_actual_local_run; final_code_verification_record_separate",
+    "sealed_service_custodian_operational_availability": "pending_final_release_check",
+    "shared_and_branch_b_current_commit_python314_ci": "PASS_SCOPED: reviewed code commit 30ae3602; run 36980323424; 67 tests; evidence-only followup separately identified"
+  },
+  "satisfied_or_recorded": {
+    "branch_a_existing_python314_golden_record": "present",
+    "branch_a_pilot_configuration": "frozen_restricted",
+    "branch_a_pilot_root_seed": "approved_and_frozen_restricted",
+    "formal_pilot_generation": "not_started",
+    "observable_only_boundary": "pass",
+    "pilot_sentinel_registry": "frozen_public_safe_view",
+    "project_lead_raw_truth_prohibition": "pass_recorded",
+    "shared_public_disclosure_boundary": "pass"
+  }
 }

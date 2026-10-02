@@ -1,5 +1,5 @@
 {
-  "report_version": "week2-preflight-v7",
+  "report_version": "week2-preflight-v8",
   "branch": "B",
   "date": "2026-10-02",
   "week1_gate": "complete",
@@ -20,7 +20,7 @@
     },
     {
       "id": "gradient_descent_common_fitter",
-      "status": "implementation_required",
+      "status": "source_conformance_review_required",
       "source_backed": {
         "objective": "Dasgupta soft-cardinal relaxation",
         "parameterization": "min-max/subdominant ultrametric",
@@ -43,14 +43,17 @@
         "deterministic_primary": true
       },
       "required": [
+        "approve or reject source-backed sigmoid_parameter=5 proposal",
+        "explicitly resolve paper input-weight initialization versus public-code subdominant-ultrametric initialization",
+        "explicitly choose non-negativity parameterization/projection",
         "Python 3.14 executable Dasgupta soft-cardinal/min-max optimizer kernel",
-        "source-conformance tests",
-        "actual compatible dependency versions",
-        "document exact sigmoid convention used for the paper's Heaviside relaxation before executable freeze"
+        "source-conformance tests on deterministic small graphs",
+        "actual Python 3.14-compatible dependency versions"
       ],
       "pilot_fixed_later": [
         "timeout"
-      ]
+      ],
+      "source_conformance_review": "branch_b/decision_proposals/common_fitter_source_conformance_2026-10-02.md"
     },
     {
       "id": "full_pipeline_bootstrap_integration",

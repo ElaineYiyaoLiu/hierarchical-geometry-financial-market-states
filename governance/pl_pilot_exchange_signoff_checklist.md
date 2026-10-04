@@ -87,3 +87,13 @@ A future READY decision authorizes only the protocol-defined pilot observable ex
 Existing checkboxes above are historical reconciliation; these scoped records supersede only their stated execution items. Exchange remains BLOCKED. `approval_evidence_register.csv` holds the consolidated current mapping. Pending freeze-registry rows grant no authority.
 
 Current CI update: [x] code commit `30ae3602cbb7bcfc0a1d12ff99277ab11758974a` passed `validate`, run `36980323424`, under actual Python 3.14.7 / NumPy 2.5.3 with 67 tests. See `governance/current_ci_evidence_2026-10-02.json`. This closes only the execution check for that code snapshot; incomplete method and external approval gates remain blocking.
+
+## 2026-10-04 scoped execution update
+
+Current Branch A execution and primary development handoff verification passed under actual Python 3.14.7 / NumPy 2.5.3 with 32 tests. Aggregate attestation: `governance/branch_a_execution_attestation_2026-10-04.json`. All-family formal runner certification remains pending.
+
+Public CI passed 79 tests at the audited code commit. The 12 new gate-guard tests also passed in the dedicated audit workflow. Evidence: `governance/current_ci_evidence_2026-10-04.json`.
+
+The public register audit checked all 20 gate IDs without missing or duplicate IDs and verified 11 referenced evidence checksums. It remains BLOCKED because scoped/recorded evidence, missing approvals and missing freeze records do not close gates. The archived audit is tied to its recorded source commit and register checksum; subsequent register changes require a new audit.
+
+This update supersedes historical execution-pending statements only within the stated scope. Method decisions, all-family certification, the operational custodian, the approved sealed contract, minimum-effect provenance and Faculty approvals remain open. No final PL approval is inferred.

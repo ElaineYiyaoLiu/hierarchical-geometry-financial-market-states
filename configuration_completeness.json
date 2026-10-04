@@ -1,23 +1,27 @@
 {
-  "version": "week3-closeout-2026-10-02",
-  "review_date": "2026-10-02",
+  "version": "week3-execution-reconciliation-2026-10-04",
+  "review_date": "2026-10-04",
   "project_lead_scope": {
     "observable_only_boundary": "pass",
     "project_lead_raw_truth_prohibition": "recorded",
     "sealed_service_custodian_path": "recorded",
     "pilot_precision_plan": "present",
     "pilot_sentinel_registry": "frozen_public_safe_view",
-    "pilot_exchange_decision": "blocked"
+    "pilot_exchange_decision": "blocked",
+    "pre_pilot_register_audit": "blocked_evidence_and_approvals_incomplete"
   },
   "branch_a": {
     "pilot_configuration": "frozen_restricted",
     "pilot_root_seed": "approved_and_frozen_restricted",
     "exact_balanced_positive_control": "pass",
     "shared_contract_alignment": "pass",
-    "formal_pilot_generation": "not_started"
+    "formal_pilot_generation": "not_started",
+    "current_commit_execution": "pass_scoped",
+    "primary_development_handoff_reproduction": "pass_scoped",
+    "all_family_formal_runner_certification": "pending"
   },
   "branch_b": {
-    "bootstrap_lca_original_identity_integration": "implementation_complete_pending_python314_ci",
+    "bootstrap_lca_original_identity_integration": "implementation_complete_tests_pass_scoped_method_gate_pending",
     "correlation_admissibility": "proposal_ready_for_review",
     "general_numerical_tolerances": "proposal_ready_for_review",
     "common_fitter_source_conformance": "review_complete_decisions_required",
@@ -30,5 +34,10 @@
     "faculty_pilot_exchange_approval": "pending_external"
   },
   "pilot_exchange_recommended": false,
-  "locked_test_authorized": false
+  "locked_test_authorized": false,
+  "execution_evidence": {
+    "branch_a": "governance/branch_a_execution_attestation_2026-10-04.json",
+    "shared_ci": "governance/current_ci_evidence_2026-10-04.json",
+    "register_audit": "governance/pre_pilot_gate_audit_2026-10-04.json"
+  }
 }

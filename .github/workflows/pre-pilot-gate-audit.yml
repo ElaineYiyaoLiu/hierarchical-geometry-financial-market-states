@@ -25,7 +25,9 @@ jobs:
           python-version: "3.14.7"
       - run: python -m pip install -r requirements-dev.txt
       - name: Verify guard behavior
-        run: python -m pytest -q governance/test_pre_pilot_audit.py --junitxml=pre_pilot_audit_tests.xml
+        run: python -m pytest -q governance/test_pre_pilot_audit.py governance/week4/test_sealed_transport.py --junitxml=pre_pilot_audit_tests.xml
+      - name: Dummy signed transport rehearsal
+        run: python governance/week4/run_sealed_rehearsal.py --output sealed_transport_rehearsal
       - name: Audit current public evidence without granting approval
         run: python governance/audit_pre_pilot.py --output pre_pilot_gate_audit.json
       - uses: actions/upload-artifact@v4
@@ -34,3 +36,4 @@ jobs:
           path: |
             pre_pilot_gate_audit.json
             pre_pilot_audit_tests.xml
+            sealed_transport_rehearsal/

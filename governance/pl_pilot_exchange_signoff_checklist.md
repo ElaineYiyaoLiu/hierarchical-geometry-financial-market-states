@@ -1,99 +1,33 @@
 # Project Lead pilot-exchange signoff checklist
 
-Status: **current evidence reconciliation - 2026-10-02**. No pilot-exchange approval is granted by this file.
+Current reconciliation: 2026-10-04. Overall decision: **BLOCKED**.
 
-Legend:
-- [x] evidence currently supports this item
-- [ ] still requires evidence or approval before READY
-- [~] recorded but requires final operational/current-commit verification
+## Verified execution scope
 
-## A. Configuration and boundary checks
+- Branch A audited code passed 32 tests, frozen readiness and primary development handoff byte reproduction under actual Python 3.14.7 / NumPy 2.5.3. Evidence: `governance/branch_a_execution_attestation_2026-10-04.json`. Formal all-family certification remains open.
+- Public audited code passed 79 tests under the recorded Python 3.14.7 / NumPy 2.5.3 environment. Evidence: `governance/current_ci_evidence_2026-10-04.json`. This supersedes the earlier CI collection failure for that execution scope.
+- The archived gate audit covered all 20 gate IDs and verified 11 evidence checksums at its recorded source/register. Evidence: `governance/pre_pilot_gate_audit_2026-10-04.json`. A changed register requires a new audit.
+- Observable-only and raw-truth access boundaries are recorded in `pilot_access_audit.md`; the public-safe sentinel view is in `pilot_sentinel_registry.csv`. Final operational verification remains required.
 
-- [ ] `configuration_completeness.json` has no unresolved pre-pilot field.
-  - Current state: unresolved Branch B and Faculty gates remain.
-- [x] Observable-only handoff boundary remains intact.
-  - Evidence: `pilot_access_audit.md`.
-- [x] Shared-repository public-disclosure boundary is recorded as passing.
-  - Evidence: `pilot_access_audit.md`.
-- [x] Project Lead raw pilot-truth prohibition remains recorded.
-  - Evidence: `pilot_access_audit.md`, `pilot_precision_plan.yaml`.
-- [~] Sealed-service / independent-custodian path is recorded.
-  - Final release still requires operational availability verification.
-- [x] Public-safe seven-sentinel registry is frozen.
-  - Evidence: `pilot_sentinel_registry.csv`.
-- [x] No formal pilot observable package has been generated/exchanged according to the current Branch A golden record and PL exchange packet.
-  - Evidence: private Branch A `generator_golden_report.json`; shared `pilot_exchange_packet.md`.
+## Remaining applicable gates
 
-## B. Branch A evidence
+| Gate | Current closure requirement |
+|---|---|
+| Configuration completeness | Every applicable pre-pilot field has complete evidence, approval and freeze references |
+| Branch A all-family runner | Formal dispatch/accounting/packaging certification and final restricted-side attestation |
+| Branch B method package | Existing method decisions, source conformance, cards and final pipeline verification remain separate gates; not reviewed by this A/PL close-out |
+| Custodian operational availability | Real identity, independent key registration, dated availability and custodian-operated rehearsal |
+| Sealed precision contract | Approved formula, input aggregation, conservative rule, exact release allowlist, signature verification and before-inspection checksum freeze |
+| Minimum-effect provenance | Original substantive value, dated approval/freeze and proof that freeze preceded earliest relevant development-contrast inspection |
+| Faculty concept/governance | Dated signed decision with reviewed versions, checksums and conditions |
+| Faculty pilot exchange | Separate dated signed decision after applicable gates close |
+| Final PL exchange | Final complete gate audit and explicit dated PL decision |
 
-- [x] Pilot configuration remains frozen in the restricted Branch A repository.
-- [x] Formal pilot root seed remains approved and frozen in the restricted Branch A repository.
-- [ ] Generator golden / reproduction evidence is current for the exact latest Branch A commit.
-  - Current issue: the private repository received reconciliation/documentation commits after the existing golden report; rerun/current-commit evidence is still required.
-- [~] Existing Branch A golden evidence records Python 3.14.7 / NumPy 2.5.3.
-  - Final signoff requires the current exact-commit run, not metadata-only carry-forward.
-- [x] Exact condition mappings, seed values, latent labels, truth, and generator implementation remain restricted by the recorded access boundary.
+## Prepared close-out material
 
-## C. Branch B decision closure
+- `governance/week4/sealed_contract_decision_packet.md` lists unresolved decisions and the executable transport proposal.
+- `governance/week4/sealed_transport.py` and `run_sealed_rehearsal.py` verify actual Ed25519 signatures on dummy records. The demo is not a custodian availability or approval attestation.
+- `governance/minimum_effect_provenance_review_2026-10-04.md` and the adjacent template record the missing historical evidence without selecting a value.
+- `governance/faculty_review_package_2026-10-02.md` is reconciled to current execution evidence.
 
-- [ ] Correlation-distance admissibility rule is explicitly approved and recorded.
-- [ ] General numerical comparison tolerances are explicitly approved and recorded.
-- [ ] Dasgupta soft-area sigmoid convention is explicitly approved and recorded.
-- [ ] Common-Fitter initialization rule is explicitly approved and recorded.
-- [ ] Common-Fitter non-negativity parameterization is explicitly approved and recorded.
-- [ ] Valuation favorable-feature sanity invariant and minimum passing criterion are prespecified and recorded before designated-control inspection.
-
-## D. Branch B implementation and verification
-
-- [ ] Executable Common Fitter is complete.
-- [ ] Common Fitter source-conformance tests pass.
-- [ ] Actual Python 3.14-compatible scientific dependency versions are recorded.
-- [ ] Bootstrap original-identity LCA stability integration passes Python 3.14 CI.
-  - Implementation is complete; current-commit CI evidence is pending.
-- [ ] Geometry / Common Fitter / support / interval / tree / triplet / bootstrap / failure / serialization golden tests pass on the final pre-pilot code.
-- [ ] Executable Geometry Cards are complete.
-- [ ] Candidate Common Fitter Cards are complete.
-- [ ] Geometry-specific search rules are frozen where required.
-- [ ] Geometry-neutral Common-Fitter selection rule is frozen where required.
-- [ ] Pilot processing configuration is complete.
-- [ ] Shared schema / output conformance passes on the final current code.
-  - Earlier Python 3.14 CI evidence passed, but later bootstrap changes require current-commit verification.
-
-## E. Faculty approvals
-
-- [ ] Faculty concept / governance approval is recorded.
-- [ ] Faculty pilot-exchange approval is recorded.
-
-## F. Current Project Lead decision
-
-**BLOCKED**
-
-The evidence reconciliation supports the access boundary, public-safe sentinel registry, restricted Branch A pilot configuration/seed status, and existing Branch A Python 3.14 golden record. READY is not yet available because current-commit Branch A execution evidence, Branch B method decisions/implementation/CI evidence, and Faculty approvals remain open.
-
-READY may be recorded only when every applicable item above is satisfied with evidence references.
-
-A future READY decision authorizes only the protocol-defined pilot observable exchange. It does not authorize locked-test generation, locked-test processing, unblinding, or any post-pilot scientific redesign.
-
-## 2026-10-02 execution reconciliation
-
-- [x] Audited Branch A base snapshot passed 23 tests, frozen readiness and primary development observable/sealed byte reproduction under actual Python 3.14.7 / NumPy 2.5.3. Public aggregate attestation: `governance/branch_a_readiness_attestation_2026-10-02.json`. Final preparation code has separate verification. This does not close all-family formal-bank certification.
-- [x] Shared audited base passed 15 validator and 47 Branch B tests locally under Python 3.14.7. See `governance/week3_execution_evidence_2026-10-02.json`.
-- [ ] Repaired shared workflow must pass at its new head; prior CI failed during collection.
-- [ ] All-family production dispatch, accounting and packaging certification.
-- [ ] Approved/frozen sealed binary trigger, conservative calculation rule and exact signed release-field allowlist before associated inspection.
-- [ ] Operational custodian identity, signature verification and availability.
-- [ ] Minimum-effect-size frozen value and before-inspection provenance reconciled.
-
-Existing checkboxes above are historical reconciliation; these scoped records supersede only their stated execution items. Exchange remains BLOCKED. `approval_evidence_register.csv` holds the consolidated current mapping. Pending freeze-registry rows grant no authority.
-
-Current CI update: [x] code commit `30ae3602cbb7bcfc0a1d12ff99277ab11758974a` passed `validate`, run `36980323424`, under actual Python 3.14.7 / NumPy 2.5.3 with 67 tests. See `governance/current_ci_evidence_2026-10-02.json`. This closes only the execution check for that code snapshot; incomplete method and external approval gates remain blocking.
-
-## 2026-10-04 scoped execution update
-
-Current Branch A execution and primary development handoff verification passed under actual Python 3.14.7 / NumPy 2.5.3 with 32 tests. Aggregate attestation: `governance/branch_a_execution_attestation_2026-10-04.json`. All-family formal runner certification remains pending.
-
-Public CI passed 79 tests at the audited code commit. The 12 new gate-guard tests also passed in the dedicated audit workflow. Evidence: `governance/current_ci_evidence_2026-10-04.json`.
-
-The public register audit checked all 20 gate IDs without missing or duplicate IDs and verified 11 referenced evidence checksums. It remains BLOCKED because scoped/recorded evidence, missing approvals and missing freeze records do not close gates. The archived audit is tied to its recorded source commit and register checksum; subsequent register changes require a new audit.
-
-This update supersedes historical execution-pending statements only within the stated scope. Method decisions, all-family certification, the operational custodian, the approved sealed contract, minimum-effect provenance and Faculty approvals remain open. No final PL approval is inferred.
+The consolidated register is `governance/approval_evidence_register.csv`. Scoped, pending, historical and demo evidence retain their scope. Pending freeze rows grant no authority. Record READY only after all applicable gates close with reviewed evidence and corresponding decisions. A pilot-exchange decision applies only to protocol-defined pilot exchange; later research stages require their own approvals.

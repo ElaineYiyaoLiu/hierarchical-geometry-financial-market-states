@@ -1,21 +1,25 @@
 # Faculty review package
 
-Date: 2026-10-02. Decision requested: concept/governance review and, separately, eventual pilot observable exchange. Current exchange status: BLOCKED. No approval is inferred or prefilled.
+Originally prepared 2026-10-02; reconciled 2026-10-04. Decisions requested: concept/governance review and, separately, eventual pilot observable exchange. Current exchange decision: **BLOCKED**. No approval is prefilled.
 
-## Current evidence
+## Current execution evidence
 
-The blinded design and raw pilot-truth firewall are recorded in `pilot_access_audit.md`. The public seven-sentinel role view is in `pilot_sentinel_registry.csv`; condition mappings remain restricted. Branch A frozen readiness and primary development byte reproduction have actual Python 3.14.7 / NumPy 2.5.3 evidence summarized in `governance/branch_a_readiness_attestation_2026-10-02.json`. This attestation does not certify an all-family formal pilot bank.
+The blinded design and PL raw pilot-truth firewall are recorded in `pilot_access_audit.md`. The public sentinel-role view is in `pilot_sentinel_registry.csv`; hidden mappings remain restricted.
 
-Shared source snapshot `054e4453cb741904cb30af98e8c3dba3aeb3ea09` passes 15 validator and 47 Branch B tests locally under Python 3.14.7 / NumPy 2.5.3. Its validate CI run 36977868807 failed at collection because NumPy and module imports were missing. The environment repair is an implementation correction, with new-head CI evidence required after commit.
+Actual Python 3.14.7 / NumPy 2.5.3 execution passed 32 Branch A tests, frozen readiness and primary development observable/sealed byte reproduction. See `governance/branch_a_execution_attestation_2026-10-04.json`. This attestation covers its recorded code snapshot and does not certify a formal all-family pilot bank.
 
-## Open pre-pilot gates
+Public audited code passed 79 tests. See `governance/current_ci_evidence_2026-10-04.json`. The previously recorded CI collection failure was repaired and is historical. The dedicated public gate audit passed its 12 guard tests, covered 20 gate IDs and verified 11 referenced checksums at its recorded source/register. Its decision remains BLOCKED because execution success does not close approval/freeze or incomplete-scope gates.
 
-Branch B must explicitly close correlation admissibility, numerical tolerances, sigmoid, initialization, positivity and valuation favorable-feature sanity. Common Fitter executable/source-conformance and complete method cards remain required. Passing existing tests does not demonstrate completion of these missing components.
+## A/PL close-out
 
-Custodian operational availability needs a dated verification. The binary trigger formula, conservative precision calculation rule, exact permitted signed release fields and signature-verification path need an approved checksum freeze. Current `pilot_precision_plan.yaml` gives counts and boundaries but omits that controlling operational contract. The minimum scientific effect size and its before-inspection provenance also require evidence reconciliation; no effect-size value is proposed here.
+Branch A formal all-family runner certification remains required. Custodian availability needs a real dated record and independent identity/key verification. The exact binary trigger, conservative calculation and signed release-field allowlist need decisions and a checksum freeze before associated inspection. The public decision packet is `governance/week4/sealed_contract_decision_packet.md`; the transport demo uses dummy records only.
 
-## Approval records
+Minimum-effect provenance remains pending. The controlling chronology begins before the earliest relevant development geometry-contrast inspection, as well as before pilot exchange. See `governance/minimum_effect_provenance_review_2026-10-04.md`. No substantive value is proposed or inferred from observed performance.
 
-For each decision record: authority, approve/reject/conditional decision, scope, dated signature, reviewed source versions, SHA-256 digests, conditions and freeze-registry entry. Concept/governance approval is separate from pilot-exchange approval. Resolve every applicable pre-pilot gate before exchange approval takes effect; concept review may proceed while technical evidence remains pending.
+Existing Branch B method gates remain separately open and are outside this A/PL close-out review.
 
-Appendix J exit review is prepared in `governance/week4/appendix_j_evidence_matrix.csv`. Passing it permits only the bounded G.4 revision and final lock-package assembly. Week 5 revision requires dual approval/checksum freeze before calibration seed release. Locked generation requires separate Appendix E approval.
+## Decision records
+
+For each decision record authority, approve/reject/conditional decision, scope, dated signature, reviewed source versions, exact-byte SHA-256, conditions and freeze-registry entry. Concept/governance review may proceed while technical evidence remains pending. Pilot-exchange approval takes effect only after all applicable gates close and the final PL decision is recorded.
+
+Appendix J exit review is prepared in `governance/week4/appendix_j_evidence_matrix.csv`. Pilot exit, bounded revision, calibration and later research stages each retain their controlling gates and approvals.

@@ -1,0 +1,31 @@
+{
+  "approved_precision_contract": false,
+  "base_commit": "f0fcb05e0331be08019fb9e2ab23aceefd40ea27",
+  "checks": {
+    "extra_release_field_rejected": true,
+    "missing_release_field_rejected": true,
+    "rehearsal_as_production_rejected": true,
+    "tampered_payload_rejected": true,
+    "uniform_expansion_transport": true,
+    "valid_signed_dummy_release": true,
+    "wrong_key_rejected": true,
+    "wrong_manifest_rejected": true,
+    "wrong_signer_rejected": true
+  },
+  "cryptography": "50.0.2",
+  "custodian_operational_availability_verified": false,
+  "development_only": true,
+  "local_governance_tests": 30,
+  "pilot_exchange_authorized": false,
+  "pilot_generation_authorized": false,
+  "python": "3.14.7",
+  "raw_pilot_truth_used": false,
+  "record": "sealed_transport_dummy_rehearsal",
+  "scope": "DUMMY_REHEARSAL_ONLY",
+  "source_binding": "base commit plus exact changed-source digests",
+  "source_sha256": {
+    "governance/week4/run_sealed_rehearsal.py": "a5a7bf86c9015aff3f1b39de3376273cc71c8e54d3c45dbe2300e4dcd331b584",
+    "governance/week4/sealed_transport.py": "7ba1ea6d2506a5e4baafcb5714bb90b43e353686acd66bfd9498eae1206ce523",
+    "governance/week4/test_sealed_transport.py": "7b4775bce56ccc0ba48b5e7ff2d2114154094724d93c642da37e946b4be24559"
+  }
+}

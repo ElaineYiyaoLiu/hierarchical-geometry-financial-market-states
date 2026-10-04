@@ -1,0 +1,17 @@
+{
+  "status": "PENDING_RECONCILIATION",
+  "primary_metric_definition_ref": null,
+  "effect_orientation_and_units": null,
+  "minimum_effect_value": null,
+  "substantive_rationale_ref": null,
+  "original_decision_ref": null,
+  "original_decision_sha256": null,
+  "approval_authority": null,
+  "approval_signature_ref": null,
+  "frozen_at_utc": null,
+  "freeze_id": null,
+  "earliest_relevant_development_contrast_inspection_at_utc": null,
+  "inspection_chronology_attestation_ref": null,
+  "chronology_verified": false,
+  "pilot_exchange_authorized": false
+}

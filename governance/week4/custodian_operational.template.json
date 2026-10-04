@@ -1,0 +1,17 @@
+{
+  "status": "PENDING_REAL_CUSTODIAN",
+  "custodian_identity": null,
+  "role_and_independence_attestation_ref": null,
+  "availability_verified_at_utc": null,
+  "availability_window": null,
+  "approved_access_scope_ref": null,
+  "independent_public_key_registration_ref": null,
+  "public_key_sha256": null,
+  "identity_key_binding_verification_ref": null,
+  "custodian_operated_rehearsal_ref": null,
+  "custodian_operated_rehearsal_sha256": null,
+  "PL_review_ref": null,
+  "freeze_id": null,
+  "raw_pilot_truth_released_to_PL": false,
+  "operational_availability_verified": false
+}

@@ -1,0 +1,13 @@
+{
+  "status": "UNSIGNED",
+  "decision_scope": null,
+  "decision": null,
+  "authority_identity": null,
+  "signed_at_utc": null,
+  "signature_ref": null,
+  "reviewed_versions_and_sha256": [],
+  "conditions": [],
+  "effective_only_after_applicable_gates_close": true,
+  "freeze_registry_entry": null,
+  "pilot_exchange_authorized_by_template": false
+}

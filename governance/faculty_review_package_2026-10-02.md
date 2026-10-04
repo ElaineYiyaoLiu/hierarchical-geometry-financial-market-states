@@ -6,9 +6,9 @@ Originally prepared 2026-10-02; reconciled 2026-10-04. Decisions requested: conc
 
 The blinded design and PL raw pilot-truth firewall are recorded in `pilot_access_audit.md`. The public sentinel-role view is in `pilot_sentinel_registry.csv`; hidden mappings remain restricted.
 
-Actual Python 3.14.7 / NumPy 2.5.3 execution passed 32 Branch A tests, frozen readiness and primary development observable/sealed byte reproduction. See `governance/branch_a_execution_attestation_2026-10-04.json`. This attestation covers its recorded code snapshot and does not certify a formal all-family pilot bank.
+Actual Python 3.14.7 / NumPy 2.5.3 execution results, source snapshot and development integration scope are recorded in `governance/branch_a_execution_attestation_2026-10-04.json`. This attestation does not certify a formal all-family pilot bank.
 
-Public audited code passed 79 tests. See `governance/current_ci_evidence_2026-10-04.json`. The previously recorded CI collection failure was repaired and is historical. The dedicated public gate audit passed its 12 guard tests, covered 20 gate IDs and verified 11 referenced checksums at its recorded source/register. Its decision remains BLOCKED because execution success does not close approval/freeze or incomplete-scope gates.
+Public audited test counts and workflow/source references are in `governance/current_ci_evidence_2026-10-04.json`. The previously recorded CI collection failure was repaired and is historical. The archived gate audit is tied to its source/register checksum. Its decision remains BLOCKED because execution success does not close approval/freeze or incomplete-scope gates.
 
 ## A/PL close-out
 

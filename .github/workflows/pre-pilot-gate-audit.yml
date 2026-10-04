@@ -25,7 +25,7 @@ jobs:
           python-version: "3.14.7"
       - run: python -m pip install -r requirements-dev.txt
       - name: Verify guard behavior
-        run: python -m pytest -q governance/test_pre_pilot_audit.py governance/week4/test_sealed_transport.py --junitxml=pre_pilot_audit_tests.xml
+        run: python -m pytest -q governance/test_pre_pilot_audit.py governance/week4/test_sealed_transport.py governance/week4/test_escalation_signatures.py governance/week4/test_audit_guards.py --junitxml=pre_pilot_audit_tests.xml
       - name: Dummy signed transport rehearsal
         run: python governance/week4/run_sealed_rehearsal.py --output sealed_transport_rehearsal
       - name: Audit current public evidence without granting approval

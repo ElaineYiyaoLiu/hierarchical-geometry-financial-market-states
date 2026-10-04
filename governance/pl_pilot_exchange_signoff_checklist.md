@@ -4,8 +4,8 @@ Current reconciliation: 2026-10-04. Overall decision: **BLOCKED**.
 
 ## Verified execution scope
 
-- Branch A audited code passed 32 tests, frozen readiness and primary development handoff byte reproduction under actual Python 3.14.7 / NumPy 2.5.3. Evidence: `governance/branch_a_execution_attestation_2026-10-04.json`. Formal all-family certification remains open.
-- Public audited code passed 79 tests under the recorded Python 3.14.7 / NumPy 2.5.3 environment. Evidence: `governance/current_ci_evidence_2026-10-04.json`. This supersedes the earlier CI collection failure for that execution scope.
+- Branch A execution scope and source commit are recorded in `governance/branch_a_execution_attestation_2026-10-04.json`, including development integration evidence where verified. Formal all-family certification remains open.
+- Public audited execution count, source commit and workflow runs are recorded in `governance/current_ci_evidence_2026-10-04.json`. These scoped records supersede the earlier CI collection failure.
 - The archived gate audit covered all 20 gate IDs and verified 11 evidence checksums at its recorded source/register. Evidence: `governance/pre_pilot_gate_audit_2026-10-04.json`. A changed register requires a new audit.
 - Observable-only and raw-truth access boundaries are recorded in `pilot_access_audit.md`; the public-safe sentinel view is in `pilot_sentinel_registry.csv`. Final operational verification remains required.
 
@@ -27,6 +27,7 @@ Current reconciliation: 2026-10-04. Overall decision: **BLOCKED**.
 
 - `governance/week4/sealed_contract_decision_packet.md` lists unresolved decisions and the executable transport proposal.
 - `governance/week4/sealed_transport.py` and `run_sealed_rehearsal.py` verify actual Ed25519 signatures on dummy records. The demo is not a custodian availability or approval attestation.
+- `validate_escalation.py` now invokes actual signature verification against the registered key and verifies consistency with the signed release and identity-binding evidence. Independent authority/freeze review remains required.
 - `governance/minimum_effect_provenance_review_2026-10-04.md` and the adjacent template record the missing historical evidence without selecting a value.
 - `governance/faculty_review_package_2026-10-02.md` is reconciled to current execution evidence.
 

@@ -1,0 +1,33 @@
+{
+  "status": "CANDIDATE_PENDING_DECISION",
+  "selected": false,
+  "production_use_authorized": false,
+  "candidate_id": "conservative_operational_precision_v1",
+  "input_unit": "opaque sentinel aggregate after initial outputs freeze",
+  "required_inputs_per_sentinel": ["scheduled_count", "failed_or_indeterminate_count"],
+  "candidate_trigger": "Uniform escalation if any failure fraction exceeds failure_fraction_limit OR conservative contrast halfwidth exceeds target_halfwidth. Missing, invalid or incomplete inputs HALT.",
+  "failure_fraction": "failed_or_indeterminate_count / scheduled_count; all planned attempts stay in the denominator",
+  "precision_bound": "For an independent replicate contrast bounded in [-1,1], conservative normal-approximation halfwidth = critical_value / sqrt(scheduled_count). This is a planning bound, not an exact confidence guarantee or scientific acceptance test.",
+  "alternative_for_decision": "A bounded-variable concentration bound may be selected instead; its confidence level and exact formula must be prespecified. Do not mix conventions after inspection.",
+  "unselected_constants": {
+    "failure_fraction_limit": null,
+    "target_halfwidth": null,
+    "critical_value_or_confidence_level": null,
+    "resource_safety_multiplier": null
+  },
+  "resource_candidate": "By prespecified stage, use maximum observed resource cost per attempted dataset, multiply by planned attempts and an approved safety multiplier; divide elapsed workload by approved effective concurrency. Missing measures HALT; failures remain in workload accounting.",
+  "proposed_optional_release_fields": {
+    "conservative_contrast_halfwidth": "finite nonnegative number; only if approved",
+    "projected_core_hours": "finite nonnegative number; only if approved",
+    "projected_storage_bytes": "nonnegative integer; only if approved",
+    "measured_peak_memory_bytes": "nonnegative integer; only if approved"
+  },
+  "forbidden_release": "Per-condition truth-keyed recovery results, geometry effect direction/magnitude, labels or mappings",
+  "decision_questions": [
+    "Is the proposed trigger appropriate for operational pilot escalation?",
+    "Which precision convention, constants and missing/failure handling are approved?",
+    "Which exact resource/precision fields and types may be released?"
+  ],
+  "approvals": {"PL": null, "Faculty": null},
+  "before_inspection_freeze_evidence": null
+}

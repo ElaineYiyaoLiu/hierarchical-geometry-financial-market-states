@@ -8,6 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 from validate_pilot_exit import checked_evidence
+from sealed_transport import verify, canonical_bytes
 
 
 def validate(record: dict, contract: dict, contract_bytes: bytes, root: Path) -> dict:
@@ -15,6 +16,8 @@ def validate(record: dict, contract: dict, contract_bytes: bytes, root: Path) ->
         raise RuntimeError("Python 3.14 required")
     blockers = []
     try:
+        if record.get("status") != "COMPLETE" or record.get("generation_authorized_by_template") is not False:
+            raise ValueError("complete non-authorizing record required")
         if record.get("project_lead_raw_truth_accessed") is not False:
             raise ValueError("raw-truth firewall failed")
         if contract.get("status") != "APPROVED_FROZEN":
@@ -51,18 +54,42 @@ def validate(record: dict, contract: dict, contract_bytes: bytes, root: Path) ->
             verification.get("signer") != record["custodian"]):
             raise ValueError("custodian signature verification attestation inconsistent")
         allowed = contract["exact_signed_release_field_allowlist"]
-        if not isinstance(allowed, list) or set(record.get("released_fields", {})) - set(allowed):
-            raise ValueError("released fields exceed approved allowlist")
+        if (not isinstance(allowed, list) or set(record.get("released_fields", {})) != set(allowed)
+            or set(record.get("authorized_release_fields", [])) != set(allowed)):
+            raise ValueError("released fields differ from approved exact allowlist")
         envelope = json.loads((root / record["signed_release_ref"]).read_text())
+        signer = contract["signer_identity_and_verification"]
+        if not isinstance(signer, dict) or signer.get("algorithm") != "Ed25519":
+            raise ValueError("approved Ed25519 signer registration required")
+        if signer.get("release_scope") != "pilot_sealed_release_v1":
+            raise ValueError("production release scope required")
+        for prefix in ("public_key", "identity_key_binding"):
+            checked_evidence(root, signer.get(prefix + "_ref", ""), signer.get(prefix + "_sha256", ""))
+        # The trusted key comes from the reviewed contract registration, never the envelope.
+        public_key = (root / signer["public_key_ref"]).read_bytes()
+        verified = verify(envelope, trusted_public_key=public_key,
+            expected_signer=signer["signer_id"], expected_scope=signer["release_scope"],
+            expected_contract_sha256=hashlib.sha256(contract_bytes).hexdigest(),
+            expected_initial_manifest_sha256=record["initial_output_manifest_sha256"],
+            allowed_release_fields=allowed)
+        if signer["signer_id"] != record["custodian"]:
+            raise ValueError("registered signer differs from custodian")
+        for field in ("trusted_key_sha256", "signed_payload_sha256", "transport_verified"):
+            if verification.get(field) != verified[field]:
+                raise ValueError("signature attestation differs from actual verification")
+        payload = envelope["payload"]
         for field in ("trigger", "initial_output_manifest_sha256", "released_fields"):
-            if envelope.get(field) != record.get(field):
+            if payload.get(field) != record.get(field):
                 raise ValueError(f"signed envelope mismatch: {field}")
+        issued = datetime.fromisoformat(payload["issued_at_utc"].replace("Z", "+00:00"))
+        if not date("initial_output_frozen_at_utc") < issued <= date("checked_at_utc"):
+            raise ValueError("signed issue time outside frozen-output verification interval")
     except (ValueError, OSError, KeyError, TypeError) as exc:
         blockers.append(str(exc))
     return {"envelope_consistent": not blockers, "blockers": blockers,
             "decision": "REVIEWABLE" if not blockers else "BLOCKED",
             "supplemental_generation_authorized": False,
-            "note": "Approving authority must independently verify signer and freeze provenance."}
+            "note": "Signature is verified against the registered key. Approving authority must independently verify identity binding, approval and freeze provenance."}
 
 
 if __name__ == "__main__":

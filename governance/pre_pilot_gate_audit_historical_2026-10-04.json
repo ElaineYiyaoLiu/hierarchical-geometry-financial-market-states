@@ -175,23 +175,25 @@
     },
     {
       "blockers": [
+        "evidence checksum missing",
         "gate is not declared PASS; scoped and recorded evidence retains its scope",
         "approval_ref missing",
         "freeze_id missing"
       ],
       "declared_status": "PENDING",
-      "evidence_checksum_verified": true,
+      "evidence_checksum_verified": false,
       "gate_id": "SEALED_PRECISION_CONTRACT",
       "status": "BLOCKED"
     },
     {
       "blockers": [
+        "evidence checksum missing",
         "gate is not declared PASS; scoped and recorded evidence retains its scope",
         "approval_ref missing",
         "freeze_id missing"
       ],
       "declared_status": "PENDING_RECONCILIATION",
-      "evidence_checksum_verified": true,
+      "evidence_checksum_verified": false,
       "gate_id": "MINIMUM_EFFECT_PROVENANCE",
       "status": "BLOCKED"
     },
@@ -234,9 +236,9 @@
   "note": "Checks public evidence bytes and declared closure only. Approvers must verify scientific scope, signatures, chronology and operational availability.",
   "pilot_exchange_authorized": false,
   "record": "pre_pilot_register_audit",
-  "register_sha256": "8a0488bbdd6a48abb162ba620893afd80b28ae3c8303dc5c2fed2e7d5fb63c81",
-  "source_commit": "8f1837bc5051e1a3745d0ee6d41d92b48f3fcc9b",
+  "register_sha256": "9cec7b13ef1ff320071f99967b684dfbb5242a2a6b0cd485770cdcbc0166860b",
   "structural_blockers": [],
-  "workflow_job_id": 111356618899,
-  "workflow_run_id": 37175315565
+  "source_commit": "e0e43967781249ba4fa531c662ea8b4db4a68a8f",
+  "run_id": 37165547090,
+  "date_utc": "2026-10-04"
 }

@@ -1,0 +1,36 @@
+name: pre-pilot-gate-audit
+
+on:
+  push:
+    paths:
+      - "governance/**"
+      - "configuration_completeness.json"
+      - "pilot_precision_plan.yaml"
+      - ".github/workflows/pre-pilot-gate-audit.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-register-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14.7"
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Verify guard behavior
+        run: python -m pytest -q governance/test_pre_pilot_audit.py --junitxml=pre_pilot_audit_tests.xml
+      - name: Audit current public evidence without granting approval
+        run: python governance/audit_pre_pilot.py --output pre_pilot_gate_audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-pre-pilot-gate-audit-${{ github.sha }}
+          path: |
+            pre_pilot_gate_audit.json
+            pre_pilot_audit_tests.xml

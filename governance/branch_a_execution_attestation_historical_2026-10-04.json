@@ -1,0 +1,19 @@
+{
+  "record": "branch_a_execution_attestation",
+  "date_utc": "2026-10-04",
+  "scope": "current-commit execution and primary development handoff only",
+  "python": "3.14.7",
+  "numpy": "2.5.3",
+  "tests_passed": 32,
+  "environment_assertions_passed": true,
+  "frozen_readiness_passed": true,
+  "primary_development_observable_byte_reproducible": true,
+  "primary_development_sealed_truth_byte_reproducible": true,
+  "shared_observable_and_manifest_validation_passed": true,
+  "initial_and_supplemental_planning_passed": true,
+  "formal_pilot_generated": false,
+  "all_family_formal_runner_certified": false,
+  "pilot_exchange_authorized": false,
+  "restricted_provenance": "Retained in Branch A issue 2 and its private execution artifact.",
+  "status": "PASS_SCOPED"
+}

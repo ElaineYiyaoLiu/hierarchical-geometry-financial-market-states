@@ -1,14 +1,17 @@
 {
-  "record": "public_current_ci_evidence",
-  "date_utc": "2026-10-04",
-  "source_commit": "e0e43967781249ba4fa531c662ea8b4db4a68a8f",
-  "python": "3.14.7",
-  "numpy": "2.5.3",
-  "test_count": 79,
   "conclusion": "success",
-  "run_id": 37165547014,
-  "job_id": 111327582405,
-  "gate_guard_tests": 12,
-  "gate_audit_run_id": 37165547090,
-  "scope": "executable tests and operational evidence guards; pending method choices and external approvals remain pending"
+  "date_utc": "2026-10-04",
+  "gate_audit_job_id": 111356216139,
+  "gate_audit_run_id": 37175178632,
+  "gate_guard_tests": 38,
+  "job_id": 111356216151,
+  "method_gates_closed": false,
+  "numpy": "2.5.3",
+  "pilot_exchange_authorized": false,
+  "python": "3.14.7",
+  "record": "public_scoped_ci_evidence",
+  "run_id": 37175178667,
+  "scope": "Code execution and signature/accounting guards only. Gate audit at this source precedes evidence-register checksum updates; updated register requires a new audit.",
+  "source_commit": "28e570566b9ccae4ee3af2115de48a7da3c6154e",
+  "test_count": 100
 }

@@ -2,6 +2,7 @@
   "branch_a": {
     "all_family_formal_runner_certification": "pending",
     "current_commit_execution": "pass_scoped",
+    "development_failure_accounting": "pass_scoped; formal runner pending",
     "exact_balanced_positive_control": "pass",
     "formal_pilot_generation": "not_started",
     "pilot_configuration": "frozen_restricted",
@@ -35,8 +36,10 @@
     "faculty_decisions": "unsigned_record_template_prepared",
     "minimum_effect_provenance": "pending_original_value_and_earliest_development_inspection_chronology",
     "scope": "operational_preparation_only; no Branch B review or formal pilot authorization",
+    "sealed_calculation_candidate": "unselected_candidate_prepared; approval/freeze pending",
     "sealed_contract": "decision_packet_prepared_approval_and_freeze_pending",
-    "sealed_transport": "dummy_ed25519_rehearsal_pass_scoped"
+    "sealed_transport": "dummy_ed25519_rehearsal_pass_scoped",
+    "signature_validator_integration": "actual_registered_key_verification_pass_scoped"
   },
   "project_lead_scope": {
     "observable_only_boundary": "pass",

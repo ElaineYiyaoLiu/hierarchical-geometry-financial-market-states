@@ -25,15 +25,21 @@ jobs:
           python-version: "3.14.7"
       - run: python -m pip install -r requirements-dev.txt
       - name: Verify guard behavior
-        run: python -m pytest -q governance/test_pre_pilot_audit.py governance/week4/test_sealed_transport.py governance/week4/test_escalation_signatures.py governance/week4/test_audit_guards.py --junitxml=pre_pilot_audit_tests.xml
+        run: python -m pytest -q governance/test_pre_pilot_audit.py governance/test_a_pl_preparation.py governance/week4/test_sealed_transport.py governance/week4/test_escalation_signatures.py governance/week4/test_audit_guards.py --junitxml=pre_pilot_audit_tests.xml
       - name: Dummy signed transport rehearsal
         run: python governance/week4/run_sealed_rehearsal.py --output sealed_transport_rehearsal
       - name: Audit current public evidence without granting approval
         run: python governance/audit_pre_pilot.py --output pre_pilot_gate_audit.json
+      - name: Prepare A and PL closure queue
+        run: python governance/prepare_a_pl_queue.py --output a_pl_closure_queue.json
+      - name: Check available minimum-effect provenance without inferring historical approval
+        run: python governance/check_minimum_effect_provenance.py --record governance/minimum_effect_provenance.template.json --output minimum_effect_consistency.json
       - uses: actions/upload-artifact@v4
         with:
           name: public-pre-pilot-gate-audit-${{ github.sha }}
           path: |
             pre_pilot_gate_audit.json
             pre_pilot_audit_tests.xml
+            a_pl_closure_queue.json
+            minimum_effect_consistency.json
             sealed_transport_rehearsal/

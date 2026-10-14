@@ -10,5 +10,11 @@
   "locked_test_authorized": false,
   "pilot_exit_approval_ref": null,
   "prohibited_scientific_changes": [],
-  "status": "NOT_PROPOSED"
+  "status": "NOT_PROPOSED",
+  "approvals_sha256": {
+    "Faculty": null,
+    "PL": null
+  },
+  "pilot_exit_approval_sha256": null,
+  "checksum_freeze_sha256": null
 }

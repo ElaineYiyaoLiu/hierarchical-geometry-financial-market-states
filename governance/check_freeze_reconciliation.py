@@ -37,7 +37,7 @@ def reconcile(gates: list[dict], freezes: list[dict], root: Path) -> dict:
             for field in ("owner", "approved_by", "version"):
                 if not isinstance(freeze.get(field), str) or not freeze[field].strip():
                     issues.append("freeze " + field + " missing")
-            if freeze.get("version", "").lower() == "pending":
+            if isinstance(freeze.get("version"), str) and freeze["version"].lower() == "pending":
                 issues.append("freeze version remains pending")
             try:
                 utc_time(freeze.get("frozen_at_utc"))

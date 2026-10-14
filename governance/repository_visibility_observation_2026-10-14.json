@@ -1,0 +1,13 @@
+{
+  "record": "repository_visibility_observation",
+  "date_utc": "2026-10-14",
+  "source": "GitHub repository metadata retrieved through the connected account",
+  "branch_a_visibility_observed": "private",
+  "shared_visibility_observed": "public",
+  "complete_collaborator_roster_verified": false,
+  "installation_access_verified": false,
+  "actual_access_approval_recorded": false,
+  "status": "PASS_SCOPED_VISIBILITY_ONLY",
+  "pilot_exchange_authorized": false,
+  "note": "Repository visibility is observed. It does not establish the full authorized-person/app access boundary or a signed access-auditor decision. The current connector does not expose the collaborator collection."
+}

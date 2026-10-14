@@ -1,0 +1,21 @@
+{
+  "status": "PREPARATION_ONLY",
+  "planned_ids": [],
+  "outcomes": [],
+  "frozen_references": [],
+  "registered_failure_codes": [],
+  "benchmark_references": [],
+  "stages": [],
+  "time_contingency_fraction": 0.25,
+  "available_hours": null,
+  "storage_available_bytes": null,
+  "allocation": [],
+  "approved_capacity_reference": null,
+  "resource_log_references": [],
+  "remaining_available_hours": null,
+  "remaining_base_hours": null,
+  "remaining_queue_storage_hours": null,
+  "remaining_required_bytes": null,
+  "remaining_storage_bytes": null,
+  "frozen_science_unchanged": null
+}

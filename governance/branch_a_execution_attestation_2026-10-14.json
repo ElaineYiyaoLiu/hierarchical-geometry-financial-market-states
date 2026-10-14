@@ -1,0 +1,18 @@
+{
+  "record": "branch_a_execution_attestation",
+  "date_utc": "2026-10-14",
+  "status": "PASS_SCOPED",
+  "scope": "verified development validation only",
+  "python": "3.14.7",
+  "numpy": "2.5.3",
+  "tests_passed": 50,
+  "environment_assertions_passed": true,
+  "frozen_readiness_passed": true,
+  "development_all_family_integration_passed": true,
+  "development_byte_reproduction_passed": true,
+  "restricted_archive_and_member_checksums_verified": true,
+  "formal_pilot_generated": false,
+  "all_family_formal_runner_certified": false,
+  "pilot_exchange_authorized": false,
+  "restricted_provenance": "Exact source, run, archive, package and member-checksum evidence retained in the private repository."
+}

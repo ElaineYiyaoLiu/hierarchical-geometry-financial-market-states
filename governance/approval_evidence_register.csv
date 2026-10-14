@@ -1,7 +1,7 @@
 gate_id,owner,evidence_ref,evidence_sha256,status,approval_authority,approval_ref,freeze_id,approval_sha256
 BOUNDARY,PL,pilot_access_audit.md,38283ad59642b443e2d98fa32590aed4c26b712fe75138a4b3f4d096d8d279c3,RECORDED_REVERIFY,access auditor,,,
 SENTINELS,PL,pilot_sentinel_registry.csv,cf0ce9dfd2e2836f467ced63db0a158f701f7048c4c08e769abb8d4bdac0a575,RECORDED_REVERIFY,PL,,,
-A_READINESS,A,governance/branch_a_execution_attestation_2026-10-14.json,e4695cc553e2cb414406d029b9db206c0d55d2b70618b7ce00b54941a9b5f165,PASS_SCOPED,PL,,,
+A_READINESS,A,governance/branch_a_execution_attestation_2026-10-14-final.json,43e156dff322532fed9909c16da774811aa162cb79f371831073cce944a257cd,PASS_SCOPED,PL,,,
 A_ALL_FAMILY_RUNNER,A,restricted attestation pending,,PENDING,PL,,,
 B_CURRENT_TESTS,B,governance/week3_execution_evidence_2026-10-02.json,5e4804d2ef4a7ceebabcddb10fe6958244fc9473f31fc7a9d15bc3f3d21bba8d,PASS_SCOPED,PL,,,
 B_CURRENT_CI,B,governance/current_ci_evidence_2026-10-04.json,e94ee814fc6f2d8040c0bcceaa4df968ae477bb81e87a7d7c33d0f0d6a43c13d,PASS_SCOPED,PL,,,

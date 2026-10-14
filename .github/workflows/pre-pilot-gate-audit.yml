@@ -25,7 +25,7 @@ jobs:
           python-version: "3.14.7"
       - run: python -m pip install -r requirements-dev.txt
       - name: Verify guard behavior
-        run: python -m pytest -q governance/test_pre_pilot_audit.py governance/test_a_pl_preparation.py governance/test_freeze_reconciliation.py governance/test_revision_preparation.py governance/week4/test_sealed_transport.py governance/week4/test_escalation_signatures.py governance/week4/test_audit_guards.py --junitxml=pre_pilot_audit_tests.xml
+        run: python -m pytest -q governance/test_pre_pilot_audit.py governance/test_a_pl_preparation.py governance/test_freeze_reconciliation.py governance/test_revision_preparation.py governance/test_later_stage_audit.py governance/test_threshold_blind_preparation.py governance/week4/test_sealed_transport.py governance/week4/test_escalation_signatures.py governance/week4/test_audit_guards.py --junitxml=pre_pilot_audit_tests.xml
       - name: Dummy signed transport rehearsal
         run: python governance/week4/run_sealed_rehearsal.py --output sealed_transport_rehearsal
       - name: Audit current public evidence without granting approval
@@ -38,6 +38,14 @@ jobs:
         run: python governance/check_freeze_reconciliation.py --output freeze_reconciliation.json
       - name: Audit future bounded revision preparation without approving it
         run: python governance/audit_revision_preparation.py --output revision_preparation.json
+      - name: Inspect later-stage blank preparation without authorization
+        run: |
+          for mode in receipt capacity allocation burn; do
+            python governance/later_stage_audit.py --mode "$mode" --record governance/week6_8/operational_record.template.json --output "later_${mode}.json"
+          done
+          for mode in trace blind; do
+            python governance/threshold_blind_preparation.py --mode "$mode" --record governance/week6_8/operational_record.template.json --output "later_${mode}.json"
+          done
       - uses: actions/upload-artifact@v4
         with:
           name: public-pre-pilot-gate-audit-${{ github.sha }}
@@ -48,4 +56,5 @@ jobs:
             minimum_effect_consistency.json
             freeze_reconciliation.json
             revision_preparation.json
+            later_*.json
             sealed_transport_rehearsal/

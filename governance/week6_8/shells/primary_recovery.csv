@@ -1,0 +1,1 @@
+condition_id,geometry_id,comparator_id,scheduled_count,paired_denominator,failed_count,indeterminate_count,failure_penalized_contrast,CI_lower,CI_upper,CI_rule_ref,minimum_effect_ref,successful_fit_sensitivity_ref,freeze_id,status

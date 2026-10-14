@@ -70,3 +70,17 @@ def test_queue_keeps_all_gates_and_never_changes_input_or_authorizes(tmp_path):
     assert not result["formal_generation_authorized"] and not result["pilot_exchange_authorized"]
     assert not any(r["gate_id"].startswith(("B_", "FACULTY")) for r in result["work_items"])
     assert result["other_gate_count"] == 12
+
+@pytest.mark.parametrize("field", ["original_decision_ref", "original_decision_sha256"])
+@pytest.mark.parametrize("value", [None, "", 17, [], {}])
+def test_incomplete_reference_fields_have_actionable_blockers(tmp_path, field, value):
+    record = fixture(tmp_path)
+    record[field] = value
+    result = provenance.check(record, tmp_path)
+    assert result["status"] == "BLOCKED"
+    assert not result["approval_granted"] and not result["pilot_exchange_authorized"]
+    assert len(result["blockers"]) == 1
+    assert result["blockers"][0] in (
+        "original_decision: relative evidence file inside the public repository required",
+        "original_decision: exact-byte SHA-256 required",
+    )

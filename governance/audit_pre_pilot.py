@@ -19,6 +19,10 @@ REQUIRED_GATES = frozenset({
 
 
 def checked_file(root: Path, ref: str, digest: str) -> None:
+    if not isinstance(ref, str) or not ref.strip():
+        raise ValueError("relative evidence file inside the public repository required")
+    if not isinstance(digest, str):
+        raise ValueError("exact-byte SHA-256 required")
     root = root.resolve()
     path = (root / ref).resolve()
     if not ref or Path(ref).is_absolute() or not path.is_relative_to(root):

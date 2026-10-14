@@ -1,0 +1,4 @@
+artifact_id,artifact_kind,prespecified_rule_ref,approved_template_ref,template_sha256,status
+confirmatory_tables,table_shell,,,,PENDING_APPROVED_DEFINITIONS
+prespecified_figures,figure_spec,,,,PENDING_APPROVED_DEFINITIONS
+claim_eligibility,claim_matrix,,,,PENDING_APPROVED_DEFINITIONS

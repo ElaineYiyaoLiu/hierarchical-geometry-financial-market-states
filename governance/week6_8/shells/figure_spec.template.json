@@ -1,0 +1,16 @@
+{
+  "status": "PREPARATION_ONLY",
+  "scientific_result_values_present": false,
+  "figures": [],
+  "required_bindings": [
+    "prespecified_rule_ref",
+    "approved_data_source_ref",
+    "condition_order_ref",
+    "geometry_registry_ref",
+    "CI_rule_ref",
+    "multiplicity_rule_ref",
+    "region_rule_ref",
+    "blind_or_oracle_label"
+  ],
+  "locked_processing_authorized": false
+}

@@ -24,9 +24,14 @@ def validate_tree_edge_list(tree: dict, sample_order: list[str]) -> None:
     if len(nodes) != len(internal) + len(leaves):
         raise BranchBFailure(FailureCode.DEGENERATE_TREE, "internal-node and leaf identifiers must be disjoint")
 
+    if not isinstance(tree["edges"], list):
+        raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree edges must be a list")
+
     parent_count: Counter[str] = Counter()
     children: dict[str, list[str]] = {}
     for edge in tree["edges"]:
+        if not isinstance(edge, dict):
+            raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "each tree edge must be an object")
         if set(edge) - {"parent", "child", "branch_length", "unresolved"}:
             raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree edge contains unsupported fields")
         parent = edge.get("parent")

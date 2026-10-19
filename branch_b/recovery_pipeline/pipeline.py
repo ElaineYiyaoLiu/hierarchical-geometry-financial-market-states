@@ -101,6 +101,9 @@ class RecoveryPipeline:
         if not all(isinstance(parameters, dict) for parameters in parameter_records):
             raise ConfigurationRequired("each geometry-parameter candidate must be a dictionary")
 
+        # Snapshot the entire registered candidate set before invoking callbacks.
+        # A callback must not silently rewrite a later candidate through an alias.
+        parameter_records = deepcopy(parameter_records)
         validation_candidates: list[ValidationCandidate] = []
         for parameters in parameter_records:
             d_validation, fit_validation = self._fit_split(

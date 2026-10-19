@@ -1,6 +1,9 @@
 """Synthetic mutation-isolation regression for observable geometry parameters."""
 
 import numpy as np
+import pytest
+
+from branch_b.failures import ConfigurationRequired
 
 from branch_b.fitters.base import FitResult
 from branch_b.recovery_pipeline.pipeline import PipelineConfiguration, RecoveryPipeline
@@ -176,3 +179,36 @@ def test_mutating_preprocessing_callbacks_do_not_change_split_inputs():
     assert np.all(validation == 0.0)
     assert np.all(test == 0.0)
     assert result["geometry_parameters"] == {"scale": 1.0}
+
+
+@pytest.mark.parametrize(
+    "invalid_candidates",
+    [None, [], {}, "candidate", [{"scale": 1.0}, None], [1]],
+)
+def test_malformed_geometry_candidate_collection_fails_before_fitting(invalid_candidates):
+    fitter_calls = []
+
+    class RecordingFitter:
+        fitter_id = "synthetic_recording"
+
+        def fit(self, dissimilarity, *, random_seed=None):
+            fitter_calls.append(True)
+            return FitResult(ultrametric_matrix=np.zeros((2, 2)), tree={}, diagnostics={})
+
+    pipeline = RecoveryPipeline(
+        config=PipelineConfiguration(
+            geometry_id="synthetic_geometry",
+            common_fitter_id="synthetic_recording",
+        ),
+        fit_preprocessor=lambda train: IdentityPreprocessor(),
+        geometry_factory=lambda values, parameters: np.array(
+            [[0.0, 2.0], [2.0, 0.0]]
+        ),
+        geometry_parameter_candidates=lambda train: invalid_candidates,
+        select_validation_candidate=lambda candidates: 0,
+        fitter=RecordingFitter(),
+    )
+    x = np.zeros((2, 12))
+    with pytest.raises(ConfigurationRequired):
+        pipeline.run(x, x.copy(), x.copy())
+    assert not fitter_calls

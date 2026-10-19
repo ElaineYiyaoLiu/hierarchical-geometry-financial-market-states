@@ -87,3 +87,45 @@ def test_selector_mutation_cannot_rewrite_selected_candidate_or_validation_fit()
     assert candidate.parameters == original
     assert candidate.dissimilarity_matrix[0, 1] == 1.0
     assert candidate.fit.ultrametric_matrix[0, 1] == 1.0
+
+
+def test_mutating_geometry_and_fitter_cannot_corrupt_pipeline_matrices():
+    observed_geometry_inputs = []
+
+    def mutating_geometry(values, parameters):
+        observed_geometry_inputs.append(values[0, 0])
+        values[0, 0] = 999.0
+        return np.array([[0.0, 2.0], [2.0, 0.0]])
+
+    class MutatingFitter:
+        fitter_id = "synthetic_mutator"
+
+        def fit(self, dissimilarity, *, random_seed=None):
+            dissimilarity[0, 1] = 999.0
+            return FitResult(
+                ultrametric_matrix=np.zeros((2, 2)),
+                tree={},
+                diagnostics={},
+            )
+
+    pipeline = RecoveryPipeline(
+        config=PipelineConfiguration(
+            geometry_id="synthetic_geometry",
+            common_fitter_id="synthetic_mutator",
+        ),
+        fit_preprocessor=lambda train: IdentityPreprocessor(),
+        geometry_factory=mutating_geometry,
+        geometry_parameter_candidates=lambda train: [{"scale": 1.0}, {"scale": 2.0}],
+        select_validation_candidate=lambda candidates: 0,
+        fitter=MutatingFitter(),
+    )
+    x = np.zeros((2, 12))
+    result = pipeline.run(x, x.copy(), x.copy())
+
+    assert observed_geometry_inputs == [0.0, 0.0, 0.0]
+    assert x[0, 0] == 0.0
+    assert all(
+        candidate.dissimilarity_matrix[0, 1] == 1.0
+        for candidate in result["validation_candidates"]
+    )
+    assert result["dissimilarity_matrix"][0, 1] == 1.0

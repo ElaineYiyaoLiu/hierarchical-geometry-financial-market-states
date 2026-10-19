@@ -10,12 +10,20 @@ from branch_b.failures import BranchBFailure
 
 @dataclass(frozen=True)
 class BootstrapReplicate:
+    """One attempted replicate, including its original draw and evaluator seed.
+
+    Records produced by the bootstrap engine always include replicate_seed.
+    None preserves compatibility with older manually constructed records; it
+    means the seed was not recorded, not that a seed may be reconstructed here.
+    """
+
     replicate_index: int
     train_indices: np.ndarray
     validation_indices: np.ndarray
     test_indices: np.ndarray
     result: object | None
     failure: dict | None
+    replicate_seed: int | None = None
 
 
 def bootstrap_split_indices(n: int, rng: np.random.Generator) -> np.ndarray:
@@ -62,7 +70,10 @@ def run_full_pipeline_bootstrap(
         test_idx = bootstrap_split_indices(test_size, rng)
         replicate_seed = int(rng.integers(0, 2**63 - 1))
         try:
-            result = evaluate_replicate(train_idx, validation_idx, test_idx, replicate_seed)
+            # Preserve the original draw even if an evaluator modifies its inputs.
+            result = evaluate_replicate(
+                train_idx.copy(), validation_idx.copy(), test_idx.copy(), replicate_seed
+            )
             failure = None
         except Exception as exc:
             result = None
@@ -75,6 +86,7 @@ def run_full_pipeline_bootstrap(
                 test_indices=test_idx,
                 result=result,
                 failure=failure,
+                replicate_seed=replicate_seed,
             )
         )
     return out

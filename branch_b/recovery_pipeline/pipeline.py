@@ -114,7 +114,8 @@ class RecoveryPipeline:
                 )
             )
 
-        selected_index = self.select_validation_candidate(validation_candidates)
+        # Selection is index-only; isolate stored candidate records from selector side effects.
+        selected_index = self.select_validation_candidate(deepcopy(validation_candidates))
         if not isinstance(selected_index, int) or isinstance(selected_index, bool):
             raise ConfigurationRequired("validation selector must return an integer candidate index")
         if selected_index < 0 or selected_index >= len(validation_candidates):

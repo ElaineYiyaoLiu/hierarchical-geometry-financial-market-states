@@ -6,7 +6,7 @@ candidate, an approved selection rule, or evidence of pilot readiness.
 import numpy as np
 import pytest
 
-from branch_b.failures import ConfigurationRequired
+from branch_b.failures import BranchBFailure, ConfigurationRequired, FailureCode
 from branch_b.fitters import FitResult
 from branch_b.preprocessing import Standardizer
 from branch_b.recovery_pipeline import PipelineConfiguration, RecoveryPipeline
@@ -98,6 +98,7 @@ def test_nonfinite_test_input_fails_before_geometry_fitting():
     train = np.vstack([np.zeros(12), np.full(12, 2.0)])
     test = train.copy()
     test[0, 0] = np.nan
-    with pytest.raises(Exception, match="non-finite"):
+    with pytest.raises(BranchBFailure, match="non-finite") as exc:
         pipeline.run(train, train, test)
+    assert exc.value.code == FailureCode.NONFINITE_INPUT
     assert geometry_calls == []

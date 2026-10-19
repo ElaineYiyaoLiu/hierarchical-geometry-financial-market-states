@@ -48,3 +48,18 @@ def test_pilot_timeout_setting_does_not_enable_unimplemented_kernel():
     d = np.array([[0.0, 1.0], [1.0, 0.0]])
     with pytest.raises(ConfigurationRequired, match="optimizer kernel"):
         fitter.fit(d)
+
+
+@pytest.mark.parametrize(
+    "malformed_input",
+    [
+        [["not-a-number", "also-not-a-number"], ["x", "y"]],
+        [[0.0, None], [None, 0.0]],
+        object(),
+    ],
+)
+def test_nonnumeric_input_has_structured_schema_failure(malformed_input):
+    fitter = GradientDescentUltrametricFitter()
+    with pytest.raises(BranchBFailure) as caught:
+        fitter.fit(malformed_input)
+    assert caught.value.code == FailureCode.INPUT_SCHEMA

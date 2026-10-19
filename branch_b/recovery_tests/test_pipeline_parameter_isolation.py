@@ -129,3 +129,50 @@ def test_mutating_geometry_and_fitter_cannot_corrupt_pipeline_matrices():
         for candidate in result["validation_candidates"]
     )
     assert result["dissimilarity_matrix"][0, 1] == 1.0
+
+
+def test_mutating_preprocessing_callbacks_do_not_change_split_inputs():
+    observed = []
+
+    class MutatingPreprocessor:
+        def transform(self, values):
+            observed.append(values[0, 0])
+            values[0, 0] = 999.0
+            return np.zeros_like(values)
+
+        def to_record(self):
+            return {"name": "synthetic_mutating_preprocessor"}
+
+    def fit_preprocessor(train):
+        observed.append(train[0, 0])
+        train[0, 0] = 999.0
+        return MutatingPreprocessor()
+
+    def parameter_candidates(train):
+        observed.append(train[0, 0])
+        train[0, 0] = 999.0
+        return [{"scale": 1.0}]
+
+    pipeline = RecoveryPipeline(
+        config=PipelineConfiguration(
+            geometry_id="synthetic_geometry",
+            common_fitter_id="synthetic_stub",
+        ),
+        fit_preprocessor=fit_preprocessor,
+        geometry_factory=lambda values, parameters: np.array(
+            [[0.0, 2.0], [2.0, 0.0]]
+        ),
+        geometry_parameter_candidates=parameter_candidates,
+        select_validation_candidate=lambda candidates: 0,
+        fitter=SyntheticFitter(),
+    )
+    train = np.zeros((2, 12))
+    validation = np.zeros((2, 12))
+    test = np.zeros((2, 12))
+    result = pipeline.run(train, validation, test)
+
+    assert observed == [0.0, 0.0, 0.0, 0.0, 0.0]
+    assert np.all(train == 0.0)
+    assert np.all(validation == 0.0)
+    assert np.all(test == 0.0)
+    assert result["geometry_parameters"] == {"scale": 1.0}

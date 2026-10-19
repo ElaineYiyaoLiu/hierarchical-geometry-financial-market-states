@@ -1,0 +1,252 @@
+name: Branch B pinned final audit
+
+on:
+  push:
+    paths:
+      - ".github/workflows/branch-b-final-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-boundary-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      AUDITED_SOURCE: "e6f2cfb6ec53470312f8b637f50c63d7b5d7a69a"
+      AUDIT_WORKFLOW_REVISION: ${{ github.sha }}
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "e6f2cfb6ec53470312f8b637f50c63d7b5d7a69a"
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /branch_b/
+            /interface_package/
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: Verify interpreter and audited source
+        run: |
+          python --version
+          python -c 'import sys; assert sys.version_info[:2] == (3, 14), sys.version'
+          test "$(git rev-parse HEAD)" = "$AUDITED_SOURCE"
+      - name: Install the existing development validation dependencies
+        run: |
+          python -m pip install pytest==9.1.1 jsonschema==4.26.0 numpy==2.5.3 -r branch_b/requirements-output-dev.txt
+          python -m pip freeze > "$RUNNER_TEMP/final-audit-pip-freeze.txt"
+      - name: Probe checked boundaries without changing scientific modules
+        shell: bash
+        run: |
+          set -o pipefail
+          export PYTHONPATH="$GITHUB_WORKSPACE"
+          cat > "$RUNNER_TEMP/final_audit_probes.py" <<'PY'
+          """Literal synthetic counterexamples, not scientific fits or bank data.
+
+          The job fails when a probe exposes an unresolved boundary. Such a
+          failure is audit evidence, not an optimizer or experimental outcome.
+          """
+          import sys
+          if sys.version_info[:2] != (3, 14):
+              raise RuntimeError("Audit execution requires Python 3.14")
+
+          from hashlib import sha256
+          from importlib.metadata import version
+          import json
+          import os
+          from pathlib import Path
+          import platform
+          import subprocess
+
+          import numpy as np
+
+          from branch_b.bootstrap.checked import bound_lca_stability
+          from branch_b.failures import BranchBFailure
+          from branch_b.fitters import FitResult
+          from branch_b.output.checked import (
+              complete_record_from_checked_pipeline,
+              prepare_development_output, verify_development_output,
+          )
+          from branch_b.recovery_pipeline import PipelineConfiguration, RecoveryPipeline
+          from branch_b.recovery_pipeline.result_validation import validate_bound_tree
+
+          actual_source = subprocess.check_output(
+              ["git", "rev-parse", "HEAD"], text=True
+          ).strip()
+          if actual_source != os.environ["AUDITED_SOURCE"]:
+              raise RuntimeError("Audited source revision mismatch")
+
+          ORDER = ["audit_a", "audit_b", "audit_c"]
+          CONFIG = b'{"fixture":"audit only, not a scientific configuration"}\n'
+          MANIFEST = b'{"fixture":"audit only, not a released observable manifest"}\n'
+          CONFIG_REF = "synthetic-audit-configuration.json"
+          IDENTITY = {
+              "dataset_id": "D0000000000000001", "split": "test",
+              "geometry_id": "audit_geometry", "common_fitter_id": "audit_stub",
+              "schema_version": "audit-fixture-v1",
+          }
+
+          def digest(content):
+              return sha256(content).hexdigest()
+
+          def tree(order, dangling=False):
+              value = {
+                  "tree_format_version": "audit-fixture-v1", "root": "audit_root",
+                  "internal_nodes": ["audit_root"], "leaves": order.copy(),
+                  "edges": [{"parent": "audit_root", "child": name,
+                             "branch_length": 1.0, "unresolved": True}
+                            for name in order],
+              }
+              if dangling:
+                  value["internal_nodes"].append("audit_terminal_internal")
+                  value["edges"].append({
+                      "parent": "audit_root", "child": "audit_terminal_internal",
+                      "branch_length": 1.0, "unresolved": True,
+                  })
+              return value
+
+          def failure(exc):
+              return {"exception_type": type(exc).__name__,
+                      "failure_code": str(getattr(exc, "code", "")),
+                      "message": str(exc)}
+
+          class IdentityPreprocessor:
+              def transform(self, values):
+                  return values.copy()
+              def to_record(self):
+                  return {"fixture": "identity, not registered preprocessing"}
+
+          def probe(mode):
+              events = []
+              class NamedStub:
+                  fitter_id = "audit_stub"
+                  def fit_with_sample_order(self, dissimilarity, *, sample_order, random_seed=None):
+                      matrix = dissimilarity.copy()
+                      diagnostics = {"fixture": "synthetic audit, not scientific output"}
+                      if mode == "masked_matrix":
+                          matrix = np.ma.array(matrix, mask=np.zeros_like(matrix, dtype=bool))
+                          matrix.mask[0, 1] = True
+                      elif mode == "mixed_boolean_matrix":
+                          matrix = matrix.tolist()
+                          matrix[0][1] = True
+                      elif mode == "nonfinite_diagnostics":
+                          diagnostics["nonfinite_fixture"] = float("nan")
+                      return FitResult(matrix, tree(sample_order, mode == "terminal_internal_node"), diagnostics)
+
+              def select(candidates):
+                  events.append("selector_called")
+                  return 0
+
+              pipeline = RecoveryPipeline(
+                  config=PipelineConfiguration("audit_geometry", "audit_stub"),
+                  fit_preprocessor=lambda values: IdentityPreprocessor(),
+                  geometry_factory=lambda values, parameters: np.ones((len(values), len(values))) - np.eye(len(values)),
+                  geometry_parameter_candidates=lambda values: [{}],
+                  select_validation_candidate=select, fitter=NamedStub(),
+              )
+              values = np.arange(36, dtype=float).reshape(3, 12)
+              observation = {"probe": mode, "checked_pipeline_returned": False,
+                             "transport_verified": False}
+              try:
+                  result = pipeline.run_checked(
+                      values, values.copy(), values.copy(),
+                      validation_sample_order=ORDER.copy(), test_sample_order=ORDER.copy(),
+                  )
+                  observation["checked_pipeline_returned"] = True
+              except Exception as exc:
+                  observation["pipeline_error"] = failure(exc)
+              observation["selector_calls"] = len(events)
+              if observation["checked_pipeline_returned"]:
+                  try:
+                      context = {
+                          "runtime_seconds": 0.0, "peak_memory_bytes": 0,
+                          "software_environment": {"fixture": "not scientific execution metadata"},
+                          "random_seeds": {}, "configuration_file": CONFIG_REF,
+                          "creation_timestamp": "2026-10-19T00:00:00Z",
+                      }
+                      record = complete_record_from_checked_pipeline(
+                          result, context=context, expected_identity=IDENTITY,
+                          expected_sample_order=ORDER, expected_configuration_file=CONFIG_REF,
+                          common_fitter_parameters={"fixture": "stub"},
+                          hierarchy_support={"score": 0.25, "decision": "indeterminate"},
+                          bootstrap_stability=None,
+                      )
+                      prepared = prepare_development_output(
+                          record, expected_identity=IDENTITY, expected_sample_order=ORDER,
+                          expected_configuration_file=CONFIG_REF, source_revision=actual_source,
+                          configuration_bytes=CONFIG, expected_configuration_sha256=digest(CONFIG),
+                          input_manifest_bytes=MANIFEST, expected_input_manifest_sha256=digest(MANIFEST),
+                      )
+                      decoded = verify_development_output(
+                          prepared, expected_record_sha256=digest(prepared.record_bytes),
+                          expected_receipt_sha256=digest(prepared.receipt_bytes),
+                          expected_identity=IDENTITY, expected_sample_order=ORDER,
+                          expected_configuration_file=CONFIG_REF,
+                          expected_source_revision=actual_source,
+                          expected_configuration_sha256=digest(CONFIG),
+                          expected_input_manifest_sha256=digest(MANIFEST),
+                      )
+                      observation["transport_verified"] = True
+                      observation["transported_entry_type"] = type(decoded["ultrametric_matrix"][0][1]).__name__
+                      observation["transported_entry_value"] = decoded["ultrametric_matrix"][0][1]
+                  except Exception as exc:
+                      observation["transport_error"] = failure(exc)
+              return observation
+
+          observations = [probe(mode) for mode in (
+              "well_formed_control", "terminal_internal_node", "masked_matrix",
+              "mixed_boolean_matrix", "nonfinite_diagnostics",
+          )]
+          rank = {"probe": "structurally_valid_constant_rank_stars"}
+          occurrence_order = ["audit_occurrence_0", "audit_occurrence_1", "audit_occurrence_2"]
+          try:
+              full, boot = tree(ORDER), tree(occurrence_order)
+              validate_bound_tree(full, sample_order=ORDER)
+              validate_bound_tree(boot, sample_order=occurrence_order)
+              rank["both_trees_pass_structure"] = True
+              rank["returned_stability"] = bound_lca_stability(
+                  full_test_tree=full, original_sample_order=ORDER,
+                  bootstrap_tree=boot, bootstrap_sample_order=occurrence_order,
+                  bootstrap_test_indices=np.arange(3),
+              )
+          except Exception as exc:
+              rank["stability_error"] = failure(exc)
+          observations.append(rank)
+
+          findings = [item["probe"] for item in observations[1:5]
+                      if item["checked_pipeline_returned"]]
+          if rank.get("both_trees_pass_structure") and rank.get("stability_error", {}).get("failure_code") == "DEGENERATE_TREE":
+              findings.append(rank["probe"])
+          control_ok = observations[0]["transport_verified"]
+          report = {
+              "scope": "synthetic boundary audit only", "scientific_authorization": False,
+              "audited_source_revision": actual_source,
+              "audit_workflow_revision": os.environ["AUDIT_WORKFLOW_REVISION"],
+              "python_version": platform.python_version(), "python_build": sys.version,
+              "numpy_version": version("numpy"), "jsonschema_version": version("jsonschema"),
+              "rfc3339_validator_version": version("rfc3339-validator"),
+              "well_formed_control_verified": control_ok,
+              "observations": observations, "open_probe_findings": findings,
+              "no_scientific_modules_modified": True,
+              "provenance_expectations_are_synthetic_fixtures": True,
+          }
+          text = json.dumps(report, sort_keys=True, indent=2, allow_nan=False) + "\n"
+          (Path(os.environ["RUNNER_TEMP"]) / "final-audit-observations.json").write_text(text, encoding="utf-8")
+          print(text, end="")
+          # Deliberately fail the audit rather than label observed defects as passes.
+          raise SystemExit(0 if control_ok and not findings else 1)
+          PY
+          python "$RUNNER_TEMP/final_audit_probes.py" | tee "$RUNNER_TEMP/final-audit.log"
+      - name: Retain audit findings and environment evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: branch-b-final-audit-evidence
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/final-audit-observations.json
+            ${{ runner.temp }}/final-audit.log
+            ${{ runner.temp }}/final-audit-pip-freeze.txt

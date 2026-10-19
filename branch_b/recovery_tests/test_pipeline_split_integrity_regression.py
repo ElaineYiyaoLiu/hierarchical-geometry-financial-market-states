@@ -71,3 +71,33 @@ def test_invalid_validation_selection_fails_closed(selector):
     train = np.vstack([np.zeros(12), np.full(12, 2.0)])
     with pytest.raises(ConfigurationRequired):
         pipeline.run(train, train, train)
+
+
+def test_empty_candidate_registry_fails_before_validation_or_test_fit():
+    geometry_calls = []
+
+    def geometry(values, params):
+        geometry_calls.append(True)
+        return np.array([[0.0, 1.0], [1.0, 0.0]])
+
+    pipeline = make_pipeline([], lambda candidates: 0, geometry)
+    train = np.vstack([np.zeros(12), np.full(12, 2.0)])
+    with pytest.raises(ConfigurationRequired, match="no prespecified"):
+        pipeline.run(train, train, train)
+    assert geometry_calls == []
+
+
+def test_nonfinite_test_input_fails_before_geometry_fitting():
+    geometry_calls = []
+
+    def geometry(values, params):
+        geometry_calls.append(True)
+        return np.array([[0.0, 1.0], [1.0, 0.0]])
+
+    pipeline = make_pipeline([{}], lambda candidates: 0, geometry)
+    train = np.vstack([np.zeros(12), np.full(12, 2.0)])
+    test = train.copy()
+    test[0, 0] = np.nan
+    with pytest.raises(Exception, match="non-finite"):
+        pipeline.run(train, train, test)
+    assert geometry_calls == []

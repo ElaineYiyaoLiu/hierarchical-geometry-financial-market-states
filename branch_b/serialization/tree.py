@@ -63,20 +63,22 @@ def validate_tree_edge_list(tree: dict, sample_order: list[str]) -> None:
         if parent_count[node] != 1:
             raise BranchBFailure(FailureCode.DEGENERATE_TREE, "every non-root node must have exactly one parent")
 
+    # Iterative depth-first traversal avoids Python recursion limits on deep trees.
     seen: set[str] = set()
     active: set[str] = set()
-
-    def visit(node: str) -> None:
+    stack: list[tuple[str, bool]] = [(root, False)]
+    while stack:
+        node, exiting = stack.pop()
+        if exiting:
+            active.remove(node)
+            seen.add(node)
+            continue
         if node in active:
             raise BranchBFailure(FailureCode.DEGENERATE_TREE, "cycle detected in tree")
         if node in seen:
-            return
+            continue
         active.add(node)
-        for child in children.get(node, []):
-            visit(child)
-        active.remove(node)
-        seen.add(node)
-
-    visit(root)
+        stack.append((node, True))
+        stack.extend((child, False) for child in reversed(children.get(node, [])))
     if seen != nodes:
         raise BranchBFailure(FailureCode.DEGENERATE_TREE, "tree contains nodes unreachable from the root")

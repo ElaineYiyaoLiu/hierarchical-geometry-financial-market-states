@@ -1,0 +1,35 @@
+name: Branch B evidence checker tests
+
+on:
+  push:
+    paths:
+      - "branch_b/tools/check_gate_evidence.py"
+      - "branch_b/tests/test_gate_evidence.py"
+      - ".github/workflows/branch_b_evidence_tests.yml"
+  pull_request:
+    paths:
+      - "branch_b/tools/check_gate_evidence.py"
+      - "branch_b/tests/test_gate_evidence.py"
+      - ".github/workflows/branch_b_evidence_tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence-checker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out public repository
+        uses: actions/checkout@v4
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Verify interpreter version
+        run: |
+          python -c 'import sys; assert sys.version_info[:2] == (3, 14), sys.version'
+      - name: Run isolated evidence-checker tests
+        run: |
+          python -m unittest discover -s branch_b/tests -p 'test_gate_evidence.py' -v

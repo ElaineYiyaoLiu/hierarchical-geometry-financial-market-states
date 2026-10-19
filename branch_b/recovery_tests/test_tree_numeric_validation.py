@@ -1,0 +1,33 @@
+"""Synthetic regression tests for finite tree branch lengths (Python 3.14 CI)."""
+from copy import deepcopy
+
+import pytest
+
+from branch_b.failures import BranchBFailure, FailureCode
+from branch_b.serialization.tree import validate_tree_edge_list
+
+
+def two_leaf_tree():
+    return {
+        "tree_format_version": "1",
+        "root": "I000001",
+        "internal_nodes": ["I000001"],
+        "leaves": ["S1", "S2"],
+        "edges": [
+            {"parent": "I000001", "child": "S1", "branch_length": 0.0},
+            {"parent": "I000001", "child": "S2", "branch_length": 1.0},
+        ],
+    }
+
+
+def test_zero_length_branch_remains_valid():
+    validate_tree_edge_list(two_leaf_tree(), ["S1", "S2"])
+
+
+@pytest.mark.parametrize("invalid", [float("nan"), float("inf"), -float("inf"), True, -1.0])
+def test_invalid_branch_length_rejected(invalid):
+    tree = deepcopy(two_leaf_tree())
+    tree["edges"][0]["branch_length"] = invalid
+    with pytest.raises(BranchBFailure) as exc:
+        validate_tree_edge_list(tree, ["S1", "S2"])
+    assert exc.value.code == FailureCode.OUTPUT_SCHEMA

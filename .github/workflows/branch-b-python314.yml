@@ -32,8 +32,18 @@ jobs:
       - name: Install test dependencies
         run: python -m pip install pytest==9.1.1 jsonschema==4.26.0 numpy==2.5.3
       - name: Record dependency versions
-        run: python -m pip freeze
+        run: python -m pip freeze | tee branch-b-pip-freeze.txt
       - name: Run shared validator tests
-        run: python -m pytest validator -q
+        run: python -m pytest validator -q --junitxml=validator-junit.xml
       - name: Run Branch B Week 2 tests
-        run: python -m pytest branch_b/support_tests branch_b/recovery_tests branch_b/failure_tests -q
+        run: python -m pytest branch_b/support_tests branch_b/recovery_tests branch_b/failure_tests -q --junitxml=branch-b-junit.xml
+      - name: Preserve test and environment evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: branch-b-python314-test-evidence
+          path: |
+            branch-b-pip-freeze.txt
+            validator-junit.xml
+            branch-b-junit.xml
+          if-no-files-found: warn

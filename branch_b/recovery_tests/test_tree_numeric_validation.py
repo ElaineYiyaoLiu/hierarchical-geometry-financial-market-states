@@ -127,3 +127,27 @@ def test_invalid_edge_endpoint_types_report_schema_failure(endpoint, invalid):
     with pytest.raises(BranchBFailure) as exc:
         validate_tree_edge_list(tree, ["S1", "S2"])
     assert exc.value.code == FailureCode.OUTPUT_SCHEMA
+
+
+def test_deep_synthetic_tree_does_not_depend_on_python_recursion_limit():
+    depth = 1200
+    internal = [f"I{i:06d}" for i in range(depth)]
+    leaves = [f"S{i:06d}" for i in range(depth + 1)]
+    edges = []
+    for i in range(depth - 1):
+        edges.append({"parent": internal[i], "child": internal[i + 1], "branch_length": 0.0})
+        edges.append({"parent": internal[i], "child": leaves[i], "branch_length": 0.0})
+    edges.extend(
+        [
+            {"parent": internal[-1], "child": leaves[-2], "branch_length": 0.0},
+            {"parent": internal[-1], "child": leaves[-1], "branch_length": 0.0},
+        ]
+    )
+    tree = {
+        "tree_format_version": "1",
+        "root": internal[0],
+        "internal_nodes": internal,
+        "leaves": leaves,
+        "edges": edges,
+    }
+    validate_tree_edge_list(tree, leaves)

@@ -87,18 +87,29 @@ def test_empty_candidate_registry_fails_before_validation_or_test_fit():
     assert geometry_calls == []
 
 
-def test_nonfinite_test_input_fails_before_geometry_fitting():
-    geometry_calls = []
+def test_nonfinite_test_input_is_rejected_after_selection_before_test_geometry():
+    events = []
+    geometry_values = []
 
     def geometry(values, params):
-        geometry_calls.append(True)
+        events.append("geometry")
+        geometry_values.append(values.copy())
         return np.array([[0.0, 1.0], [1.0, 0.0]])
 
-    pipeline = make_pipeline([{}], lambda candidates: 0, geometry)
+    def selector(candidates):
+        events.append("selection")
+        return 0
+
+    pipeline = make_pipeline([{}], selector, geometry)
     train = np.vstack([np.zeros(12), np.full(12, 2.0)])
     test = train.copy()
     test[0, 0] = np.nan
     with pytest.raises(BranchBFailure, match="non-finite") as exc:
         pipeline.run(train, train, test)
     assert exc.value.code == FailureCode.NONFINITE_INPUT
-    assert geometry_calls == []
+    # Validation geometry runs once; test geometry never runs. Test input
+    # inspection is deliberately deferred until a valid selection exists.
+    assert events == ["geometry", "selection"]
+    assert len(geometry_values) == 1
+    np.testing.assert_array_equal(geometry_values[0][:, 0], [-1.0, 1.0])
+    assert np.isnan(test[0, 0])

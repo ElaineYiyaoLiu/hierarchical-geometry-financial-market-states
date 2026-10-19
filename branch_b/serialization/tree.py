@@ -44,6 +44,8 @@ def validate_tree_edge_list(tree: dict, sample_order: list[str]) -> None:
         child = edge.get("child")
         length = edge.get("branch_length")
         unresolved = edge.get("unresolved", False)
+        if not isinstance(parent, str) or not isinstance(child, str):
+            raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree edge endpoints must be identifiers")
         if parent not in nodes or child not in nodes:
             raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree edge references an unknown node")
         if parent in leaves:

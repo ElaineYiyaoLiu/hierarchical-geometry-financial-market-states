@@ -90,12 +90,12 @@ class RecoveryPipeline:
         validation = as_finite_matrix(validation_values)
         test = as_finite_matrix(test_values)
 
-        preprocessor = self.fit_preprocessor(train)
-        x_train = preprocessor.transform(train)
-        x_validation = preprocessor.transform(validation)
-        x_test = preprocessor.transform(test)
+        preprocessor = self.fit_preprocessor(train.copy())
+        x_train = preprocessor.transform(train.copy())
+        x_validation = preprocessor.transform(validation.copy())
+        x_test = preprocessor.transform(test.copy())
 
-        parameter_records = self.geometry_parameter_candidates(x_train)
+        parameter_records = self.geometry_parameter_candidates(x_train.copy())
         if not parameter_records:
             raise ConfigurationRequired("no prespecified geometry-parameter candidates were supplied")
 

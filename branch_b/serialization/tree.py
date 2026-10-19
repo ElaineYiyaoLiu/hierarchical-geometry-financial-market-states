@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import Counter
+from math import isfinite
 
 from branch_b.failures import BranchBFailure, FailureCode
 
@@ -34,8 +35,8 @@ def validate_tree_edge_list(tree: dict, sample_order: list[str]) -> None:
         unresolved = edge.get("unresolved", False)
         if parent not in nodes or child not in nodes:
             raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree edge references an unknown node")
-        if not isinstance(length, (int, float)) or length < 0:
-            raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "branch length must be non-negative")
+        if isinstance(length, bool) or not isinstance(length, (int, float)) or not isfinite(length) or length < 0:
+            raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "branch length must be finite and non-negative")
         if not isinstance(unresolved, bool):
             raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "unresolved must be boolean when present")
         parent_count[child] += 1

@@ -31,3 +31,19 @@ def test_invalid_branch_length_rejected(invalid):
     with pytest.raises(BranchBFailure) as exc:
         validate_tree_edge_list(tree, ["S1", "S2"])
     assert exc.value.code == FailureCode.OUTPUT_SCHEMA
+
+
+def test_leaf_cannot_parent_another_leaf():
+    tree = {
+        "tree_format_version": "1",
+        "root": "I000001",
+        "internal_nodes": ["I000001"],
+        "leaves": ["S1", "S2"],
+        "edges": [
+            {"parent": "I000001", "child": "S1", "branch_length": 0.0},
+            {"parent": "S1", "child": "S2", "branch_length": 1.0},
+        ],
+    }
+    with pytest.raises(BranchBFailure) as exc:
+        validate_tree_edge_list(tree, ["S1", "S2"])
+    assert exc.value.code == FailureCode.DEGENERATE_TREE

@@ -96,8 +96,10 @@ class RecoveryPipeline:
         x_test = preprocessor.transform(test.copy())
 
         parameter_records = self.geometry_parameter_candidates(x_train.copy())
-        if not parameter_records:
-            raise ConfigurationRequired("no prespecified geometry-parameter candidates were supplied")
+        if not isinstance(parameter_records, list) or not parameter_records:
+            raise ConfigurationRequired("geometry-parameter candidates must be a non-empty list")
+        if not all(isinstance(parameters, dict) for parameters in parameter_records):
+            raise ConfigurationRequired("each geometry-parameter candidate must be a dictionary")
 
         validation_candidates: list[ValidationCandidate] = []
         for parameters in parameter_records:

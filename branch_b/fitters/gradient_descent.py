@@ -26,16 +26,17 @@ class GradientDescentFitterConfig:
 
 
 class GradientDescentUltrametricFitter:
-    """Configured candidate based on Chierchia & Perret's gradient-descent framework.
+    """Configured development candidate, not an executable scientific fitter.
 
-    Scientific/project settings frozen by Branch B for this development candidate:
-    complete graph, AMSGrad, lr=0.01, input-weight initialization, relative objective
-    tolerance 1e-8 for 10 consecutive iterations, max 1000 iterations, and no random
-    restarts. Timeout remains pilot-fixed and is intentionally unset here.
+    Existing candidate-card settings are retained: complete graph, AMSGrad,
+    lr=0.01, input-weight initialization, relative objective tolerance 1e-8 for
+    10 consecutive iterations, max 1000 iterations, and no random restarts.
+    CF-SIGMOID, CF-INIT, and CF-POSITIVITY still require the explicit review
+    recorded in the source-conformance document. Timeout remains pilot-fixed.
 
-    The executable optimizer kernel still requires a Python 3.14-compatible
-    automatic-differentiation implementation of the paper's Dasgupta soft-cardinal
-    objective and min-max/subdominant-ultrametric operator.
+    Development configuration/input checks do not verify a scientific freeze.
+    General numerical comparison conventions also remain subject to approval.
+    The Python 3.14 Dasgupta/min-max optimizer kernel is not implemented.
     """
 
     fitter_id = "gradient_descent_ultrametric"
@@ -150,7 +151,8 @@ class GradientDescentUltrametricFitter:
     def fit(self, dissimilarity: object, *, random_seed: int | None = None) -> FitResult:
         self.validate_normalized_input(dissimilarity)
         raise ConfigurationRequired(
-            "registered fitter settings are complete except pilot-fixed timeout, but the "
-            "Python 3.14 executable Dasgupta/min-max optimizer kernel has not yet been "
-            "implemented and validated against the approved source"
+            "CF-SIGMOID, CF-INIT, and CF-POSITIVITY require explicit review; "
+            "the Python 3.14 executable Dasgupta/min-max optimizer kernel has not yet "
+            "been implemented and validated. Numerical-rule and configuration approval "
+            "remain separate requirements; timeout remains pilot-fixed."
         )

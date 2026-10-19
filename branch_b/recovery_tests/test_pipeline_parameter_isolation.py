@@ -212,3 +212,34 @@ def test_malformed_geometry_candidate_collection_fails_before_fitting(invalid_ca
     with pytest.raises(ConfigurationRequired):
         pipeline.run(x, x.copy(), x.copy())
     assert not fitter_calls
+
+
+def test_candidate_snapshot_survives_factory_mutating_future_candidate():
+    original_candidates = [
+        {"nested": {"scale": 1.0}},
+        {"nested": {"scale": 2.0}},
+    ]
+    observed = []
+
+    def geometry_factory(values, parameters):
+        observed.append(parameters["nested"]["scale"])
+        original_candidates[1]["nested"]["scale"] = 999.0
+        return np.array([[0.0, 2.0], [2.0, 0.0]])
+
+    pipeline = RecoveryPipeline(
+        config=PipelineConfiguration(
+            geometry_id="synthetic_geometry",
+            common_fitter_id="synthetic_stub",
+        ),
+        fit_preprocessor=lambda train: IdentityPreprocessor(),
+        geometry_factory=geometry_factory,
+        geometry_parameter_candidates=lambda train: original_candidates,
+        select_validation_candidate=lambda candidates: 1,
+        fitter=SyntheticFitter(),
+    )
+    x = np.zeros((2, 12))
+    result = pipeline.run(x, x.copy(), x.copy())
+
+    assert observed == [1.0, 2.0, 2.0]
+    assert result["geometry_parameters"] == {"nested": {"scale": 2.0}}
+    assert [candidate.parameters["nested"]["scale"] for candidate in result["validation_candidates"]] == [1.0, 2.0]

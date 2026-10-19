@@ -12,11 +12,17 @@ def validate_tree_edge_list(tree: dict, sample_order: list[str]) -> None:
         raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree edge list is missing required fields")
 
     leaves = tree["leaves"]
+    internal = tree["internal_nodes"]
+    if not isinstance(leaves, list) or not all(isinstance(node, str) for node in leaves):
+        raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree leaves must be a list of identifiers")
+    if not isinstance(internal, list) or not all(isinstance(node, str) for node in internal):
+        raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree internal nodes must be a list of identifiers")
+    if not isinstance(tree["root"], str):
+        raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree root must be an identifier")
     if leaves != sample_order:
         raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree leaves must match canonical sample order exactly")
 
     root = tree["root"]
-    internal = tree["internal_nodes"]
     if root not in internal:
         raise BranchBFailure(FailureCode.DEGENERATE_TREE, "tree root must be listed as an internal node")
 

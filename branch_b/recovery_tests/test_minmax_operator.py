@@ -49,3 +49,42 @@ def test_minmax_rejects_invalid_weights(w, code):
     with pytest.raises(BranchBFailure) as exc:
         subdominant_ultrametric(w)
     assert exc.value.code == code
+
+
+def test_minmax_agrees_with_independent_spanning_tree_bottlenecks():
+    """Compare the recurrence against a separate Kruskal path construction."""
+    w = np.array([
+        [0.0, 7.0, 4.0, 9.0, 6.0],
+        [7.0, 0.0, 5.0, 8.0, 3.0],
+        [4.0, 5.0, 0.0, 2.0, 7.0],
+        [9.0, 8.0, 2.0, 0.0, 1.0],
+        [6.0, 3.0, 7.0, 1.0, 0.0],
+    ])
+    n = len(w)
+    parent = list(range(n))
+
+    def root(i):
+        while parent[i] != i:
+            i = parent[i]
+        return i
+
+    adjacency = [[] for _ in range(n)]
+    edges = sorted((w[i, j], i, j) for i in range(n) for j in range(i + 1, n))
+    for weight, i, j in edges:
+        ri, rj = root(i), root(j)
+        if ri == rj:
+            continue
+        parent[ri] = rj
+        adjacency[i].append((j, weight))
+        adjacency[j].append((i, weight))
+
+    expected = np.zeros_like(w)
+    for source in range(n):
+        stack = [(source, -1, 0.0)]
+        while stack:
+            node, previous, bottleneck = stack.pop()
+            expected[source, node] = bottleneck
+            for neighbor, weight in adjacency[node]:
+                if neighbor != previous:
+                    stack.append((neighbor, node, max(bottleneck, weight)))
+    assert np.array_equal(subdominant_ultrametric(w), expected)

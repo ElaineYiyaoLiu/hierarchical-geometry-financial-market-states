@@ -88,3 +88,28 @@ def test_minmax_agrees_with_independent_spanning_tree_bottlenecks():
                 if neighbor != previous:
                     stack.append((neighbor, node, max(bottleneck, weight)))
     assert np.array_equal(subdominant_ultrametric(w), expected)
+
+
+def test_minmax_is_permutation_equivariant_and_scale_equivariant():
+    """Relabeling vertices and positive rescaling preserve bottleneck paths."""
+    w = np.array([
+        [0.0, 2.0, 8.0, 6.0],
+        [2.0, 0.0, 5.0, 7.0],
+        [8.0, 5.0, 0.0, 3.0],
+        [6.0, 7.0, 3.0, 0.0],
+    ])
+    order = [3, 1, 0, 2]
+    expected = subdominant_ultrametric(w)
+    permuted = subdominant_ultrametric(w[np.ix_(order, order)])
+    assert np.array_equal(permuted, expected[np.ix_(order, order)])
+    assert np.array_equal(subdominant_ultrametric(4.0 * w), 4.0 * expected)
+
+
+def test_minmax_preserves_equal_height_unresolved_structure():
+    """Equal bottleneck heights remain equal; this primitive never resolves ties."""
+    w = np.array([
+        [0.0, 2.0, 2.0],
+        [2.0, 0.0, 2.0],
+        [2.0, 2.0, 0.0],
+    ])
+    assert np.array_equal(subdominant_ultrametric(w), w)

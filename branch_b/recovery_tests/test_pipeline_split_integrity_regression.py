@@ -82,7 +82,7 @@ def test_empty_candidate_registry_fails_before_validation_or_test_fit():
 
     pipeline = make_pipeline([], lambda candidates: 0, geometry)
     train = np.vstack([np.zeros(12), np.full(12, 2.0)])
-    with pytest.raises(ConfigurationRequired, match="no prespecified"):
+    with pytest.raises(ConfigurationRequired, match="non-empty list"):
         pipeline.run(train, train, train)
     assert geometry_calls == []
 

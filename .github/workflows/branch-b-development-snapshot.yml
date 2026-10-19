@@ -1,0 +1,186 @@
+name: Branch B reviewed packaging snapshot
+
+on:
+  push:
+    paths:
+      - ".github/workflows/branch-b-development-snapshot.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reviewed-packaging-snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out only the reviewed source files
+        uses: actions/checkout@v4
+        with:
+          ref: "6975d4da8baf1e1374353466fe8420183da69152"
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /branch_b/__init__.py
+            /branch_b/tools/development_bundle.py
+            /branch_b/tools/development_bundles.md
+            /branch_b/recovery_tests/test_development_bundle.py
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: Build twice and independently verify the exact reviewed bytes
+        shell: bash
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+          WORKFLOW_REVISION: ${{ github.sha }}
+        run: |
+          python -c 'import sys; assert sys.version_info[:2] == (3, 14), sys.version; print(sys.version)'
+          cat > "$RUNNER_TEMP/build_reviewed_packaging_snapshot.py" <<'PY'
+          import sys
+          if sys.version_info[:2] != (3, 14):
+              raise RuntimeError("This development check requires Python 3.14")
+
+          from hashlib import sha1, sha256
+          import importlib.util
+          import json
+          import os
+          from pathlib import Path
+          import platform
+          import subprocess
+
+          SOURCE = "6975d4da8baf1e1374353466fe8420183da69152"
+          REVIEW = (
+              "https://github.com/ElaineYiyaoLiu/hierarchical-geometry-financial-market-states/"
+              "blob/cbb1024434dffacfaf379f7b4457b3eec35012e3/"
+              "branch_b/tools/packaging_source_snapshot_review_2026-10-19.md"
+          )
+          REVIEWED_BLOBS = {
+              "branch_b/__init__.py": "1500ee800b43bebc7e60fbef269204483f0adbb4",
+              "branch_b/tools/development_bundle.py": "d2c256e0d2dd3d32275881b9475e8c704e47bc36",
+              "branch_b/tools/development_bundles.md": "238445876bbe6bf496d6c5b96bd3585996da3c33",
+              "branch_b/recovery_tests/test_development_bundle.py": "fc4437cc5e60af3d673f239404cc7ee8e442f183",
+          }
+
+          def require(condition, message):
+              if not condition:
+                  raise RuntimeError(message)
+
+          def git(*args):
+              return subprocess.run(
+                  ["git", *args], check=True, stdout=subprocess.PIPE,
+                  stderr=subprocess.PIPE, timeout=30,
+              ).stdout
+
+          def json_bytes(value):
+              return (json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + "\n").encode("utf-8")
+
+          require(len(sys.argv) == 2 and sys.argv[1] in {"first", "second", "compare"}, "invalid check mode")
+          mode = sys.argv[1]
+          require(git("rev-parse", "HEAD").decode("ascii").strip() == SOURCE, "source checkout revision changed")
+          root = Path.cwd()
+          files = {}
+          records = []
+          for name, blob in sorted(REVIEWED_BLOBS.items()):
+              expected_entry = f"100644 blob {blob}\t{name}\n".encode("ascii")
+              require(git("ls-tree", SOURCE, "--", name) == expected_entry, "reviewed Git tree entry changed")
+              content = git("cat-file", "blob", f"{SOURCE}:{name}")
+              header = b"blob " + str(len(content)).encode("ascii") + b"\0"
+              require(sha1(header + content).hexdigest() == blob, "reviewed Git blob identity changed")
+              current = root
+              for part in name.split("/"):
+                  current = current / part
+                  require(not current.is_symlink(), "source snapshot cannot follow symlinks")
+              require(current.is_file() and current.read_bytes() == content, "working bytes differ from reviewed source")
+              files[name] = content
+              records.append({"path": name, "byte_count": len(content), "git_blob_sha1": blob, "sha256": sha256(content).hexdigest()})
+          reviewed = {row["path"]: row["sha256"] for row in records}
+
+          # Load only the already byte-checked standard-library bundler.
+          spec = importlib.util.spec_from_file_location(
+              "reviewed_development_bundle", root / "branch_b/tools/development_bundle.py"
+          )
+          require(spec is not None and spec.loader is not None, "reviewed bundler cannot be loaded")
+          bundler = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(bundler)
+          first = Path(os.environ["RUNNER_TEMP"]) / "branch-b-snapshot-first"
+          second = Path(os.environ["RUNNER_TEMP"]) / "branch-b-snapshot-second"
+
+          if mode != "compare":
+              output = first if mode == "first" else second
+              output.mkdir()
+              ordered_files = files if mode == "first" else dict(reversed(list(files.items())))
+              archive = bundler.build_development_bundle(
+                  ordered_files, reviewed_sha256=reviewed,
+                  source_revision=SOURCE, review_reference=REVIEW,
+              )
+              digest = sha256(archive).hexdigest()
+              verified = bundler.verify_development_bundle(
+                  archive, expected_sha256=digest, reviewed_sha256=reviewed,
+                  expected_source_revision=SOURCE,
+              )
+              require(verified["integrity_verified"] and verified["scientific_authorization"] is False, "invalid development verification result")
+              (output / "packaging_source.zip").write_bytes(archive)
+              (output / "archive.sha256").write_text(digest + "\n", encoding="ascii")
+              inventory = {
+                  "scope": "development_only", "scientific_authorization": False,
+                  "source_revision": SOURCE, "content_review_reference": REVIEW, "files": records,
+              }
+              (output / "source_inventory.json").write_bytes(json_bytes(inventory))
+              (output / "bundle_manifest.json").write_bytes(json_bytes(verified["manifest"]))
+              environment = {
+                  "python_implementation": platform.python_implementation(),
+                  "python_version": platform.python_version(), "python_build": sys.version,
+                  "platform": platform.platform(), "source_revision": SOURCE,
+                  "workflow_revision": os.environ["WORKFLOW_REVISION"],
+                  "additional_dependencies_installed": False,
+              }
+              (output / "producer_environment.json").write_bytes(json_bytes(environment))
+              print(json.dumps({"build": mode, "python_version": platform.python_version(), "source_revision": SOURCE, "files": len(files), "bundle_sha256": digest}))
+          else:
+              expected = (first / "archive.sha256").read_text(encoding="ascii").strip()
+              left = (first / "packaging_source.zip").read_bytes()
+              right = (second / "packaging_source.zip").read_bytes()
+              for archive in (left, right):
+                  result = bundler.verify_development_bundle(
+                      archive, expected_sha256=expected, reviewed_sha256=reviewed,
+                      expected_source_revision=SOURCE,
+                  )
+                  require(result["scientific_authorization"] is False, "development scope changed")
+              require(left == right, "independent process builds differ")
+              for name in ("archive.sha256", "source_inventory.json", "bundle_manifest.json", "producer_environment.json"):
+                  require((first / name).read_bytes() == (second / name).read_bytes(), "independent provenance records differ")
+              report = {
+                  "scope": "development_only", "scientific_authorization": False,
+                  "source_revision": SOURCE, "workflow_revision": os.environ["WORKFLOW_REVISION"],
+                  "python_version": platform.python_version(), "reviewed_payload_files": len(files),
+                  "independent_process_builds": 2, "python_hash_seeds": [0, 1],
+                  "input_mapping_order_reversed": True, "byte_identical": True,
+                  "git_revision_and_blobs_verified": True, "external_inventory_verified": True,
+                  "bundle_sha256": expected,
+              }
+              (first / "reproducibility_report.json").write_bytes(json_bytes(report))
+              names = ["packaging_source.zip", "archive.sha256", "source_inventory.json", "bundle_manifest.json", "producer_environment.json", "reproducibility_report.json", "installed-packages.txt"]
+              checksums = "".join(f"{sha256((first / name).read_bytes()).hexdigest()}  {name}\n" for name in sorted(names))
+              (first / "SHA256SUMS").write_text(checksums, encoding="ascii")
+              print(json.dumps(report, sort_keys=True))
+              print(checksums, end="")
+          PY
+          PYTHONHASHSEED=0 python "$RUNNER_TEMP/build_reviewed_packaging_snapshot.py" first
+          PYTHONHASHSEED=1 python "$RUNNER_TEMP/build_reviewed_packaging_snapshot.py" second
+          python -m pip freeze > "$RUNNER_TEMP/branch-b-snapshot-first/installed-packages.txt"
+          python "$RUNNER_TEMP/build_reviewed_packaging_snapshot.py" compare
+      - name: Retain reviewed source and reproducibility evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: branch-b-reviewed-packaging-snapshot
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/branch-b-snapshot-first/packaging_source.zip
+            ${{ runner.temp }}/branch-b-snapshot-first/archive.sha256
+            ${{ runner.temp }}/branch-b-snapshot-first/source_inventory.json
+            ${{ runner.temp }}/branch-b-snapshot-first/bundle_manifest.json
+            ${{ runner.temp }}/branch-b-snapshot-first/producer_environment.json
+            ${{ runner.temp }}/branch-b-snapshot-first/reproducibility_report.json
+            ${{ runner.temp }}/branch-b-snapshot-first/installed-packages.txt
+            ${{ runner.temp }}/branch-b-snapshot-first/SHA256SUMS

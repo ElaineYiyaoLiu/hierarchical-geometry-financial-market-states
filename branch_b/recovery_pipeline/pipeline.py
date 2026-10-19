@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass
 from typing import Callable, Protocol
 
@@ -69,7 +70,7 @@ class RecoveryPipeline:
         *,
         random_seed: int | None,
     ) -> tuple[np.ndarray, FitResult]:
-        native = self.geometry_factory(values, parameters)
+        native = self.geometry_factory(values, deepcopy(parameters))
         normalized = normalize_dissimilarity(
             native,
             rule=self.config.normalization_rule,
@@ -107,7 +108,7 @@ class RecoveryPipeline:
             )
             validation_candidates.append(
                 ValidationCandidate(
-                    parameters=dict(parameters),
+                    parameters=deepcopy(parameters),
                     dissimilarity_matrix=d_validation,
                     fit=fit_validation,
                 )
@@ -131,7 +132,7 @@ class RecoveryPipeline:
             "common_fitter_id": self.config.common_fitter_id,
             "preprocessing": preprocessor.to_record(),
             "selected_candidate_index": selected_index,
-            "geometry_parameters": dict(selected.parameters),
+            "geometry_parameters": deepcopy(selected.parameters),
             "validation_candidates": validation_candidates,
             "dissimilarity_matrix": d_test,
             "ultrametric_matrix": fit_test.ultrametric_matrix,

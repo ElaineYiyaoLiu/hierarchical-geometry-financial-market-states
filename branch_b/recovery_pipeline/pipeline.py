@@ -70,12 +70,12 @@ class RecoveryPipeline:
         *,
         random_seed: int | None,
     ) -> tuple[np.ndarray, FitResult]:
-        native = self.geometry_factory(values, deepcopy(parameters))
+        native = self.geometry_factory(values.copy(), deepcopy(parameters))
         normalized = normalize_dissimilarity(
             native,
             rule=self.config.normalization_rule,
         )
-        fit = self.fitter.fit(normalized, random_seed=random_seed)
+        fit = self.fitter.fit(normalized.copy(), random_seed=random_seed)
         return normalized, fit
 
     def run(

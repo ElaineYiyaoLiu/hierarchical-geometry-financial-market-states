@@ -130,3 +130,34 @@ def test_zero_weight_path_collapses_only_its_connected_component():
         [3.0, 3.0, 3.0, 0.0],
     ])
     assert np.array_equal(subdominant_ultrametric(w), expected)
+
+
+def test_unique_bottleneck_local_finite_difference_sensitivity():
+    """Synthetic equation (5) check away from all min/max ties.
+
+    For the 0-1-2 path with edge weights 2 and 3 and direct edge 5,
+    Phi(W)[0,2] = 3. Only the unique bottleneck edge (1,2) changes
+    this output to first order. This does not choose a derivative at ties.
+    """
+    w = np.array([
+        [0.0, 2.0, 5.0],
+        [2.0, 0.0, 3.0],
+        [5.0, 3.0, 0.0],
+    ])
+    epsilon = 1e-5
+
+    def central_difference(i, j):
+        positive = w.copy()
+        negative = w.copy()
+        positive[i, j] += epsilon
+        positive[j, i] += epsilon
+        negative[i, j] -= epsilon
+        negative[j, i] -= epsilon
+        return (
+            subdominant_ultrametric(positive)[0, 2]
+            - subdominant_ultrametric(negative)[0, 2]
+        ) / (2 * epsilon)
+
+    assert central_difference(1, 2) == pytest.approx(1.0, abs=1e-9)
+    assert central_difference(0, 1) == pytest.approx(0.0, abs=1e-9)
+    assert central_difference(0, 2) == pytest.approx(0.0, abs=1e-9)

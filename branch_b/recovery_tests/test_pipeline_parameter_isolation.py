@@ -243,3 +243,32 @@ def test_candidate_snapshot_survives_factory_mutating_future_candidate():
     assert observed == [1.0, 2.0, 2.0]
     assert result["geometry_parameters"] == {"nested": {"scale": 2.0}}
     assert [candidate.parameters["nested"]["scale"] for candidate in result["validation_candidates"]] == [1.0, 2.0]
+
+
+@pytest.mark.parametrize("selected_index", [None, True, False, 1.0, "0", -1, 2])
+def test_invalid_selector_index_never_processes_test_split(selected_index):
+    geometry_calls = []
+
+    def geometry_factory(values, parameters):
+        geometry_calls.append(values[0, 0])
+        return np.array([[0.0, 2.0], [2.0, 0.0]])
+
+    pipeline = RecoveryPipeline(
+        config=PipelineConfiguration(
+            geometry_id="synthetic_geometry",
+            common_fitter_id="synthetic_stub",
+        ),
+        fit_preprocessor=lambda train: IdentityPreprocessor(),
+        geometry_factory=geometry_factory,
+        geometry_parameter_candidates=lambda train: [{"scale": 1.0}, {"scale": 2.0}],
+        select_validation_candidate=lambda candidates: selected_index,
+        fitter=SyntheticFitter(),
+    )
+    train = np.zeros((2, 12))
+    validation = np.ones((2, 12))
+    test = np.full((2, 12), 3.0)
+
+    with pytest.raises(ConfigurationRequired):
+        pipeline.run(train, validation, test)
+
+    assert geometry_calls == [1.0, 1.0]

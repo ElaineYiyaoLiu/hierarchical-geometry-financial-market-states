@@ -59,3 +59,42 @@ def test_tied_weights_are_not_assigned_an_unapproved_derivative():
     ])
     with pytest.raises(ConfigurationRequired, match="tied weights"):
         unique_bottleneck_jacobian(w)
+
+
+def test_jacobian_is_equivariant_under_vertex_relabeling():
+    """The derivative reference must not depend on sample identifiers/order."""
+    w = np.array([
+        [0.0, 4.0, 8.0, 7.0],
+        [4.0, 0.0, 3.0, 9.0],
+        [8.0, 3.0, 0.0, 2.0],
+        [7.0, 9.0, 2.0, 0.0],
+    ])
+    order = [3, 1, 0, 2]
+    pairs, jacobian = unique_bottleneck_jacobian(w)
+    permuted_pairs, permuted_jacobian = unique_bottleneck_jacobian(
+        w[np.ix_(order, order)]
+    )
+    original_edge_ids = {
+        tuple(pair): index for index, pair in enumerate(pairs.tolist())
+    }
+    edge_reindex = [
+        original_edge_ids[tuple(sorted((order[i], order[j])))]
+        for i, j in permuted_pairs
+    ]
+    np.testing.assert_array_equal(
+        permuted_jacobian,
+        jacobian[np.ix_(edge_reindex, edge_reindex)],
+    )
+
+
+def test_jacobian_is_invariant_under_positive_weight_rescaling():
+    """Away from ties, scaling weights preserves the controlling edge."""
+    w = np.array([
+        [0.0, 2.0, 5.0],
+        [2.0, 0.0, 3.0],
+        [5.0, 3.0, 0.0],
+    ])
+    pairs, jacobian = unique_bottleneck_jacobian(w)
+    scaled_pairs, scaled_jacobian = unique_bottleneck_jacobian(4.0 * w)
+    np.testing.assert_array_equal(scaled_pairs, pairs)
+    np.testing.assert_array_equal(scaled_jacobian, jacobian)

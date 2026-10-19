@@ -88,3 +88,23 @@ def test_invalid_edge_item_reports_schema_failure(invalid_edge):
     with pytest.raises(BranchBFailure) as exc:
         validate_tree_edge_list(tree, ["S1", "S2"])
     assert exc.value.code == FailureCode.OUTPUT_SCHEMA
+
+
+@pytest.mark.parametrize(
+    ("field", "invalid"),
+    [
+        ("leaves", None),
+        ("leaves", "S1"),
+        ("leaves", ["S1", {"id": "S2"}]),
+        ("internal_nodes", None),
+        ("internal_nodes", "I000001"),
+        ("internal_nodes", [None]),
+        ("root", {"id": "I000001"}),
+    ],
+)
+def test_invalid_tree_node_container_types_report_schema_failure(field, invalid):
+    tree = two_leaf_tree()
+    tree[field] = invalid
+    with pytest.raises(BranchBFailure) as exc:
+        validate_tree_edge_list(tree, ["S1", "S2"])
+    assert exc.value.code == FailureCode.OUTPUT_SCHEMA

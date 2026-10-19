@@ -43,6 +43,8 @@ class RecoveryPipeline:
     validation candidates. The selected parameter record is then applied unchanged
     to the test split.
 
+    Callback outputs are snapshotted on receipt so reused work buffers or result
+    containers cannot overwrite earlier split, candidate, or run records.
     This class intentionally does not define the scientific validation criterion.
     """
 
@@ -75,7 +77,8 @@ class RecoveryPipeline:
             native,
             rule=self.config.normalization_rule,
         )
-        fit = self.fitter.fit(normalized.copy(), random_seed=random_seed)
+        # Detach arrays and nested records before the fitter is called again.
+        fit = deepcopy(self.fitter.fit(normalized.copy(), random_seed=random_seed))
         return normalized, fit
 
     def run(
@@ -91,9 +94,10 @@ class RecoveryPipeline:
         test = as_finite_matrix(test_values)
 
         preprocessor = self.fit_preprocessor(train.copy())
-        x_train = preprocessor.transform(train.copy())
-        x_validation = preprocessor.transform(validation.copy())
-        x_test = preprocessor.transform(test.copy())
+        # A transform may return a view into a reusable work buffer.
+        x_train = preprocessor.transform(train.copy()).copy()
+        x_validation = preprocessor.transform(validation.copy()).copy()
+        x_test = preprocessor.transform(test.copy()).copy()
 
         parameter_records = self.geometry_parameter_candidates(x_train.copy())
         if not isinstance(parameter_records, list) or not parameter_records:
@@ -136,7 +140,7 @@ class RecoveryPipeline:
         return {
             "geometry_id": self.config.geometry_id,
             "common_fitter_id": self.config.common_fitter_id,
-            "preprocessing": preprocessor.to_record(),
+            "preprocessing": deepcopy(preprocessor.to_record()),
             "selected_candidate_index": selected_index,
             "geometry_parameters": deepcopy(selected.parameters),
             "validation_candidates": validation_candidates,

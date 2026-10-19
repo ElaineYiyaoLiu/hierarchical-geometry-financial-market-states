@@ -117,7 +117,12 @@ class GradientDescentUltrametricFitter:
         }
 
     def validate_normalized_input(self, dissimilarity: object) -> np.ndarray:
-        d = np.asarray(dissimilarity, dtype=float)
+        try:
+            d = np.asarray(dissimilarity, dtype=float)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise BranchBFailure(
+                FailureCode.INPUT_SCHEMA, "fitter input must contain numeric matrix values"
+            ) from exc
         if d.ndim != 2 or d.shape[0] != d.shape[1] or d.shape[0] < 2:
             raise BranchBFailure(FailureCode.INPUT_SCHEMA, "fitter input must be a square matrix")
         if not np.isfinite(d).all():

@@ -25,3 +25,27 @@ Shared golden cases: present
 Local Branch B workstation OS/CPU/RAM: not yet recorded. This is not used as evidence for the Week 1 repository-CI verification and will be recorded later if local execution or benchmarking relies on that host.
 
 Scientific implementation dependencies beyond the shared validator remain to be fixed and recorded as Week 2 implementation is completed. Any scientific output described as Python 3.14 output must be generated in a verified Python 3.14 environment.
+
+Development evidence supplement - 2026-10-19
+
+The preceding section is the historical September 28 setup record. Its Python
+3.14.7 execution is not relabeled as a later environment.
+
+The detailed report branch_b/pipeline_output_snapshot_validation_2026-10-19.md
+records actual CPython 3.14.8 development tests for source revision
+8f224c2fcaa48ba9b915a2240421fc1f175cfb1c:
+- Branch B run 39320669279: 202 support/recovery/failure tests and 15 shared-validator tests passed.
+- Repository-wide run 39320669222: 343 tests passed; these suites overlap.
+- Both jobs used Ubuntu 24.04.5 and runner 2.337.0.
+- The Branch B job recorded NumPy 2.5.3, pytest 9.1.1, and jsonschema 4.26.0.
+- The repository-wide job used pytest 8.4.2, not 9.1.1. The environments are not identical.
+
+The linked report records the remaining resolved dependency versions, job IDs,
+retained JUnit/dependency artifacts, and GitHub-reported artifact checksum.
+This supplement indexes existing evidence; it does not describe a new execution,
+change dependency constraints, or replace any historical manifest or checksum.
+
+A complete executable Common-Fitter dependency environment and scientific golden
+validation remain outstanding. Development CI and the separate packaging-only
+source snapshot do not certify a scientific runner or a production compute host.
+See branch_b/weeks_1_to_6_evidence_checklist.md for the decision-blocked handoff.

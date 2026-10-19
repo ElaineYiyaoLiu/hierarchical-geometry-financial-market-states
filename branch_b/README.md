@@ -4,9 +4,11 @@ Branch B develops the observable-data side of the study: preprocessing, candidat
 
 ## Current checkpoint
 
-The [Weeks 1-6 evidence handoff](weeks_1_to_6_evidence_checklist.md) distinguishes completed development work from decision-blocked scientific milestones and records what is needed to resume substantial implementation.
+The [observable-to-output validation report](output_transport_validation_2026-10-19.md) is the current development handoff. It records the checked input loader, outgoing schema/provenance transport, inventory accounting, actual Python 3.14.8 results, retained failures, and the remaining scientific decision boundary. The concrete integration repairs identified by the [audit](integration_audit_2026-10-19.md) and [checked-pipeline follow-up](checked_integration_validation_2026-10-19.md) are implemented within their stated scopes; the scientific optimizer, numerical conventions, and duplicate-bootstrap weighting reconciliation remain unresolved.
 
-The development suite has verified Python 3.14 execution; see [the latest detailed pipeline test report](pipeline_output_snapshot_validation_2026-10-19.md). The [reviewed packaging snapshot](packaging_source_snapshot_validation_2026-10-19.md) is a packaging-component artifact, not the scientific validation runner. Passing development tests does not approve methods, complete end-to-end scientific golden testing, or authorize bank processing.
+Use the [checked transport guide](output/checked_transport.md) and [checked pipeline guide](recovery_pipeline/checked_integration.md) for the interfaces. Generic development entry points are not scientific certificates. The [Weeks 1-6 evidence checklist](weeks_1_to_6_evidence_checklist.md) retains its earlier dated reconciliation; the audit and newer reports qualify that earlier stopping assessment and supply later execution evidence.
+
+The [reviewed packaging snapshot](packaging_source_snapshot_validation_2026-10-19.md) remains a pinned four-file packaging-component artifact, not the scientific validation runner or an archive of the newer modules. Passing development tests does not approve methods, complete end-to-end scientific golden testing, or authorize bank processing.
 
 ## Data boundary
 

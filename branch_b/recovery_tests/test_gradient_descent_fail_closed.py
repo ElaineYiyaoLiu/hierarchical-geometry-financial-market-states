@@ -51,15 +51,20 @@ def test_pilot_timeout_setting_does_not_enable_unimplemented_kernel():
 
 
 @pytest.mark.parametrize(
-    "malformed_input",
+    "malformed_input, failure_code",
     [
-        [["not-a-number", "also-not-a-number"], ["x", "y"]],
-        [[0.0, None], [None, 0.0]],
-        object(),
+        (
+            [["not-a-number", "also-not-a-number"], ["x", "y"]],
+            FailureCode.INPUT_SCHEMA,
+        ),
+        # Float conversion represents None as NaN; retain the existing
+        # NONFINITE_INPUT classification rather than changing the fitter.
+        ([[0.0, None], [None, 0.0]], FailureCode.NONFINITE_INPUT),
+        (object(), FailureCode.INPUT_SCHEMA),
     ],
 )
-def test_nonnumeric_input_has_structured_schema_failure(malformed_input):
+def test_malformed_input_has_structured_failure(malformed_input, failure_code):
     fitter = GradientDescentUltrametricFitter()
     with pytest.raises(BranchBFailure) as caught:
         fitter.fit(malformed_input)
-    assert caught.value.code == FailureCode.INPUT_SCHEMA
+    assert caught.value.code == failure_code

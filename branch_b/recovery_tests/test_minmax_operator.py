@@ -113,3 +113,20 @@ def test_minmax_preserves_equal_height_unresolved_structure():
         [2.0, 2.0, 0.0],
     ])
     assert np.array_equal(subdominant_ultrametric(w), w)
+
+
+def test_zero_weight_path_collapses_only_its_connected_component():
+    """Equation (5): zero-weight paths have zero bottleneck distance."""
+    w = np.array([
+        [0.0, 0.0, 9.0, 8.0],
+        [0.0, 0.0, 0.0, 7.0],
+        [9.0, 0.0, 0.0, 3.0],
+        [8.0, 7.0, 3.0, 0.0],
+    ])
+    expected = np.array([
+        [0.0, 0.0, 0.0, 3.0],
+        [0.0, 0.0, 0.0, 3.0],
+        [0.0, 0.0, 0.0, 3.0],
+        [3.0, 3.0, 3.0, 0.0],
+    ])
+    assert np.array_equal(subdominant_ultrametric(w), expected)

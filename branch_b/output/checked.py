@@ -52,6 +52,16 @@ def _schema() -> tuple[dict, str]:
     return json.loads(content), sha256(content).hexdigest()
 
 
+def _required_format_checker() -> FormatChecker:
+    checker = FormatChecker()
+    # jsonschema silently skips formats whose optional dependencies are absent.
+    if "date-time" not in checker.checkers:
+        raise ConfigurationRequired(
+            "date-time validation is unavailable; install branch_b/requirements-output-dev.txt under Python 3.14"
+        )
+    return checker
+
+
 def _json_value(value: object, active: set[int]) -> None:
     """Reject lossy key/string conversions, nonfinite values, and cycles."""
     if value is None or isinstance(value, (str, bool)):
@@ -159,7 +169,7 @@ def validate_development_output(
         raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "output record must be an object")
     _json_bytes(record)
     schema, _ = _schema()
-    validator = Draft202012Validator(schema, format_checker=FormatChecker())
+    validator = Draft202012Validator(schema, format_checker=_required_format_checker())
     if next(validator.iter_errors(record), None) is not None:
         raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "output violates the shared Branch B schema")
     if any(record[key] != value for key, value in expected.items()):
@@ -287,6 +297,7 @@ def prepare_development_output(
             "python_implementation": platform.python_implementation(),
             "python_version": platform.python_version(),
             "numpy_version": version("numpy"), "jsonschema_version": version("jsonschema"),
+            "rfc3339_validator_version": version("rfc3339-validator"),
         },
     }
     return PreparedDevelopmentOutput(payload, _json_bytes(receipt))
@@ -335,7 +346,8 @@ def verify_development_output(
     if any(receipt[key] != value for key, value in expected.items()):
         raise BranchBFailure(FailureCode.CHECKSUM_MISMATCH, "receipt differs from external provenance or record bytes")
     environment = receipt["producer_environment"]
-    keys = {"python_implementation", "python_version", "numpy_version", "jsonschema_version"}
+    keys = {"python_implementation", "python_version", "numpy_version", "jsonschema_version",
+            "rfc3339_validator_version"}
     if (type(environment) is not dict or set(environment) != keys
             or not all(isinstance(value, str) and value for value in environment.values())
             or not re.fullmatch(r"3\.14\.\d+(?:[a-zA-Z0-9.+-]*)", environment["python_version"])):

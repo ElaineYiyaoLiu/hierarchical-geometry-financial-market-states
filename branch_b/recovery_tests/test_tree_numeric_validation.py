@@ -47,3 +47,26 @@ def test_leaf_cannot_parent_another_leaf():
     with pytest.raises(BranchBFailure) as exc:
         validate_tree_edge_list(tree, ["S1", "S2"])
     assert exc.value.code == FailureCode.DEGENERATE_TREE
+
+
+def test_unresolved_multifurcation_with_zero_branches_is_valid():
+    tree = {
+        "tree_format_version": "1",
+        "root": "I000001",
+        "internal_nodes": ["I000001"],
+        "leaves": ["S1", "S2", "S3"],
+        "edges": [
+            {"parent": "I000001", "child": "S1", "branch_length": 0.0, "unresolved": True},
+            {"parent": "I000001", "child": "S2", "branch_length": 0.0, "unresolved": True},
+            {"parent": "I000001", "child": "S3", "branch_length": 0.0, "unresolved": True},
+        ],
+    }
+    validate_tree_edge_list(tree, ["S1", "S2", "S3"])
+
+
+def test_duplicate_parent_edges_are_structurally_invalid():
+    tree = two_leaf_tree()
+    tree["edges"].append(dict(tree["edges"][0]))
+    with pytest.raises(BranchBFailure) as exc:
+        validate_tree_edge_list(tree, ["S1", "S2"])
+    assert exc.value.code == FailureCode.DEGENERATE_TREE

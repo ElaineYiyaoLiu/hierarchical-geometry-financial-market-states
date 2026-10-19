@@ -70,3 +70,21 @@ def test_duplicate_parent_edges_are_structurally_invalid():
     with pytest.raises(BranchBFailure) as exc:
         validate_tree_edge_list(tree, ["S1", "S2"])
     assert exc.value.code == FailureCode.DEGENERATE_TREE
+
+
+@pytest.mark.parametrize("invalid_edges", [None, "not-an-edge-list", {"parent": "I000001"}])
+def test_invalid_edge_collection_reports_schema_failure(invalid_edges):
+    tree = two_leaf_tree()
+    tree["edges"] = invalid_edges
+    with pytest.raises(BranchBFailure) as exc:
+        validate_tree_edge_list(tree, ["S1", "S2"])
+    assert exc.value.code == FailureCode.OUTPUT_SCHEMA
+
+
+@pytest.mark.parametrize("invalid_edge", [None, "edge", 42, ["I000001", "S1"]])
+def test_invalid_edge_item_reports_schema_failure(invalid_edge):
+    tree = two_leaf_tree()
+    tree["edges"][0] = invalid_edge
+    with pytest.raises(BranchBFailure) as exc:
+        validate_tree_edge_list(tree, ["S1", "S2"])
+    assert exc.value.code == FailureCode.OUTPUT_SCHEMA

@@ -6,6 +6,7 @@ import numpy as np
 
 from branch_b.bootstrap.engine import BootstrapReplicate, run_full_pipeline_bootstrap
 from branch_b.failures import BranchBFailure, FailureCode
+from branch_b.preprocessing import as_finite_matrix
 from branch_b.recovery import lca_depths
 from branch_b.recovery_pipeline import RecoveryPipeline
 from branch_b.support import lca_depth_stability
@@ -136,7 +137,10 @@ def run_recovery_pipeline_bootstrap(
     base_seed: int,
     full_test_tree: dict | None = None,
 ) -> list[BootstrapReplicate]:
-    """Run the full recovery pipeline inside each independently resampled split.
+    """Development-only unchecked bootstrap path; not an authorized production runner.
+
+    Use the identity-bound checked bootstrap path for integration validation.
+    This function calls pipeline.run() and cannot certify fitted identities.
 
     Preprocessing is refit on bootstrap training, validation selection is rerun on
     bootstrap validation, and the selected parameters are applied to bootstrap test
@@ -144,9 +148,9 @@ def run_recovery_pipeline_bootstrap(
     replicate also records LCA-depth stability after projecting duplicate bootstrap
     draws back to distinct original test-observation identities.
     """
-    train = np.asarray(train_values, dtype=float)
-    validation = np.asarray(validation_values, dtype=float)
-    test = np.asarray(test_values, dtype=float)
+    train = as_finite_matrix(train_values)
+    validation = as_finite_matrix(validation_values)
+    test = as_finite_matrix(test_values)
 
     def evaluate(train_idx, validation_idx, test_idx, seed):
         result = pipeline.run(

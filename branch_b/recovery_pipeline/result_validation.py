@@ -6,6 +6,7 @@ intentionally do not choose symmetry, ultrametric, or height-tie tolerances.
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 from typing import Protocol
 
@@ -40,8 +41,23 @@ def checked_sample_order(sample_order: object, *, size: int | None = None) -> li
     return order
 
 
+def _reject_lossy_matrix_scalars(value: object) -> None:
+    """Inspect original matrix values before NumPy can coerce bool to numbers."""
+    if isinstance(value, (bool, np.bool_)):
+        raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "boolean matrix entries are not real observations")
+    if isinstance(value, (list, tuple)):
+        for item in value:
+            _reject_lossy_matrix_scalars(item)
+    elif isinstance(value, np.ndarray) and value.dtype.kind == "O":
+        for item in value.flat:
+            _reject_lossy_matrix_scalars(item)
+
+
 def validate_finite_square(matrix: object, *, size: int) -> None:
-    """Check real numeric shape and finiteness without coercion or repair."""
+    """Check real numeric shape and finiteness without lossy coercion."""
+    if np.ma.isMaskedArray(matrix):
+        raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "masked fitted matrices cannot be serialized losslessly")
+    _reject_lossy_matrix_scalars(matrix)
     try:
         values = np.asarray(matrix)
     except (TypeError, ValueError, OverflowError) as exc:
@@ -50,6 +66,33 @@ def validate_finite_square(matrix: object, *, size: int) -> None:
         raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "fitted matrix must be real numeric and match canonical sample order")
     if not np.isfinite(values).all():
         raise BranchBFailure(FailureCode.NUMERICAL_FIT, "fitted matrix contains non-finite values")
+
+
+def _check_export_diagnostics(value: object, active: set[int]) -> None:
+    """Validate JSON-native, finite diagnostics before selection sees a fit."""
+    if value is None or isinstance(value, (str, bool)) or type(value) is int:
+        return
+    if type(value) is float:
+        if not math.isfinite(value):
+            raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "diagnostics contain non-finite JSON numbers")
+        return
+    if type(value) not in (list, dict):
+        raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "diagnostics must contain JSON-native values")
+    marker = id(value)
+    if marker in active:
+        raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "diagnostics contain a cycle")
+    active.add(marker)
+    try:
+        if isinstance(value, dict):
+            if not all(isinstance(key, str) for key in value):
+                raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "diagnostic keys must be strings")
+            items = value.values()
+        else:
+            items = value
+        for item in items:
+            _check_export_diagnostics(item, active)
+    finally:
+        active.remove(marker)
 
 
 def validate_bound_tree(tree: object, *, sample_order: list[str]) -> None:
@@ -77,4 +120,5 @@ def validate_fit_result(fit: object, *, sample_order: list[str]) -> None:
     validate_finite_square(fit.ultrametric_matrix, size=len(order))
     if not isinstance(fit.diagnostics, dict):
         raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "fitter diagnostics must be an object")
+    _check_export_diagnostics(fit.diagnostics, set())
     validate_bound_tree(fit.tree, sample_order=order)

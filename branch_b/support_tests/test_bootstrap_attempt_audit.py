@@ -118,3 +118,27 @@ def test_bootstrap_engine_does_not_expose_stored_draws_to_mutating_evaluator():
     assert all((record.train_indices >= 0).all() for record in records)
     assert all((record.validation_indices >= 0).all() for record in records)
     assert all((record.test_indices >= 0).all() for record in records)
+
+
+@pytest.mark.parametrize("size", [True, False, 1.5, 0, -1, "3"])
+def test_direct_split_sampler_rejects_invalid_size(size):
+    from branch_b.bootstrap.engine import bootstrap_split_indices
+
+    with pytest.raises(ValueError):
+        bootstrap_split_indices(size, np.random.default_rng(36))
+
+
+def test_direct_split_sampler_rejects_missing_generator():
+    from branch_b.bootstrap.engine import bootstrap_split_indices
+
+    with pytest.raises(TypeError):
+        bootstrap_split_indices(3, None)
+
+
+def test_direct_split_sampler_returns_original_index_range():
+    from branch_b.bootstrap.engine import bootstrap_split_indices
+
+    result = bootstrap_split_indices(4, np.random.default_rng(36))
+    assert result.shape == (4,)
+    assert result.dtype.kind in "iu"
+    assert np.all(result >= 0) and np.all(result < 4)

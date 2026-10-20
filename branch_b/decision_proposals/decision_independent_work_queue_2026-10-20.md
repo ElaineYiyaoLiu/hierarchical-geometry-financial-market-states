@@ -85,3 +85,12 @@ The Week 3 golden readiness inventory checks *declared* Python 3.14 and SHA-256 
 - New synthetic regression tests cover both guards in `support_tests/test_bootstrap_attempt_audit.py` and `recovery_tests/test_fitter_input_integrity.py`.
 
 All updates are engineering checks only. No new Python 3.14 execution evidence was obtained, and none of these changes completes the scientific Common Fitter or the Week 3 golden report.
+
+## Audit remediation: input boundaries and checked failure propagation — 2026-10-20
+
+- Observable preprocessing now validates original matrix types before conversion. Common normalization reuses the same real-numeric input check without altering the frozen max-offdiagonal formula.
+- The legacy `run_recovery_pipeline_bootstrap` remains available for development compatibility, but is explicitly marked unchecked and cannot certify sample identity. Its input matrices now use the same observable validation as the checked route.
+- Synthetic tests in `recovery_tests/test_matrix_boundary_integrity.py` cover malformed observable, geometry, and bootstrap inputs, unchanged normalization, and copy isolation.
+- Additional checked-pipeline tests verify that malformed geometry output is rejected before the fitter or validation selector, and that bootstrap failures retain their attempt records and draw indices.
+
+No production runner was certified, no scientific threshold was changed, and Python 3.14 execution evidence is still required. Remaining audit items include numerical fit conformance, the failure-code registry reconciliation for undefined Spearman, and the executable Common Fitter.

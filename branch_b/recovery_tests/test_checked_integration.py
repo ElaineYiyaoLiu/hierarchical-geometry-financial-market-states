@@ -281,7 +281,7 @@ def test_bootstrap_identity_mapping_keeps_repeated_original_ids():
     ]
 
 
-@pytest.mark.parametrize("draw", [[0, 1, 3], [-1, 1, 2], [0.0, 1.0, 2.0], [True, False, True], [[0, 1, 2]], [0, 1]])
+@pytest.mark.parametrize("draw", [[0, 1, 3], [-1, 1, 2], [0.0, 1.0, 2.0], [True, False, True], [[0, 1, 2]], [0, 1], np.ma.array([0, 1, 2], mask=[False, True, False])])
 def test_bad_draw_binding_is_rejected(draw):
     with pytest.raises(BranchBFailure) as caught:
         bind_bootstrap_draw(draw, original_sample_order=TEST, fit_sample_order=["B0", "B1", "B2"])

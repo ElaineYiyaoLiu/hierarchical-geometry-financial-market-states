@@ -448,3 +448,37 @@ def test_provisional_seed_36_and_500_synthetic_attempts_are_reproducible():
     assert any(record.failure is not None for record in first)
     assert any(record.failure is None for record in first)
     assert all(record.replicate_seed is not None for record in first)
+
+
+@pytest.mark.parametrize("invalid", [
+    [0.0, 1.0, 1.0], [True, False, True], [-1, 0, 1],
+    [[0, 1], [1, 2]], ["0", "1", "1"],
+])
+def test_bootstrap_multiplicities_reject_identity_coercion(invalid):
+    from branch_b.bootstrap.pipeline import draw_multiplicities
+
+    with pytest.raises(BranchBFailure) as caught:
+        draw_multiplicities(invalid)
+    assert caught.value.code == FailureCode.INPUT_SCHEMA
+
+
+def test_bootstrap_multiplicities_preserve_integer_occurrences():
+    from branch_b.bootstrap.pipeline import draw_multiplicities
+
+    assert draw_multiplicities(np.array([2, 0, 2, 1, 2], dtype=np.int64)) == {
+        0: 1, 1: 1, 2: 3,
+    }
+
+
+@pytest.mark.parametrize("invalid", [
+    [0.0, 1.0, 2.0], [True, False, True], [-1, 1, 2],
+])
+def test_lca_projection_rejects_lossy_draw_indices(invalid):
+    from branch_b.bootstrap.pipeline import bootstrap_lca_depths_by_original
+
+    with pytest.raises(BranchBFailure) as caught:
+        bootstrap_lca_depths_by_original(
+            bootstrap_tree=_tree(["B0", "B1", "B2"]),
+            bootstrap_test_indices=np.asarray(invalid),
+        )
+    assert caught.value.code == FailureCode.INPUT_SCHEMA

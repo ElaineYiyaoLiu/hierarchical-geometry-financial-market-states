@@ -77,3 +77,11 @@ Bootstrap input and attempt-accounting modules were further strengthened to reje
 `branch_b/fitters/gradient_descent.py` now rejects masked, Boolean, complex, text and object-valued matrices before coercing input to floating point. This is an input-schema safeguard, **not** a change to the registered numerical method or an executable fitter. Synthetic tests are in `branch_b/recovery_tests/test_fitter_input_integrity.py`.
 
 The Week 3 golden readiness inventory checks *declared* Python 3.14 and SHA-256 metadata syntax; it does **not** read the referenced evidence or verify which interpreter actually executed a case. This limitation is explicit in its documentation. Current GitHub commit-status queries returned no attached statuses and the accessible commit-workflow query returned no PR-triggered runs for the new test commit. Therefore no new Python 3.14 test pass or golden certification is claimed.
+
+## Additional decision-independent input guards — 2026-10-20
+
+- `bootstrap_split_indices` now rejects Boolean, fractional, nonpositive and noninteger split sizes, and requires an explicit NumPy Generator. This closes the direct-call gap not covered by the higher-level bootstrap engine's argument validation.
+- `GradientDescentUltrametricFitter` now requires strictly positive integer convergence-patience and maximum-iteration settings; Boolean or fractional values no longer pass the configuration gate. The numerical defaults themselves were not changed.
+- New synthetic regression tests cover both guards in `support_tests/test_bootstrap_attempt_audit.py` and `recovery_tests/test_fitter_input_integrity.py`.
+
+All updates are engineering checks only. No new Python 3.14 execution evidence was obtained, and none of these changes completes the scientific Common Fitter or the Week 3 golden report.

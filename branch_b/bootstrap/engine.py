@@ -57,8 +57,18 @@ def run_full_pipeline_bootstrap(
     interval method, timeout rule, and failed-fit sensitivity convention are intentionally
     not imposed here because the protocol assigns them to the bounded pilot revision.
     """
-    if n_replicates <= 0:
-        raise ValueError("n_replicates must be positive")
+    for name, value in (
+        ("n_replicates", n_replicates),
+        ("train_size", train_size),
+        ("validation_size", validation_size),
+        ("test_size", test_size),
+    ):
+        if type(value) is not int or value <= 0:
+            raise ValueError(f"{name} must be a positive integer")
+    if type(base_seed) is not int or base_seed < 0:
+        raise ValueError("base_seed must be a nonnegative integer")
+    if not callable(evaluate_replicate):
+        raise TypeError("evaluate_replicate must be callable")
     root = np.random.SeedSequence(base_seed)
     child_sequences = root.spawn(n_replicates)
     out: list[BootstrapReplicate] = []

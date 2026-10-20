@@ -365,3 +365,57 @@ def test_duplicate_row_conflict_is_demonstrated_without_selecting_a_repair(geome
     with pytest.raises(BranchBFailure) as caught:
         GradientDescentUltrametricFitter().validate_normalized_input(distance)
     assert caught.value.code == FailureCode.DEGENERATE_DISTANCE
+
+
+def test_childless_internal_vertex_is_rejected_before_selection():
+    class InvalidTree(NamedStub):
+        def fit_with_sample_order(self, dissimilarity, *, sample_order, random_seed=None):
+            fit = _fit(sample_order, random_seed)
+            fit.tree["internal_nodes"].append("UNDECLARED_TERMINAL")
+            fit.tree["edges"].append({
+                "parent": "ROOT", "child": "UNDECLARED_TERMINAL", "branch_length": 1.0,
+            })
+            return fit
+
+    events = []
+    with pytest.raises(BranchBFailure) as caught:
+        _run(_pipeline(InvalidTree(), events=events))
+    assert caught.value.code == FailureCode.DEGENERATE_TREE
+    assert "select" not in events
+
+
+@pytest.mark.parametrize("kind", ["masked", "nested_bool", "object_bool"])
+def test_lossy_matrix_representations_are_rejected_before_selection(kind):
+    class InvalidMatrix(NamedStub):
+        def fit_with_sample_order(self, dissimilarity, *, sample_order, random_seed=None):
+            fit = _fit(sample_order, random_seed)
+            if kind == "masked":
+                matrix = np.ma.array(fit.ultrametric_matrix, mask=False)
+                matrix.mask[0, 1] = True
+            elif kind == "nested_bool":
+                matrix = fit.ultrametric_matrix.tolist()
+                matrix[0][1] = True
+            else:
+                matrix = fit.ultrametric_matrix.astype(object)
+                matrix[0, 1] = True
+            return FitResult(matrix, fit.tree, fit.diagnostics)
+
+    events = []
+    with pytest.raises(BranchBFailure) as caught:
+        _run(_pipeline(InvalidMatrix(), events=events))
+    assert caught.value.code == FailureCode.OUTPUT_SCHEMA
+    assert "select" not in events
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), {"nested": [float("-inf")]}])
+def test_nonfinite_export_diagnostics_are_rejected_before_selection(value):
+    class InvalidDiagnostics(NamedStub):
+        def fit_with_sample_order(self, dissimilarity, *, sample_order, random_seed=None):
+            fit = _fit(sample_order, random_seed)
+            return FitResult(fit.ultrametric_matrix, fit.tree, {"bad": value})
+
+    events = []
+    with pytest.raises(BranchBFailure) as caught:
+        _run(_pipeline(InvalidDiagnostics(), events=events))
+    assert caught.value.code == FailureCode.OUTPUT_SCHEMA
+    assert "select" not in events

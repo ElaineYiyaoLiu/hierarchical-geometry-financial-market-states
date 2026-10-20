@@ -27,8 +27,11 @@ class BootstrapReplicate:
 
 
 def bootstrap_split_indices(n: int, rng: np.random.Generator) -> np.ndarray:
-    if n <= 0:
-        raise ValueError("bootstrap split size must be positive")
+    """Sample positions within a split; never coerce fractional or Boolean sizes."""
+    if type(n) is not int or n <= 0:
+        raise ValueError("bootstrap split size must be a positive integer")
+    if not isinstance(rng, np.random.Generator):
+        raise TypeError("bootstrap split sampling requires a NumPy Generator")
     return rng.integers(0, n, size=n, endpoint=False)
 
 

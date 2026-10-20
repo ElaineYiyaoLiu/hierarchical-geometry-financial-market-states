@@ -80,3 +80,41 @@ def test_audit_rejects_invalid_attempt_index(invalid):
     record = replace(_records()[0], replicate_index=invalid)
     with pytest.raises(TypeError):
         audit_bootstrap_attempts([record])
+
+
+@pytest.mark.parametrize("override", [
+    {"n_replicates": True}, {"n_replicates": 1.5}, {"n_replicates": 0},
+    {"train_size": False}, {"validation_size": -1}, {"test_size": 2.0},
+    {"base_seed": True}, {"base_seed": -1},
+])
+def test_bootstrap_engine_rejects_invalid_arguments_before_evaluation(override):
+    calls = []
+
+    def evaluator(train, validation, test, seed):
+        calls.append(seed)
+        return "synthetic"
+
+    kwargs = {
+        "n_replicates": 2, "train_size": 3, "validation_size": 3,
+        "test_size": 3, "base_seed": 36, "evaluate_replicate": evaluator,
+    }
+    kwargs.update(override)
+    with pytest.raises(ValueError):
+        run_full_pipeline_bootstrap(**kwargs)
+    assert calls == []
+
+
+def test_bootstrap_engine_does_not_expose_stored_draws_to_mutating_evaluator():
+    def evaluator(train, validation, test, seed):
+        train[:] = -1
+        validation[:] = -1
+        test[:] = -1
+        return "synthetic"
+
+    records = run_full_pipeline_bootstrap(
+        n_replicates=3, train_size=3, validation_size=3, test_size=3,
+        base_seed=36, evaluate_replicate=evaluator,
+    )
+    assert all((record.train_indices >= 0).all() for record in records)
+    assert all((record.validation_indices >= 0).all() for record in records)
+    assert all((record.test_indices >= 0).all() for record in records)

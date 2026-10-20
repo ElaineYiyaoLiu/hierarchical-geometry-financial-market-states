@@ -390,7 +390,7 @@ def test_lossy_matrix_representations_are_rejected_before_selection(kind):
         def fit_with_sample_order(self, dissimilarity, *, sample_order, random_seed=None):
             fit = _fit(sample_order, random_seed)
             if kind == "masked":
-                matrix = np.ma.array(fit.ultrametric_matrix, mask=False)
+                matrix = np.ma.array(fit.ultrametric_matrix, mask=np.zeros_like(fit.ultrametric_matrix, dtype=bool))
                 matrix.mask[0, 1] = True
             elif kind == "nested_bool":
                 matrix = fit.ultrametric_matrix.tolist()

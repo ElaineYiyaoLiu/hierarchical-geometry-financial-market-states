@@ -3,6 +3,7 @@ from __future__ import annotations
 import numpy as np
 
 from branch_b.failures import BranchBFailure, FailureCode
+from branch_b.preprocessing.validation import _real_numeric_matrix
 
 
 COMMON_NORMALIZATION_RULE = "max_offdiagonal"
@@ -10,7 +11,7 @@ COMMON_NORMALIZATION_EPSILON = 1e-12
 
 
 def _validate_dissimilarity(dissimilarity: object) -> np.ndarray:
-    d = np.asarray(dissimilarity, dtype=float)
+    d = _real_numeric_matrix(dissimilarity, context="dissimilarity")
     if d.ndim != 2 or d.shape[0] != d.shape[1] or d.shape[0] < 2:
         raise BranchBFailure(FailureCode.INPUT_SCHEMA, "dissimilarity must be a square matrix of size at least 2")
     if not np.isfinite(d).all():

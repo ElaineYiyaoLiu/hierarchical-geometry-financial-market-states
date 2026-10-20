@@ -7,6 +7,15 @@ import numpy as np
 from branch_b.failures import BranchBFailure, FailureCode
 
 
+class UndefinedRankCorrelation(RuntimeError):
+    """Rank comparison is undefined; not evidence of an invalid tree.
+
+    The bootstrap caller records this as an unsuccessful attempted fit.
+    It deliberately has no project failure code: Appendix F does not assign
+    a specific code to an otherwise valid constant-rank comparison.
+    """
+
+
 def average_ranks(values: np.ndarray) -> np.ndarray:
     """Return 1-based average ranks with average ranks assigned to ties."""
     x = np.asarray(values, dtype=float)
@@ -40,7 +49,7 @@ def spearman_with_average_ties(x: np.ndarray, y: np.ndarray) -> float:
     ry = ry - ry.mean()
     denom = float(np.sqrt(np.sum(rx * rx) * np.sum(ry * ry)))
     if denom == 0:
-        raise BranchBFailure(FailureCode.DEGENERATE_TREE, "LCA-depth ranks are constant")
+        raise UndefinedRankCorrelation("LCA-depth Spearman correlation is undefined for constant ranks")
     return float(np.sum(rx * ry) / denom)
 
 

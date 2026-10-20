@@ -452,7 +452,8 @@ def test_provisional_seed_36_and_500_synthetic_attempts_are_reproducible():
 
 @pytest.mark.parametrize("invalid", [
     [0.0, 1.0, 1.0], [True, False, True], [-1, 0, 1],
-    [[0, 1], [1, 2]], ["0", "1", "1"],
+    [[0, 1], [1, 2]], [[0, 1], [2]], ["0", "1", "1"],
+    np.ma.array([0, 1, 2], mask=[False, True, False]),
 ])
 def test_bootstrap_multiplicities_reject_identity_coercion(invalid):
     from branch_b.bootstrap.pipeline import draw_multiplicities

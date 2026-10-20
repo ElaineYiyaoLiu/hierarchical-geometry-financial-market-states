@@ -71,3 +71,9 @@ A new `branch_b/golden/readiness.py` inventory validator now enumerates the nine
 `branch_b/recovery_tests/test_golden_readiness.py` provides synthetic positive and negative evidence checks. These tests were committed but not executed under Python 3.14 in this continuation. The approved golden cases, mathematical expectations, tolerances, and required cross-component coverage remain external to this inventory and must not be fabricated.
 
 Bootstrap input and attempt-accounting modules were further strengthened to reject lossy indices, reject invalid sizes/seeds, preserve evaluator-independent draws, and report missing/duplicate attempt provenance. These are engineering checks, not decisions on D06 weighting, bootstrap reliability or confidence-interval coverage.
+
+## Further Week 2 input-integrity work — 2026-10-20
+
+`branch_b/fitters/gradient_descent.py` now rejects masked, Boolean, complex, text and object-valued matrices before coercing input to floating point. This is an input-schema safeguard, **not** a change to the registered numerical method or an executable fitter. Synthetic tests are in `branch_b/recovery_tests/test_fitter_input_integrity.py`.
+
+The Week 3 golden readiness inventory checks *declared* Python 3.14 and SHA-256 metadata syntax; it does **not** read the referenced evidence or verify which interpreter actually executed a case. This limitation is explicit in its documentation. Current GitHub commit-status queries returned no attached statuses and the accessible commit-workflow query returned no PR-triggered runs for the new test commit. Therefore no new Python 3.14 test pass or golden certification is claimed.

@@ -7,8 +7,36 @@ import numpy as np
 from branch_b.failures import BranchBFailure, FailureCode
 
 
+def _real_numeric_matrix(values: object, *, context: str) -> np.ndarray:
+    """Reject lossy representations before converting an observable matrix."""
+    if np.ma.isMaskedArray(values) or np.ma.is_masked(values):
+        raise BranchBFailure(FailureCode.INPUT_SCHEMA, f"{context} cannot contain masked values")
+
+    def inspect(item: object) -> None:
+        if np.ma.is_masked(item) or isinstance(item, (bool, np.bool_)):
+            raise BranchBFailure(FailureCode.INPUT_SCHEMA, f"{context} cannot contain Boolean or masked values")
+        if isinstance(item, (list, tuple)):
+            for child in item:
+                inspect(child)
+        elif isinstance(item, np.ndarray) and item.dtype.kind == "O":
+            for child in item.flat:
+                inspect(child)
+
+    inspect(values)
+    try:
+        raw = np.asarray(values)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise BranchBFailure(FailureCode.INPUT_SCHEMA, f"{context} must be a regular numeric matrix") from exc
+    if raw.dtype.kind not in "iuf":
+        raise BranchBFailure(FailureCode.INPUT_SCHEMA, f"{context} must contain real numeric values")
+    try:
+        return raw.astype(float, copy=True)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise BranchBFailure(FailureCode.INPUT_SCHEMA, f"{context} values cannot be converted to floats") from exc
+
+
 def as_finite_matrix(values: object, *, expected_features: int = 12) -> np.ndarray:
-    x = np.asarray(values, dtype=float)
+    x = _real_numeric_matrix(values, context="observable data")
     if x.ndim != 2:
         raise BranchBFailure(FailureCode.INPUT_SCHEMA, "observable data must be a 2D matrix")
     if x.shape[1] != expected_features:

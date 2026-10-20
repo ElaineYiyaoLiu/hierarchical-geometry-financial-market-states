@@ -419,3 +419,29 @@ def test_nonfinite_export_diagnostics_are_rejected_before_selection(value):
         _run(_pipeline(InvalidDiagnostics(), events=events))
     assert caught.value.code == FailureCode.OUTPUT_SCHEMA
     assert "select" not in events
+
+
+def test_provisional_seed_36_and_500_synthetic_attempts_are_reproducible():
+    """Engineering-only rehearsal; does not approve production seeds or B."""
+    def evaluator(train, validation, test, seed):
+        if seed % 17 == 0:
+            raise RuntimeError("synthetic evaluator failure")
+        return (int(train[0]), int(validation[0]), int(test[0]))
+
+    kwargs = dict(
+        n_replicates=500, train_size=3, validation_size=4,
+        test_size=5, base_seed=36, evaluate_replicate=evaluator,
+    )
+    first = run_full_pipeline_bootstrap(**kwargs)
+    second = run_full_pipeline_bootstrap(**kwargs)
+    assert len(first) == len(second) == 500
+    assert [r.replicate_index for r in first] == list(range(500))
+    for left, right in zip(first, second, strict=True):
+        assert left.replicate_seed == right.replicate_seed
+        assert left.result == right.result
+        assert left.failure == right.failure
+        for attr in ("train_indices", "validation_indices", "test_indices"):
+            np.testing.assert_array_equal(getattr(left, attr), getattr(right, attr))
+    assert any(record.failure is not None for record in first)
+    assert any(record.failure is None for record in first)
+    assert all(record.replicate_seed is not None for record in first)

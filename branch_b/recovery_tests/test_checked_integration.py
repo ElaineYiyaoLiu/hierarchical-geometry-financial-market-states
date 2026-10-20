@@ -483,3 +483,36 @@ def test_lca_projection_rejects_lossy_draw_indices(invalid):
             bootstrap_test_indices=np.asarray(invalid),
         )
     assert caught.value.code == FailureCode.INPUT_SCHEMA
+
+
+@pytest.mark.parametrize("bad_geometry", [
+    lambda n: np.ones((n, n), dtype=bool),
+    lambda n: np.ones((n, n), dtype=object),
+    lambda n: np.ma.array(np.ones((n, n)), mask=np.eye(n, dtype=bool)),
+])
+def test_checked_pipeline_rejects_lossy_geometry_before_fitter_or_selection(bad_geometry):
+    events = []
+    fitter = NamedStub()
+    def geometry(values, parameters):
+        return bad_geometry(len(values))
+    with pytest.raises(BranchBFailure) as caught:
+        _run(_pipeline(fitter=fitter, events=events, geometry=geometry))
+    assert caught.value.code == FailureCode.INPUT_SCHEMA
+    assert fitter.calls == []
+    assert "select" not in events
+
+
+def test_checked_bootstrap_preserves_all_normalization_failures_and_draws():
+    fitter = NamedStub()
+    def geometry(values, parameters):
+        return np.ones((len(values), len(values)), dtype=bool)
+    records = run_checked_recovery_pipeline_bootstrap(
+        **_bootstrap_kwargs(_pipeline(fitter=fitter, geometry=geometry))
+    )
+    assert len(records) == 4
+    assert [record.replicate_index for record in records] == list(range(4))
+    assert all(record.result is None for record in records)
+    assert all(record.failure["failure_code"] == "INPUT_SCHEMA" for record in records)
+    assert all(record.replicate_seed is not None for record in records)
+    assert all(len(record.train_indices) == 3 for record in records)
+    assert fitter.calls == []

@@ -67,3 +67,15 @@ Do not relabel a run from another Python version as Python 3.14 evidence.
 3. Implement the min-max/subdominant-ultrametric kernel and Dasgupta soft-area objective.
 4. Add source-conformance tests against small deterministic graphs.
 5. Run the full Common Fitter tests in Python 3.14 CI.
+
+## Subsequent Branch B meeting decisions (2026-10-20)
+
+These entries update the *decision history*, not the protocol or a freeze record.
+
+- **CF-SIGMOID / D02:** team selected beta=5 as the initial candidate and clarified that any tuning must use only protocol-permitted training observables. Exact tuning criterion, search, and applicable freeze timing are still unapproved; beta=5 is not a final frozen parameter.
+- **CF-INIT / D01–D05:** retain the paper Algorithm 1 input-weight initialization recorded on the current project card. Do not silently switch to the reference implementation's default ultrametric initialization.
+- **CF-POSITIVITY / D03:** team selected direct nonnegative working weights with projection, rather than softplus parameterization. Projection placement and its interaction with AMSGrad moment updates require explicit executable specification before scientific implementation.
+- **D04:** team selected averaging limiting gradients over admissible tied resolutions; the admissible-resolution set and averaging measure require mathematical definition before coding.
+- **D05:** team selected the last iterate satisfying the stopping rule. The stopping-rule arithmetic and exception behavior must still conform to the approved fitter card.
+
+The current `GradientDescentUltrametricFitter.fit` intentionally raises `ConfigurationRequired`. No executable Common Fitter is claimed, and no Python 3.14 source-conformance test has yet verified these meeting choices.

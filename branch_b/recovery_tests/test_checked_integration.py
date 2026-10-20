@@ -384,7 +384,7 @@ def test_childless_internal_vertex_is_rejected_before_selection():
     assert "select" not in events
 
 
-@pytest.mark.parametrize("kind", ["masked", "nested_bool", "object_bool"])
+@pytest.mark.parametrize("kind", ["masked", "nested_masked", "nested_bool", "object_bool"])
 def test_lossy_matrix_representations_are_rejected_before_selection(kind):
     class InvalidMatrix(NamedStub):
         def fit_with_sample_order(self, dissimilarity, *, sample_order, random_seed=None):
@@ -392,6 +392,9 @@ def test_lossy_matrix_representations_are_rejected_before_selection(kind):
             if kind == "masked":
                 matrix = np.ma.array(fit.ultrametric_matrix, mask=np.zeros_like(fit.ultrametric_matrix, dtype=bool))
                 matrix.mask[0, 1] = True
+            elif kind == "nested_masked":
+                matrix = fit.ultrametric_matrix.tolist()
+                matrix[0][1] = np.ma.masked
             elif kind == "nested_bool":
                 matrix = fit.ultrametric_matrix.tolist()
                 matrix[0][1] = True

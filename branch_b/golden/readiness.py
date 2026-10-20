@@ -46,7 +46,8 @@ def audit_golden_readiness(cases: Sequence[dict]) -> dict:
         if type(case_id) is not str or not case_id or case_id in seen:
             raise BranchBFailure(FailureCode.INPUT_SCHEMA, "golden case IDs must be unique and nonempty")
         seen.add(case_id)
-        if domain not in GOLDEN_DOMAINS or status not in _ALLOWED_STATUSES:
+        if (type(domain) is not str or domain not in GOLDEN_DOMAINS
+                or type(status) is not str or status not in _ALLOWED_STATUSES):
             raise BranchBFailure(FailureCode.INPUT_SCHEMA, "unknown golden domain or status")
         version = case["python_version"]
         digest = case["evidence_sha256"]

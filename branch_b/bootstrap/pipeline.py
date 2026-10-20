@@ -13,7 +13,12 @@ from branch_b.support import lca_depth_stability
 
 def _checked_draw_indices(indices: object) -> np.ndarray:
     """Preserve integer original-row identities without coercing floats or booleans."""
-    draw = np.asarray(indices)
+    if np.ma.isMaskedArray(indices):
+        raise BranchBFailure(FailureCode.INPUT_SCHEMA, "masked bootstrap indices are not admissible")
+    try:
+        draw = np.asarray(indices)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise BranchBFailure(FailureCode.INPUT_SCHEMA, "bootstrap indices must form a regular array") from exc
     if draw.ndim != 1 or draw.dtype.kind not in "iu" or np.any(draw < 0):
         raise BranchBFailure(
             FailureCode.INPUT_SCHEMA,

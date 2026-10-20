@@ -43,6 +43,8 @@ def checked_sample_order(sample_order: object, *, size: int | None = None) -> li
 
 def _reject_lossy_matrix_scalars(value: object) -> None:
     """Inspect original matrix values before NumPy can coerce bool to numbers."""
+    if np.ma.isMaskedArray(value) or np.ma.is_masked(value):
+        raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "masked fitted matrix entries cannot be serialized losslessly")
     if isinstance(value, (bool, np.bool_)):
         raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "boolean matrix entries are not real observations")
     if isinstance(value, (list, tuple)):

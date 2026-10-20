@@ -29,7 +29,12 @@ def bind_bootstrap_draw(
     """
     originals = checked_sample_order(original_sample_order)
     labels = checked_sample_order(fit_sample_order)
-    draw = np.asarray(indices)
+    if np.ma.isMaskedArray(indices):
+        raise BranchBFailure(FailureCode.INPUT_SCHEMA, "masked bootstrap identity indices are not admissible")
+    try:
+        draw = np.asarray(indices)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise BranchBFailure(FailureCode.INPUT_SCHEMA, "bootstrap identity indices must form a regular array") from exc
     if draw.ndim != 1 or draw.dtype.kind not in "iu" or len(draw) != len(labels):
         raise BranchBFailure(FailureCode.INPUT_SCHEMA, "bootstrap indices must be integers matching the fit row count")
     if np.any(draw < 0) or np.any(draw >= len(originals)):

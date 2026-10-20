@@ -30,6 +30,13 @@ def validate_tree_edge_list(tree: dict, sample_order: list[str]) -> None:
     if len(nodes) != len(internal) + len(leaves):
         raise BranchBFailure(FailureCode.DEGENERATE_TREE, "internal-node and leaf identifiers must be disjoint")
 
+    # Every terminal vertex must be a declared sample leaf. A childless node
+    # labeled internal is not a valid internal vertex, even if reachable.
+    # Do not require binary branching: unresolved multifurcations are valid.
+    for node in internal:
+        if not any(isinstance(edge, dict) and edge.get("parent") == node for edge in tree["edges"] if isinstance(tree["edges"], list)):
+            raise BranchBFailure(FailureCode.DEGENERATE_TREE, "internal node has no children")
+
     if not isinstance(tree["edges"], list):
         raise BranchBFailure(FailureCode.OUTPUT_SCHEMA, "tree edges must be a list")
 

@@ -11,9 +11,21 @@ from branch_b.recovery_pipeline import RecoveryPipeline
 from branch_b.support import lca_depth_stability
 
 
+def _checked_draw_indices(indices: object) -> np.ndarray:
+    """Preserve integer original-row identities without coercing floats or booleans."""
+    draw = np.asarray(indices)
+    if draw.ndim != 1 or draw.dtype.kind not in "iu" or np.any(draw < 0):
+        raise BranchBFailure(
+            FailureCode.INPUT_SCHEMA,
+            "bootstrap draw must be a one-dimensional array of nonnegative integer indices",
+        )
+    return draw.copy()
+
+
 def draw_multiplicities(indices: np.ndarray) -> dict[int, int]:
     """Return original-row multiplicities; duplicate draws do not become new identities."""
-    return dict(sorted(Counter(int(i) for i in np.asarray(indices, dtype=int)).items()))
+    draw = _checked_draw_indices(indices)
+    return dict(sorted(Counter(int(i) for i in draw).items()))
 
 
 def distinct_original_indices(indices: np.ndarray) -> list[int]:
@@ -44,7 +56,7 @@ def bootstrap_lca_depths_by_original(
     is accepted only when every cross-copy LCA-depth relation agrees; otherwise the
     bootstrap tree does not define one unambiguous relation for that original pair.
     """
-    draw = np.asarray(bootstrap_test_indices, dtype=int)
+    draw = _checked_draw_indices(bootstrap_test_indices)
     sample_order = list(bootstrap_tree.get("leaves", []))
     if len(sample_order) != len(draw):
         raise BranchBFailure(

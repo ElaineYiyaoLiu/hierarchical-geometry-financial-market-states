@@ -26,7 +26,9 @@ def audit_golden_readiness(cases: Sequence[dict]) -> dict:
     """Validate supplied case evidence and summarize readiness without approval.
 
     Every supplied case must name a Schedule domain. A passed or failed case
-    must have an actual Python 3.14 version and an external evidence digest.
+    must declare a Python 3.14 version and an external evidence digest.
+    This function checks metadata syntax only: it does not read the evidence,
+    verify the digest, or establish the interpreter that actually ran a case.
     Pending/blocked cases cannot claim executed evidence. Case identifiers are
     opaque, never interpreted as hints about any generating information.
     """
@@ -56,7 +58,7 @@ def audit_golden_readiness(cases: Sequence[dict]) -> dict:
                     or type(digest) is not str or not _DIGEST.fullmatch(digest)):
                 raise BranchBFailure(
                     FailureCode.INPUT_SCHEMA,
-                    "executed golden cases require actual Python 3.14 version and SHA-256 evidence",
+                    "executed golden cases require declared Python 3.14 version and SHA-256 digest",
                 )
         elif version is not None or digest is not None:
             raise BranchBFailure(

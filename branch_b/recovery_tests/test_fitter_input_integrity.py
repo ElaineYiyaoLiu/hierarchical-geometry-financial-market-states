@@ -41,3 +41,20 @@ def test_fitter_rejects_nested_masked_scalar():
     with pytest.raises(BranchBFailure) as caught:
         GradientDescentUltrametricFitter().validate_normalized_input(nested)
     assert caught.value.code == FailureCode.INPUT_SCHEMA
+
+
+@pytest.mark.parametrize("field,value", [
+    ("convergence_patience", True),
+    ("convergence_patience", 2.5),
+    ("convergence_patience", 0),
+    ("max_iterations", False),
+    ("max_iterations", 1.5),
+    ("max_iterations", -1),
+])
+def test_fitter_rejects_invalid_iteration_count_types(field, value):
+    from branch_b.fitters.gradient_descent import GradientDescentFitterConfig
+
+    with pytest.raises(ValueError, match="positive integers"):
+        GradientDescentUltrametricFitter(
+            GradientDescentFitterConfig(**{field: value})
+        )

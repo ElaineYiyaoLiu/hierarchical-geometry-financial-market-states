@@ -37,3 +37,8 @@ The 19 October executed final audit found three decision-independent checked-pat
 6. **D14**: specify a resource scaling formula and seed-derivation contract; secure the protocol-required pilot and bounded-revision gates.
 
 No hidden generator, true hierarchy, sealed ground truth, experimental conditions, or other blinded information was consulted for this intake. No production seed was used.
+## Team clarification — permitted training observables
+
+The team clarified that “calibrate during training-phase data” in D02, D07, and D14 means **only protocol-permitted training observables**. This is not authorization to tune using validation, test, calibration, independent-validation, locked-test, generating, or sealed information. Applicable protocol freeze deadlines still control: if a choice is required to be frozen before the proposed calibration, the conflict must be resolved through the authorized process, not silently bypassed.
+
+The clarification resolves the intended **data tier**, not the optimization statistic, candidate ranges, tolerance predicates, resource-scaling formula, replicate-precision criterion, or exact freeze timing. Beta=5, numerical tolerance 1e-12, and B=500 remain starting proposals subject to their authorized gates. The Branch B-owned master seed 36 is a stated reproducibility choice; its deterministic derivation and role isolation still require specification. D06 weighting and D04 tied-gradient rules remain unresolved.

@@ -58,8 +58,9 @@ class GradientDescentUltrametricFitter:
             raise ValueError("learning_rate must be finite and positive")
         if not np.isfinite(c.convergence_tolerance) or c.convergence_tolerance <= 0:
             raise ValueError("convergence_tolerance must be finite and positive")
-        if c.convergence_patience <= 0 or c.max_iterations <= 0:
-            raise ValueError("convergence_patience and max_iterations must be positive")
+        if (type(c.convergence_patience) is not int or c.convergence_patience <= 0
+                or type(c.max_iterations) is not int or c.max_iterations <= 0):
+            raise ValueError("convergence_patience and max_iterations must be positive integers")
         if not np.isfinite(c.near_zero_weight_tolerance) or c.near_zero_weight_tolerance <= 0:
             raise ValueError("near_zero_weight_tolerance must be finite and positive")
         if c.random_restarts != 0 or not c.deterministic_primary:

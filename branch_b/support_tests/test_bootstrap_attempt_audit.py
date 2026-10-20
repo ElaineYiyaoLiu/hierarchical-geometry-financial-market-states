@@ -27,6 +27,9 @@ def test_audit_counts_all_attempts_and_keeps_uncoded_failures():
     assert audit["attempt_count"] == 30
     assert audit["successful_return_count"] + audit["failed_attempt_count"] == 30
     assert audit["inconsistent_record_count"] == 0
+    assert audit["duplicate_replicate_index_count"] == 0
+    assert audit["noncontiguous_replicate_indices"] is False
+    assert audit["missing_replicate_seed_count"] == 0
     assert audit["exception_types"].get("UndefinedRankCorrelation", 0) > 0
     assert audit["exception_types"].get("ValueError", 0) > 0
     assert audit["failure_codes"] == {}
@@ -54,3 +57,26 @@ def test_audit_flags_inconsistent_attempt_instead_of_counting_success():
 def test_audit_rejects_nonrecords():
     with pytest.raises(TypeError):
         audit_bootstrap_attempts([object()])
+
+
+def test_audit_exposes_duplicate_attempt_indices_and_missing_seed():
+    from dataclasses import replace
+
+    records = _records()[:2]
+    duplicate = replace(records[1], replicate_index=records[0].replicate_index,
+                        replicate_seed=None)
+    audit = audit_bootstrap_attempts([records[0], duplicate])
+    assert audit["attempt_count"] == 2
+    assert audit["duplicate_replicate_index_count"] == 1
+    assert audit["noncontiguous_replicate_indices"] is True
+    assert audit["missing_replicate_seed_count"] == 1
+    assert audit["scientific_success_certified"] is False
+
+
+@pytest.mark.parametrize("invalid", [True, -1, 1.0, "1"])
+def test_audit_rejects_invalid_attempt_index(invalid):
+    from dataclasses import replace
+
+    record = replace(_records()[0], replicate_index=invalid)
+    with pytest.raises(TypeError):
+        audit_bootstrap_attempts([record])

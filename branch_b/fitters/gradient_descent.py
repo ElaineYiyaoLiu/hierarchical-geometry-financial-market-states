@@ -118,11 +118,38 @@ class GradientDescentUltrametricFitter:
         }
 
     def validate_normalized_input(self, dissimilarity: object) -> np.ndarray:
+        """Check input matrix before any conversion could erase masked or Boolean data."""
+        if np.ma.isMaskedArray(dissimilarity):
+            raise BranchBFailure(FailureCode.INPUT_SCHEMA, "masked fitter inputs are inadmissible")
+
+        def reject_lossy(value: object) -> None:
+            if np.ma.is_masked(value) or isinstance(value, (bool, np.bool_)):
+                raise BranchBFailure(
+                    FailureCode.INPUT_SCHEMA, "masked and Boolean fitter entries are inadmissible"
+                )
+            if isinstance(value, (list, tuple)):
+                for item in value:
+                    reject_lossy(item)
+            elif isinstance(value, np.ndarray) and value.dtype.kind == "O":
+                for item in value.flat:
+                    reject_lossy(item)
+
+        reject_lossy(dissimilarity)
         try:
-            d = np.asarray(dissimilarity, dtype=float)
+            raw = np.asarray(dissimilarity)
         except (TypeError, ValueError, OverflowError) as exc:
             raise BranchBFailure(
-                FailureCode.INPUT_SCHEMA, "fitter input must contain numeric matrix values"
+                FailureCode.INPUT_SCHEMA, "fitter input must be a regular numeric matrix"
+            ) from exc
+        if raw.dtype.kind not in "iuf":
+            raise BranchBFailure(
+                FailureCode.INPUT_SCHEMA, "fitter input must contain real numeric values"
+            )
+        try:
+            d = raw.astype(float, copy=True)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise BranchBFailure(
+                FailureCode.INPUT_SCHEMA, "fitter input cannot be converted to real values"
             ) from exc
         if d.ndim != 2 or d.shape[0] != d.shape[1] or d.shape[0] < 2:
             raise BranchBFailure(FailureCode.INPUT_SCHEMA, "fitter input must be a square matrix")

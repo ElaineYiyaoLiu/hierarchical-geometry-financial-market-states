@@ -22,9 +22,18 @@ def audit_bootstrap_attempts(records: Sequence[BootstrapReplicate]) -> dict:
     codes: Counter[str] = Counter()
     exceptions: Counter[str] = Counter()
     success = failure = inconsistent = 0
+    indices: list[int] = []
+    missing_seeds = 0
     for record in records:
         if not isinstance(record, BootstrapReplicate):
             raise TypeError("each bootstrap record must be BootstrapReplicate")
+        if type(record.replicate_index) is not int or record.replicate_index < 0:
+            raise TypeError("bootstrap replicate index must be a nonnegative integer")
+        indices.append(record.replicate_index)
+        if record.replicate_seed is None:
+            missing_seeds += 1
+        elif type(record.replicate_seed) is not int or record.replicate_seed < 0:
+            raise TypeError("bootstrap replicate seed must be a nonnegative integer")
         if record.failure is None and record.result is not None:
             success += 1
         elif record.failure is not None and record.result is None:
@@ -47,6 +56,9 @@ def audit_bootstrap_attempts(records: Sequence[BootstrapReplicate]) -> dict:
         "successful_return_count": success,
         "failed_attempt_count": failure,
         "inconsistent_record_count": inconsistent,
+        "duplicate_replicate_index_count": len(indices) - len(set(indices)),
+        "noncontiguous_replicate_indices": sorted(indices) != list(range(len(records))),
+        "missing_replicate_seed_count": missing_seeds,
         "failure_codes": dict(sorted(codes.items())),
         "exception_types": dict(sorted(exceptions.items())),
         "scientific_success_certified": False,

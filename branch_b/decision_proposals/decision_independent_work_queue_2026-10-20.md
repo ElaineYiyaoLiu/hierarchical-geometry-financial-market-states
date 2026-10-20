@@ -63,3 +63,11 @@ Week 6: `blind_validation_outputs/`, `common_fitter_selection_report.pdf`, `sele
 Recent commits add lossless bootstrap identity guards and synthetic tests, but they are **not yet verified by an observed Python 3.14 test run**. The local runtime has Python 3.13 only. A Python 3.14 installation attempt failed due unavailable DNS/network; no Python 3.13 scientific execution was substituted. GitHub Actions workflows request Python 3.14, but current tool access did not expose new job evidence.
 
 No pilot/calibration/blind-validation/locked-test data were opened, generated, processed, or written. No hidden generating information, sealed truth, generator seeds or restricted side channels were used. The work queue itself is safe to disclose publicly and does not alter any freeze.
+
+## Subsequent engineering continuation — 2026-10-20
+
+A new `branch_b/golden/readiness.py` inventory validator now enumerates the nine Week 3 golden-test domains and requires explicit Python 3.14 execution-version and SHA-256 evidence for any case claimed as passed or failed. Pending and blocked cases cannot claim execution evidence. Its returned `scientific_golden_certified` and `pilot_authorization` fields are always false: even a fully populated synthetic inventory is **not** the required `recovery_golden_report.json`.
+
+`branch_b/recovery_tests/test_golden_readiness.py` provides synthetic positive and negative evidence checks. These tests were committed but not executed under Python 3.14 in this continuation. The approved golden cases, mathematical expectations, tolerances, and required cross-component coverage remain external to this inventory and must not be fabricated.
+
+Bootstrap input and attempt-accounting modules were further strengthened to reject lossy indices, reject invalid sizes/seeds, preserve evaluator-independent draws, and report missing/duplicate attempt provenance. These are engineering checks, not decisions on D06 weighting, bootstrap reliability or confidence-interval coverage.

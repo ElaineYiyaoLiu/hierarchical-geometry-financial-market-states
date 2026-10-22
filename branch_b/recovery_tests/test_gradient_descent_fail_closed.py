@@ -57,9 +57,8 @@ def test_pilot_timeout_setting_does_not_enable_unimplemented_kernel():
             [["not-a-number", "also-not-a-number"], ["x", "y"]],
             FailureCode.INPUT_SCHEMA,
         ),
-        # Float conversion represents None as NaN; retain the existing
-        # NONFINITE_INPUT classification rather than changing the fitter.
-        ([[0.0, None], [None, 0.0]], FailureCode.NONFINITE_INPUT),
+        # Original-value validation rejects None before floating-point coercion.
+        ([[0.0, None], [None, 0.0]], FailureCode.INPUT_SCHEMA),
         (object(), FailureCode.INPUT_SCHEMA),
     ],
 )

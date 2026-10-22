@@ -1,0 +1,20 @@
+{
+  "conclusion": "success",
+  "date_client": "2026-10-21",
+  "execution_origin": "isolated workspace host; not GitHub Actions",
+  "junit_sha256": "ffe6d078ea9a12019c360bf6556cfccc9786f5aee628b38fda4f010395916aeb",
+  "method_gates_closed": false,
+  "numpy": "2.5.3",
+  "pilot_exchange_authorized": false,
+  "pytest": "8.4.2",
+  "python": "3.14.7",
+  "record": "public_current_source_execution_evidence",
+  "scope": "synthetic tests, interface and governance checks; scientific method decisions remain pending",
+  "source_commit": "79b9c2fde5d867b6d638eaab3f2fddd897681c24",
+  "tests": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 631
+  }
+}

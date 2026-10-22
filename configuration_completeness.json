@@ -2,6 +2,7 @@
   "branch_a": {
     "all_family_formal_runner_certification": "pending",
     "current_commit_execution": "pass_scoped",
+    "development_all_family_execution": "pass_scoped_current_source",
     "development_failure_accounting": "pass_scoped; formal runner pending",
     "exact_balanced_positive_control": "pass",
     "formal_pilot_generation": "not_started",
@@ -12,7 +13,7 @@
   },
   "branch_b": {
     "bootstrap_lca_original_identity_integration": "implementation_complete_tests_pass_scoped_method_gate_pending",
-    "common_fitter_executable_kernel": "blocked_on_decisions_and_python314_dependency_evidence",
+    "common_fitter_executable_kernel": "blocked_on_method_decisions_and_missing_executable_kernel",
     "common_fitter_source_conformance": "review_complete_decisions_required",
     "correlation_admissibility": "proposal_ready_for_review",
     "general_numerical_tolerances": "proposal_ready_for_review",
@@ -20,10 +21,13 @@
     "valuation_favorable_feature_sanity_criterion": "decision_required"
   },
   "execution_evidence": {
-    "branch_a": "governance/branch_a_execution_attestation_2026-10-04.json",
-    "register_audit": "governance/pre_pilot_gate_audit_2026-10-04.json",
-    "sealed_transport_rehearsal": "governance/week4/sealed_transport_rehearsal_evidence_2026-10-04.json",
-    "shared_ci": "governance/current_ci_evidence_2026-10-04.json"
+    "branch_a": "governance/branch_a_execution_attestation_2026-10-21.json",
+    "current_source_tests": "governance/current_source_tests_2026-10-21.json",
+    "freeze_reconciliation": "governance/freeze_reconciliation_2026-10-21.json",
+    "register_audit": "governance/pre_pilot_gate_audit_2026-10-21.json",
+    "sealed_transport_rehearsal": "governance/week4/sealed_transport_rehearsal_evidence_2026-10-21.json",
+    "shared_ci": "governance/current_ci_evidence_2026-10-21.json",
+    "shared_ci_scope": "Observed current engineering source CI; method and approval gates remain pending."
   },
   "external": {
     "faculty_concept_governance": "pending_external",
@@ -50,6 +54,6 @@
     "project_lead_raw_truth_prohibition": "recorded",
     "sealed_service_custodian_path": "recorded"
   },
-  "review_date": "2026-10-04",
-  "version": "week3-a-pl-operational-preparation-2026-10-04"
+  "review_date": "2026-10-21",
+  "version": "a-pl-source-execution-review-2026-10-21"
 }

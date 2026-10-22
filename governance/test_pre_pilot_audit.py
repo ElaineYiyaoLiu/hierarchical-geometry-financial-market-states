@@ -72,3 +72,17 @@ def test_blank_approval_does_not_pass(tmp_path):
     rows = records(tmp_path)
     rows[0]["approval_ref"] = ""
     assert module.audit(rows, tmp_path)["gates"][0]["status"] == "BLOCKED"
+
+
+@pytest.mark.parametrize("parent_alias", [False, True])
+def test_internal_symlink_cannot_stand_in_for_frozen_evidence(tmp_path, parent_alias):
+    rows = records(tmp_path)
+    if parent_alias:
+        (tmp_path / "alias").symlink_to(tmp_path, target_is_directory=True)
+        rows[0]["evidence_ref"] = "alias/evidence.json"
+    else:
+        (tmp_path / "alias.json").symlink_to(tmp_path / "evidence.json")
+        rows[0]["evidence_ref"] = "alias.json"
+    result = module.audit(rows, tmp_path)["gates"][0]
+    assert not result["evidence_checksum_verified"] and result["status"] == "BLOCKED"
+    assert "symlinked evidence references are prohibited" in result["blockers"]

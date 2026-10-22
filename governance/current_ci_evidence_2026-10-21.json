@@ -1,0 +1,18 @@
+{
+  "conclusion": "success",
+  "date_client": "2026-10-21",
+  "evidence_origin": "observed GitHub Actions run metadata, job steps and decoded logs",
+  "gate_audit_job_id": 119606090702,
+  "gate_audit_run_id": 39712263353,
+  "gate_guard_tests": 126,
+  "job_id": 119606091265,
+  "method_gates_closed": false,
+  "numpy": "2.5.3",
+  "pilot_exchange_authorized": false,
+  "python": "3.14.7",
+  "record": "public_scoped_ci_evidence",
+  "run_id": 39712263466,
+  "scope": "Source-bound engineering tests and governance audit execution. Audit science/approval decision remains BLOCKED; evidence refresh requires a new register audit.",
+  "source_commit": "79b9c2fde5d867b6d638eaab3f2fddd897681c24",
+  "test_count": 631
+}

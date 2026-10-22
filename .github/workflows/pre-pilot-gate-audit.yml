@@ -25,7 +25,7 @@ jobs:
           python-version: "3.14.7"
       - run: python -m pip install -r requirements-dev.txt
       - name: Verify guard behavior
-        run: python -m pytest -q governance/test_pre_pilot_audit.py governance/test_a_pl_preparation.py governance/test_freeze_reconciliation.py governance/test_revision_preparation.py governance/test_later_stage_audit.py governance/test_threshold_blind_preparation.py governance/week4/test_sealed_transport.py governance/week4/test_escalation_signatures.py governance/week4/test_audit_guards.py --junitxml=pre_pilot_audit_tests.xml
+        run: python -m pytest -q governance/test_pre_pilot_audit.py governance/test_a_pl_preparation.py governance/test_freeze_reconciliation.py governance/test_queue_freeze_bindings.py governance/test_revision_preparation.py governance/test_later_stage_audit.py governance/test_threshold_blind_preparation.py governance/week4/test_sealed_transport.py governance/week4/test_escalation_signatures.py governance/week4/test_audit_guards.py --junitxml=pre_pilot_audit_tests.xml
       - name: Dummy signed transport rehearsal
         run: python governance/week4/run_sealed_rehearsal.py --output sealed_transport_rehearsal
       - name: Audit current public evidence without granting approval

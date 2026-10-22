@@ -1,0 +1,155 @@
+{
+  "approval_granted": false,
+  "decision": "BLOCKED",
+  "formal_generation_authorized": false,
+  "freeze_registry_sha256": "bfb6a50617dc417bc070f81b7603fab719cde6acbc59008337971acbf00bdeeb",
+  "gate_audit_decision": "BLOCKED",
+  "gates": [
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "BOUNDARY"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "SENTINELS"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "A_READINESS"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "A_ALL_FAMILY_RUNNER"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_CURRENT_TESTS"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_CURRENT_CI"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_CORRELATION"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_TOLERANCES"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_SIGMOID"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_INIT"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_POSITIVITY"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_VALUATION_SANITY"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_FITTER_EXECUTABLE"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "B_METHOD_PACKAGE"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "CUSTODIAN_OPERATIONAL"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "SEALED_PRECISION_CONTRACT"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "MINIMUM_EFFECT_PROVENANCE"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "FACULTY_CONCEPT"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "FACULTY_EXCHANGE"
+    },
+    {
+      "blockers": [
+        "referenced freeze entry missing"
+      ],
+      "freeze_reference_consistent": false,
+      "gate_id": "FINAL_PL_EXCHANGE"
+    }
+  ],
+  "note": "Checks recorded public references and bytes only. Authority, signatures, substantive scope and before-inspection chronology require independent review.",
+  "pilot_exchange_authorized": false,
+  "record": "public_gate_freeze_reconciliation",
+  "reference_consistency_complete": false,
+  "register_sha256": "c57f2b8552b98e75c0181032e5d13ec1950b4ca5babaf0067a26a91811428867",
+  "structural_blockers": []
+}

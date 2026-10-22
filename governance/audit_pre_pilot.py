@@ -24,8 +24,14 @@ def checked_file(root: Path, ref: str, digest: str) -> None:
     if not isinstance(digest, str):
         raise ValueError("exact-byte SHA-256 required")
     root = root.resolve()
-    path = (root / ref).resolve()
-    if not ref or Path(ref).is_absolute() or not path.is_relative_to(root):
+    relative = Path(ref)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError("relative evidence file inside the public repository required")
+    candidate = root / relative
+    if any(path.is_symlink() for path in (candidate, *candidate.parents) if path != root):
+        raise ValueError("symlinked evidence references are prohibited")
+    path = candidate.resolve()
+    if not path.is_relative_to(root):
         raise ValueError("relative evidence file inside the public repository required")
     if len(digest) != 64 or any(c not in "0123456789abcdef" for c in digest):
         raise ValueError("exact-byte SHA-256 required")

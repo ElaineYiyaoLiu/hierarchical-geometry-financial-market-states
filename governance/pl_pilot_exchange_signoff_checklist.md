@@ -1,34 +1,35 @@
 # Project Lead pilot-exchange signoff checklist
 
-Current reconciliation: 2026-10-04. Overall decision: **BLOCKED**.
+Current reconciliation: 2026-10-21. Overall decision: **BLOCKED**.
 
-## Verified execution scope
+## Current verified scope
 
-- Branch A execution scope and source commit are recorded in `governance/branch_a_execution_attestation_2026-10-04.json`, including development integration evidence where verified. Formal all-family certification remains open.
-- Public audited execution count, source commit and workflow runs are recorded in `governance/current_ci_evidence_2026-10-04.json`. These scoped records supersede the earlier CI collection failure.
-- The archived gate audit covered all 20 gate IDs and verified 11 evidence checksums at its recorded source/register. Evidence: `governance/pre_pilot_gate_audit_2026-10-04.json`. A changed register requires a new audit.
-- Observable-only and raw-truth access boundaries are recorded in `pilot_access_audit.md`; the public-safe sentinel view is in `pilot_sentinel_registry.csv`. Final operational verification remains required.
+- Branch A: 131 tests passed under actual Python 3.14.7 / NumPy 2.5.3. Development all-family integration, exact-byte reproduction, package audit, checkpoint inspection and frozen readiness passed. Public aggregate: `branch_a_execution_attestation_2026-10-21.json`. Formal all-family runner certification remains pending.
+- Shared source: all 631 synthetic/interface/governance tests passed under the same Python/NumPy versions. `current_source_tests_2026-10-21.json` and its XML record are local-host execution evidence bound to their recorded public source, separate from historical GitHub Actions evidence.
+- Register audit: `pre_pilot_gate_audit_2026-10-21.json` covers all 20 gates and verifies 13 evidence checksums. Scope, approval and freeze requirements remain open.
+- Freeze reconciliation: `freeze_reconciliation_2026-10-21.json`. The closure queue now incorporates actual freeze consistency: `a_pl_closure_queue_2026-10-21.json`.
+- The signed dummy transport rehearsal passed its nine checks. `week4/sealed_transport_rehearsal_evidence_2026-10-21.json` establishes development transport behavior; actual custodian operation remains pending.
 
-## Remaining applicable gates
+## Remaining completion requirements
 
-| Gate | Current closure requirement |
+| Gate group | Required evidence or decision |
 |---|---|
-| Configuration completeness | Every applicable pre-pilot field has complete evidence, approval and freeze references |
-| Branch A all-family runner | Formal dispatch/accounting/packaging certification and final restricted-side attestation |
-| Branch B method package | Existing method decisions, source conformance, cards and final pipeline verification remain separate gates; not reviewed by this A/PL close-out |
-| Custodian operational availability | Real identity, independent key registration, dated availability and custodian-operated rehearsal |
-| Sealed precision contract | Approved formula, input aggregation, conservative rule, exact release allowlist, signature verification and before-inspection checksum freeze |
-| Minimum-effect provenance | Original substantive value, dated approval/freeze and proof that freeze preceded earliest relevant development-contrast inspection |
-| Faculty concept/governance | Dated signed decision with reviewed versions, checksums and conditions |
-| Faculty pilot exchange | Separate dated signed decision after applicable gates close |
-| Final PL exchange | Final complete gate audit and explicit dated PL decision |
+| Branch A formal runner | Approved operational contracts and exact-control consumer/interface, then source-bound certification evidence retained privately |
+| Scoped execution, access and sentinels | Actual reviewed approval artifacts, exact-byte checksums and corresponding completed freeze entries |
+| Branch B methods | Approved method decisions, executable Common Fitter, prespecified valuation sanity criterion, final cards and golden coverage |
+| Custodian operation | Actual identity, independently registered key, dated availability and custodian-operated rehearsal |
+| Sealed precision contract | Exact approved formula/constants, failure/invalid-input behavior, permitted signed fields and before-inspection freeze |
+| Minimum-effect provenance | Original substantive value/decision and freeze before the earliest relevant development-contrast inspection |
+| Faculty | Separate signed concept/governance and pilot-exchange decisions |
+| Final PL exchange | Complete reconciled evidence and actual dated PL decision after all applicable prerequisites |
 
-## Prepared close-out material
+## Review sequence
 
-- `governance/week4/sealed_contract_decision_packet.md` lists unresolved decisions and the executable transport proposal.
-- `governance/week4/sealed_transport.py` and `run_sealed_rehearsal.py` verify actual Ed25519 signatures on dummy records. The demo is not a custodian availability or approval attestation.
-- `validate_escalation.py` now invokes actual signature verification against the registered key and verifies consistency with the signed release and identity-binding evidence. Independent authority/freeze review remains required.
-- `governance/minimum_effect_provenance_review_2026-10-04.md` and the adjacent template record the missing historical evidence without selecting a value.
-- `governance/faculty_review_package_2026-10-02.md` is reconciled to current execution evidence.
+1. Review the existing operational, sealed-contract and provenance decision worksheets against current evidence. Complete actual decisions and signatures without filling missing historical facts by inference.
+2. Bind approvals to the reviewed artifact versions and exact-byte checksums, and complete their freeze entries.
+3. Run `audit_pre_pilot.py`, `check_freeze_reconciliation.py` and `prepare_a_pl_queue.py` on the reconciled records.
+4. Record the final PL exchange decision only after every applicable prerequisite closes.
 
-The consolidated register is `governance/approval_evidence_register.csv`. Scoped, pending, historical and demo evidence retain their scope. Pending freeze rows grant no authority. Record READY only after all applicable gates close with reviewed evidence and corresponding decisions. A pilot-exchange decision applies only to protocol-defined pilot exchange; later research stages require their own approvals.
+The consolidated register is `approval_evidence_register.csv`. The scoped execution update changes no scientific rule or existing approval status. Later pilot exit, calibration and locked-run stages retain their own gates.
+
+Current engineering CI also passed on the recorded source: `current_ci_evidence_2026-10-21.json` records 631 full-suite and 126 governance-guard test passes. The audit workflow completed successfully while its approval decision remained BLOCKED.

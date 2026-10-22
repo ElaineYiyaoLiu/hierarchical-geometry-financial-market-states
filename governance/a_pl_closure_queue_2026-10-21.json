@@ -1,0 +1,122 @@
+{
+  "evidence_only_audit_decision": "BLOCKED",
+  "formal_generation_authorized": false,
+  "freeze_reconciliation_decision": "BLOCKED",
+  "freeze_registry_sha256": "bfb6a50617dc417bc070f81b7603fab719cde6acbc59008337971acbf00bdeeb",
+  "note": "Work priority grants no approval. B and Faculty records are preserved and are not changed by this command.",
+  "other_gate_count": 12,
+  "overall_gate_audit_decision": "BLOCKED",
+  "pilot_exchange_authorized": false,
+  "record": "a_pl_closure_queue",
+  "register_sha256": "c57f2b8552b98e75c0181032e5d13ec1950b4ca5babaf0067a26a91811428867",
+  "scope": "A/PL operational preparation",
+  "structural_blockers": [],
+  "work_items": [
+    {
+      "action": "Certify the approved formal runner and retain restricted evidence; publish only a permitted attestation.",
+      "gate_id": "A_ALL_FAMILY_RUNNER",
+      "missing_evidence": [
+        "evidence checksum missing",
+        "gate is not declared PASS; scoped and recorded evidence retains its scope",
+        "approval_ref missing",
+        "freeze_id missing",
+        "referenced freeze entry missing"
+      ],
+      "priority": 1,
+      "status": "BLOCKED",
+      "work_owner": "A"
+    },
+    {
+      "action": "Bind scoped readiness to reviewed evidence, authority and freeze references.",
+      "gate_id": "A_READINESS",
+      "missing_evidence": [
+        "gate is not declared PASS; scoped and recorded evidence retains its scope",
+        "approval_ref missing",
+        "freeze_id missing",
+        "referenced freeze entry missing"
+      ],
+      "priority": 2,
+      "status": "BLOCKED",
+      "work_owner": "A/PL"
+    },
+    {
+      "action": "Reconcile access review, approval reference and freeze entry.",
+      "gate_id": "BOUNDARY",
+      "missing_evidence": [
+        "gate is not declared PASS; scoped and recorded evidence retains its scope",
+        "approval_ref missing",
+        "freeze_id missing",
+        "referenced freeze entry missing"
+      ],
+      "priority": 3,
+      "status": "BLOCKED",
+      "work_owner": "PL"
+    },
+    {
+      "action": "Reconcile the public-safe registry approval and freeze evidence.",
+      "gate_id": "SENTINELS",
+      "missing_evidence": [
+        "gate is not declared PASS; scoped and recorded evidence retains its scope",
+        "approval_ref missing",
+        "freeze_id missing",
+        "referenced freeze entry missing"
+      ],
+      "priority": 4,
+      "status": "BLOCKED",
+      "work_owner": "PL"
+    },
+    {
+      "action": "Obtain actual identity, independent key registration, availability and operated dummy-rehearsal evidence.",
+      "gate_id": "CUSTODIAN_OPERATIONAL",
+      "missing_evidence": [
+        "evidence checksum missing",
+        "gate is not declared PASS; scoped and recorded evidence retains its scope",
+        "approval_ref missing",
+        "freeze_id missing",
+        "referenced freeze entry missing"
+      ],
+      "priority": 5,
+      "status": "BLOCKED",
+      "work_owner": "custodian/PL"
+    },
+    {
+      "action": "Complete the exact calculation/release contract and required decisions before inspection.",
+      "gate_id": "SEALED_PRECISION_CONTRACT",
+      "missing_evidence": [
+        "gate is not declared PASS; scoped and recorded evidence retains its scope",
+        "approval_ref missing",
+        "freeze_id missing",
+        "referenced freeze entry missing"
+      ],
+      "priority": 6,
+      "status": "BLOCKED",
+      "work_owner": "custodian/PL"
+    },
+    {
+      "action": "Obtain the original decision and earliest relevant inspection chronology; validate consistency and review authority.",
+      "gate_id": "MINIMUM_EFFECT_PROVENANCE",
+      "missing_evidence": [
+        "gate is not declared PASS; scoped and recorded evidence retains its scope",
+        "approval_ref missing",
+        "freeze_id missing",
+        "referenced freeze entry missing"
+      ],
+      "priority": 7,
+      "status": "BLOCKED",
+      "work_owner": "PL"
+    },
+    {
+      "action": "Reconcile the final decision only after every applicable gate closes.",
+      "gate_id": "FINAL_PL_EXCHANGE",
+      "missing_evidence": [
+        "gate is not declared PASS; scoped and recorded evidence retains its scope",
+        "approval_ref missing",
+        "freeze_id missing",
+        "referenced freeze entry missing"
+      ],
+      "priority": 8,
+      "status": "BLOCKED",
+      "work_owner": "PL"
+    }
+  ]
+}

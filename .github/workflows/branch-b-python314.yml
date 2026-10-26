@@ -36,7 +36,7 @@ jobs:
       - name: Run shared validator tests
         run: python -m pytest validator -q --junitxml=validator-junit.xml
       - name: Run Branch B Week 2 tests
-        run: python -m pytest branch_b/support_tests branch_b/recovery_tests branch_b/failure_tests -q --junitxml=branch-b-junit.xml
+        run: python -m pytest branch_b/support_tests branch_b/recovery_tests branch_b/failure_tests branch_b/bootstrap/test_none_result_failure.py -q --junitxml=branch-b-junit.xml
       - name: Preserve test and environment evidence
         if: always()
         uses: actions/upload-artifact@v4

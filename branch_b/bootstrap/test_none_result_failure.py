@@ -31,3 +31,51 @@ def test_none_evaluator_result_is_recorded_as_failed_attempt():
     assert audit["inconsistent_record_count"] == 0
     assert audit["successful_return_count"] == 0
     assert audit["scientific_success_certified"] is False
+
+
+def test_none_failure_replays_deterministically():
+    kwargs = dict(
+        n_replicates=3,
+        train_size=5,
+        validation_size=4,
+        test_size=4,
+        base_seed=1024,
+        evaluate_replicate=lambda train, validation, test, seed: None,
+    )
+    first = run_full_pipeline_bootstrap(**kwargs)
+    second = run_full_pipeline_bootstrap(**kwargs)
+    assert len(first) == len(second) == 3
+    for a, b in zip(first, second, strict=True):
+        assert a.replicate_seed == b.replicate_seed
+        assert a.train_indices.tolist() == b.train_indices.tolist()
+        assert a.validation_indices.tolist() == b.validation_indices.tolist()
+        assert a.test_indices.tolist() == b.test_indices.tolist()
+        assert a.failure == b.failure
+
+
+def test_evaluator_exception_preserves_attempt_metadata():
+    def evaluator(train, validation, test, seed):
+        train[:] = -1  # Mutate only the evaluator's copy.
+        raise RuntimeError("synthetic evaluator failure")
+
+    attempts = run_full_pipeline_bootstrap(
+        n_replicates=1,
+        train_size=5,
+        validation_size=4,
+        test_size=3,
+        base_seed=105,
+        evaluate_replicate=evaluator,
+    )
+    assert len(attempts) == 1
+    attempt = attempts[0]
+    assert attempt.result is None
+    assert attempt.failure == {
+        "exception_type": "RuntimeError",
+        "message": "synthetic evaluator failure",
+    }
+    assert attempt.replicate_seed is not None
+    assert all(0 <= int(i) < 5 for i in attempt.train_indices)
+    assert len(attempt.train_indices) == 5
+    audit = audit_bootstrap_attempts(attempts)
+    assert audit["failed_attempt_count"] == 1
+    assert audit["inconsistent_record_count"] == 0

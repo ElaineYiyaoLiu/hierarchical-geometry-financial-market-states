@@ -64,9 +64,15 @@ def test_every_attempt_records_the_exact_seed_passed_to_the_evaluator(outcome):
                 "exception_type": "RuntimeError",
                 "message": "synthetic unexpected failure",
             }
+        elif outcome == "none":
+            assert record.result is None
+            assert record.failure == {
+                "exception_type": "ValueError",
+                "message": "bootstrap evaluator returned None without a result",
+            }
         else:
             assert record.failure is None
-            assert record.result == (None if outcome == "none" else {"completed": True})
+            assert record.result == {"completed": True}
 
 
 @pytest.mark.parametrize("fail_after_mutation", [False, True])

@@ -23,10 +23,10 @@ class PositiveEdgeGraph:
 
 
 def positive_edge_graph(dissimilarity: object) -> PositiveEdgeGraph:
-    """Keep strictly positive undirected edges, retaining all original vertices.
+    """Keep edges strictly above the fixed tolerance, retaining all vertices.
 
-    Only exact off-diagonal zero weights are removed; no near-zero cutoff,
-    diagonal repair, edge insertion, or failure-code assignment is performed.
+    Off-diagonal weights at or below 1e-12 are removed. No diagonal repair,
+    edge insertion, or failure-code assignment is performed.
     """
     raw = np.asarray(dissimilarity)
     if np.ma.isMaskedArray(dissimilarity) or raw.dtype.kind not in "iuf":
@@ -40,7 +40,7 @@ def positive_edge_graph(dissimilarity: object) -> PositiveEdgeGraph:
         raise ValueError("expected exactly symmetric matrix with zero diagonal")
     n = d.shape[0]
     i, j = np.triu_indices(n, k=1)
-    keep = d[i, j] > 0
+    keep = d[i, j] > 1e-12
     edges = np.column_stack((i[keep], j[keep]))
     weights = d[i[keep], j[keep]].copy()
     adjacency = [[] for _ in range(n)]

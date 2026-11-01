@@ -64,3 +64,14 @@ def test_positive_complete_graph_remains_connected():
 def test_invalid_inputs_rejected(bad):
     with pytest.raises(ValueError):
         positive_edge_graph(bad)
+
+
+def test_d02_beta_fixed_without_calibration():
+    from branch_b.fitters.gradient_descent import (
+        GradientDescentFitterConfig, GradientDescentUltrametricFitter,
+    )
+    fitter = GradientDescentUltrametricFitter()
+    assert fitter.config.sigmoid_beta == 5.0
+    assert fitter.project_specification()["sigmoid_beta_calibration"] == "none"
+    with pytest.raises(ValueError, match="D02"):
+        GradientDescentUltrametricFitter(GradientDescentFitterConfig(sigmoid_beta=4.0))

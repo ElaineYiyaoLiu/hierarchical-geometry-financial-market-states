@@ -1,0 +1,7 @@
+stage_id,coverage,planned_jobs,measured_seconds_per_job,effective_parallelism,queue_hours,storage_io_hours,bytes_per_job,benchmark_ref,benchmark_sha256,approved_count_rule_ref,approved_count_rule_sha256,status
+primary_processing,primary,,,,,,,,,,,PENDING_MEASUREMENTS_AND_APPROVED_COUNTS
+structural_variant_processing,structural_variant,,,,,,,,,,,PENDING_MEASUREMENTS_AND_APPROVED_COUNTS
+locked_null_processing,locked_null,,,,,,,,,,,PENDING_MEASUREMENTS_AND_APPROVED_COUNTS
+generation,primary;structural_variant;locked_null,,,,,,,,,,,PENDING_MEASUREMENTS_AND_APPROVED_COUNTS
+reconciliation,reconciliation,,,,,,,,,,,PENDING_MEASUREMENTS_AND_APPROVED_COUNTS
+evaluation,frozen_evaluation,,,,,,,,,,,PENDING_MEASUREMENTS_AND_APPROVED_COUNTS

@@ -17,6 +17,8 @@ class GradientDescentFitterConfig:
     convergence_patience: int = 10
     max_iterations: int = 1000
     near_zero_weight_tolerance: float = 1e-12
+    sigmoid_beta: float = 1.0
+    cluster_size_lambda: float = 1.0
     tie_rule: str = "unresolved_multifurcation"
     zero_branch_rule: str = "preserve_and_treat_unresolved_structurally"
     degenerate_tree_rule: str = "structural_invalidity_only"
@@ -63,6 +65,10 @@ class GradientDescentUltrametricFitter:
             raise ValueError("convergence_patience and max_iterations must be positive integers")
         if not np.isfinite(c.near_zero_weight_tolerance) or c.near_zero_weight_tolerance <= 0:
             raise ValueError("near_zero_weight_tolerance must be finite and positive")
+        if type(c.sigmoid_beta) not in (int, float) or not np.isfinite(c.sigmoid_beta) or c.sigmoid_beta <= 0:
+            raise ValueError("sigmoid_beta must be finite and positive")
+        if type(c.cluster_size_lambda) not in (int, float) or not np.isfinite(c.cluster_size_lambda) or c.cluster_size_lambda < 0:
+            raise ValueError("cluster_size_lambda must be finite and nonnegative")
         if c.random_restarts != 0 or not c.deterministic_primary:
             raise ValueError("registered primary candidate uses deterministic execution with no random restarts")
         if c.timeout_seconds is not None and (not np.isfinite(c.timeout_seconds) or c.timeout_seconds <= 0):
@@ -109,6 +115,10 @@ class GradientDescentUltrametricFitter:
             },
             "max_iterations": self.config.max_iterations,
             "near_zero_weight_tolerance": self.config.near_zero_weight_tolerance,
+            "sigmoid_beta": self.config.sigmoid_beta,
+            "sigmoid_beta_status": "unfrozen; proposed manual calibration phase",
+            "cluster_size_lambda": self.config.cluster_size_lambda,
+            "cluster_size_lambda_status": "unfrozen; proposed manual calibration phase",
             "near_zero_weight_handling": "DEGENERATE_DISTANCE",
             "tie_rule": self.config.tie_rule,
             "zero_branch_rule": self.config.zero_branch_rule,

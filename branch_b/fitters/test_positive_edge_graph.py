@@ -18,6 +18,19 @@ def test_duplicate_points_keep_vertices_and_positive_paths():
     assert graph.weights.tolist() == [2., 4., 2., 4., 3.]
 
 
+def test_threshold_boundary_and_input_immutability():
+    d = np.array([[0., 1e-13, 1e-12, 2e-12],
+                  [1e-13, 0., 0., 3.],
+                  [1e-12, 0., 0., 0.],
+                  [2e-12, 3., 0., 0.]])
+    before = d.copy()
+    graph = positive_edge_graph(d)
+    assert graph.edges.tolist() == [[0, 3], [1, 3]]
+    assert graph.weights.tolist() == [2e-12, 3.]
+    assert graph.components == ((0, 1, 3), (2,))
+    np.testing.assert_array_equal(d, before)
+
+
 def test_all_zero_distances_leave_all_vertices_isolated():
     graph = positive_edge_graph(np.zeros((3, 3)))
     assert graph.edges.shape == (0, 2)

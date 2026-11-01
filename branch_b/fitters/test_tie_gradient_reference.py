@@ -61,3 +61,41 @@ def test_uniform_over_trees_requires_within_tree_gradient_convention():
         gradients = [jac for _, merger, jac in resolutions if merger == first]
         assert len(gradients) == 2
         assert not np.array_equal(gradients[0], gradients[1])
+
+
+def test_uniform_tree_conditional_gradient_matches_order_mean_for_triangle():
+    """For the symmetric triangle each binary first-merge tree has two orderings."""
+    resolutions = triangle_tie_resolution_jacobians()
+    tree_means = [
+        np.mean([jac for _, first, jac in resolutions if first == tree], axis=0)
+        for tree in range(3)
+    ]
+    tree_uniform = np.mean(tree_means, axis=0)
+    order_uniform = np.mean([jac for _, _, jac in resolutions], axis=0)
+    np.testing.assert_allclose(tree_uniform, order_uniform)
+    # This value is derived from symmetric triangle perturbations, not a
+    # prescribed general D04 rule.
+    expected = np.full((3, 3), 1.0 / 3.0)
+    np.fill_diagonal(expected, 1.0 / 3.0)
+    np.testing.assert_allclose(tree_uniform, expected)
+
+
+def test_uniform_trees_differs_from_uniform_orderings_for_unequal_fibers():
+    """Pure combinatorial counterexample: counts per tree affect weights.
+
+    The toy gradient vectors are arbitrary placeholders, not fitted gradients.
+    This proves why tree-average and ordering-average need not coincide.
+    """
+    gradients_by_tree = {
+        "tree_A": [np.array([1., 0.])],
+        "tree_B": [np.array([0., 1.]), np.array([0., 1.])],
+    }
+    tree_mean = np.mean([
+        np.mean(g, axis=0) for g in gradients_by_tree.values()
+    ], axis=0)
+    ordering_mean = np.mean([
+        grad for group in gradients_by_tree.values() for grad in group
+    ], axis=0)
+    np.testing.assert_allclose(tree_mean, [0.5, 0.5])
+    np.testing.assert_allclose(ordering_mean, [1. / 3., 2. / 3.])
+    assert not np.array_equal(tree_mean, ordering_mean)

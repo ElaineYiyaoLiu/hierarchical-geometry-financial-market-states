@@ -46,7 +46,7 @@ def test_positive_complete_graph_remains_connected():
     [[0., -1.], [-1., 0.]],
     [[1., 2.], [2., 0.]],
     [[0., float("inf")], [float("inf"), 0.]],
-    [[0., True], [True, 0.]],
+    np.array([[False, True], [True, False]]),
 ])
 def test_invalid_inputs_rejected(bad):
     with pytest.raises(ValueError):

@@ -66,6 +66,24 @@ def test_invalid_inputs_rejected(bad):
         positive_edge_graph(bad)
 
 
+def test_lambda_unfrozen_for_manual_calibration():
+    from branch_b.fitters.gradient_descent import (
+        GradientDescentFitterConfig, GradientDescentUltrametricFitter,
+    )
+    fitter = GradientDescentUltrametricFitter()
+    assert fitter.config.cluster_size_lambda == 1.0
+    assert fitter.project_specification()["cluster_size_lambda_status"] == "unfrozen; proposed manual calibration phase"
+    for valid in (0.0, 0.5, 2.0):
+        assert GradientDescentUltrametricFitter(
+            GradientDescentFitterConfig(cluster_size_lambda=valid)
+        ).config.cluster_size_lambda == valid
+    for invalid in (-0.01, float("nan"), float("inf"), True):
+        with pytest.raises(ValueError, match="cluster_size_lambda"):
+            GradientDescentUltrametricFitter(
+                GradientDescentFitterConfig(cluster_size_lambda=invalid)
+            )
+
+
 def test_d02_beta_unfrozen_for_manual_calibration():
     from branch_b.fitters.gradient_descent import (
         GradientDescentFitterConfig, GradientDescentUltrametricFitter,

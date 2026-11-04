@@ -8,6 +8,7 @@ from __future__ import annotations
 import numpy as np
 
 from branch_b.fitters.positive_edge_graph import PositiveEdgeGraph
+from branch_b.fitters._reference_input import reject_lossy_reference_input
 
 
 def minmax_ultrametric(graph: PositiveEdgeGraph, working_weights: object) -> np.ndarray:
@@ -18,6 +19,7 @@ def minmax_ultrametric(graph: PositiveEdgeGraph, working_weights: object) -> np.
     """
     if not graph.connected:
         raise ValueError("min-max transform requires a connected graph")
+    reject_lossy_reference_input(working_weights)
     raw = np.asarray(working_weights)
     if raw.dtype.kind not in "iuf" or raw.ndim != 1 or raw.shape != graph.weights.shape:
         raise ValueError("working weights must match retained edge count")

@@ -9,6 +9,8 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from branch_b.fitters._reference_input import reject_lossy_reference_input
+
 
 @dataclass(frozen=True)
 class PositiveEdgeGraph:
@@ -28,6 +30,7 @@ def positive_edge_graph(dissimilarity: object) -> PositiveEdgeGraph:
     Off-diagonal weights at or below 1e-12 are removed. No diagonal repair,
     edge insertion, or failure-code assignment is performed.
     """
+    reject_lossy_reference_input(dissimilarity)
     raw = np.asarray(dissimilarity)
     if np.ma.isMaskedArray(dissimilarity) or raw.dtype.kind not in "iuf":
         raise ValueError("expected an unmasked real numeric dissimilarity matrix")

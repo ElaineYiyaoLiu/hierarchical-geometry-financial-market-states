@@ -75,8 +75,12 @@ def test_uniform_tree_conditional_gradient_matches_order_mean_for_triangle():
     np.testing.assert_allclose(tree_uniform, order_uniform)
     # This value is derived from symmetric triangle perturbations, not a
     # prescribed general D04 rule.
-    expected = np.full((3, 3), 1.0 / 3.0)
-    np.fill_diagonal(expected, 1.0 / 3.0)
+    # A pair's own edge controls its output in four of six orderings:
+    # twice as the smallest edge and twice as the second-smallest edge.
+    # Each other edge controls it once. This follows the strict Jacobians
+    # checked above against forward finite differences.
+    expected = np.full((3, 3), 1.0 / 6.0)
+    np.fill_diagonal(expected, 2.0 / 3.0)
     np.testing.assert_allclose(tree_uniform, expected)
 
 

@@ -1,0 +1,79 @@
+{
+  "disclosure_review": "Actual new source, synthetic test data and report inspected; Branch B/public permitted; restricted experimental information excluded.",
+  "executed_at_utc": "2026-11-04T05:22:30.512529+00:00",
+  "frozen_rules_changed": false,
+  "gate_count": 20,
+  "gate_decision": "BLOCKED",
+  "packages": {
+    "Pygments": "2.21.0",
+    "attrs": "26.1.0",
+    "cffi": "2.1.1",
+    "cryptography": "50.0.2",
+    "iniconfig": "2.3.1",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "numpy": "2.5.3",
+    "packaging": "26.3",
+    "pluggy": "1.7.0",
+    "pycparser": "3.12",
+    "pytest": "9.1.1",
+    "referencing": "0.37.0",
+    "rfc3339-validator": "0.1.4",
+    "rpds-py": "2026.9.1",
+    "six": "1.17.0"
+  },
+  "python_version": "3.14.7",
+  "record": "branch_b_implementation_review",
+  "runs": [
+    {
+      "command": "python -m pytest -q --tb=short --junitxml=<evidence-file>",
+      "errors": 0,
+      "failures": 0,
+      "junit": "shared-research-junit.xml",
+      "patched_source_manifest": null,
+      "scope": "shared-research",
+      "sha256": "fd9704f1bd270be12184ff0e8410f3ca08257f6e6ad2760a151a3753aac5c22b",
+      "skipped": 0,
+      "source_commit": "eeeeeffc6c268328f9759ce8a7a3e22aca89de21",
+      "tests": 631
+    },
+    {
+      "command": "python -m pytest -q --tb=short --junitxml=<evidence-file>",
+      "errors": 0,
+      "failures": 0,
+      "junit": "review-pr12-junit.xml",
+      "patched_source_manifest": null,
+      "scope": "review-pr12",
+      "sha256": "6e11359bf4495e76b1d8a3c296dcf868b7c8ab067211f27c506037c7aeb438ad",
+      "skipped": 0,
+      "source_commit": "32c0167b654b0b1b36a942eb2fb661ceebd75aa9",
+      "tests": 634
+    },
+    {
+      "command": "python -m pytest -q --tb=short --junitxml=<evidence-file>",
+      "errors": 0,
+      "failures": 1,
+      "junit": "original-pr14-junit.xml",
+      "patched_source_manifest": null,
+      "scope": "original-pr14",
+      "sha256": "9c2d3da9a3a37c32e1c066502f544e025364d243d12b62e79261287b13dc24f6",
+      "skipped": 0,
+      "source_commit": "159bda5addcb4f316fab1ef201541fefeab49102",
+      "tests": 656
+    },
+    {
+      "command": "python -m pytest -q --tb=short --junitxml=<evidence-file>",
+      "errors": 0,
+      "failures": 0,
+      "junit": "review-pr14-junit.xml",
+      "patched_source_manifest": "source_manifest.json",
+      "scope": "review-pr14",
+      "sha256": "5f29a63cf4840c5044e154bfc54f6b32319f2be77803957540d01def765aa80f",
+      "skipped": 0,
+      "source_commit": null,
+      "tests": 663
+    }
+  ],
+  "scientific_approval_granted": false,
+  "verified_evidence_checksums": 13
+}

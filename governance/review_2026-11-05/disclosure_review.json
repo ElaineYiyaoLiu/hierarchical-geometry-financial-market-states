@@ -1,0 +1,14 @@
+{
+  "date_client": "2026-11-05",
+  "formal_generation_authorized": false,
+  "gate_approval_or_freeze_changed": false,
+  "hidden_configuration_or_parameters_included": false,
+  "pilot_exchange_authorized": false,
+  "private_generator_information_included": false,
+  "private_source_identifiers_or_revealing_paths_included": false,
+  "record": "shared_content_disclosure_review",
+  "reviewed_actual_content": true,
+  "scope": "Aggregate development attestation, pending-input work list, unchanged-scope evidence reference refresh and resulting gate audit reports",
+  "seeds_labels_mappings_or_truth_included": false,
+  "status": "PERMITTED_FOR_BRANCH_B_AND_PUBLIC_DISCLOSURE"
+}

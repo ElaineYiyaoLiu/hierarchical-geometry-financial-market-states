@@ -22,7 +22,7 @@ For ordinary, unweighted observations with the complete undirected edge set E={(
 
 The reciprocal denominator is the **fixed input** Delta_ij (never the fitted u_ij); soft cardinalities are symmetrically averaged across endpoints; contributions are averaged over undirected edges. The existing input admissibility/near-zero-denominator convention remains in force pending D06 reconciliation. No additional regularization is implied by the source paper's discussion of other objectives.
 
-The exact executable definition of S_i (including sigmoid and self-contribution conventions), beta-selection rule (now fixed at beta=5 by the 2026-11-08 team decision), D06 bootstrap multiplicities and zero-distance behavior, and complete tied-gradient derivation remain open. Do not silently fix them from this baseline formula. The registered candidate is not selected or frozen, and the complete Python 3.14 scientific fitter remains unimplemented.
+The D02 beta and D06 multiplicity/self-mass decisions are separately recorded below. Source-level sigmoid conformance, any remaining numerical/zero-distance admissibility details, full-pipeline equivalence, and the complete D04 tied-gradient derivation remain open. Do not silently fix these implementation dependencies from this baseline formula. The registered candidate is not selected or frozen, and the complete Python 3.14 scientific fitter remains unimplemented.
 
 ## D02 sigmoid beta decision (2026-11-08)
 
@@ -30,6 +30,30 @@ The exact executable definition of S_i (including sigmoid and self-contribution 
 - This is the candidate's fixed method parameter, not a calibration search starting point. Do not manually retune beta using development, pilot, hierarchy-support calibration, blind-validation, independent-null, or locked-test performance without an authorized protocol revision.
 - The team decision is frozen for this candidate's development specification. The full Common Fitter Card, implementation, and applicable project-level freeze gate remain pending; this record does not claim that the complete fitter is formally frozen or selected.
 - Exact sigmoid/self-contribution and bootstrap soft-mass implementation details remain open and require consistency with beta = 5.
+
+## D06 bootstrap multiplicity decision (2026-11-08; approved method direction, not complete fitter freeze)
+
+For each bootstrap draw, retain the canonical original sample identities and integer occurrence multiplicities m_i >= 0. The active set I_b = {i : m_i > 0} contains one graph vertex and one output leaf per distinct original identity; repeated occurrences do not become new original leaves. Preserve the full draw mapping, counts, attempt and failure records for provenance.
+
+Construct the fitted complete undirected graph on I_b, with one edge (i,j) for i<j, and use the approved product pair weights q_ij = m_i * m_j. Use the approved fixed-beta sigmoid sigma(z) = 1/(1+exp(-z)) at beta=5. The multiplicity-weighted soft mass is
+
+    S_i^b(h;u,m) = sum_{k in I_b} m_k * sigma(5*(h-u_ik))
+
+including the k=i self-mass contribution m_i*sigma(5*h), with u_ii=0. This is a smooth self-contribution, not a forced full mass. The *outer* reciprocal-weight Dasgupta edge sum includes only distinct identities i<j; no diagonal or same-original-identity edge is created.
+
+With fixed commonly normalized bootstrap input Delta_ij for distinct active identities, u=Phi_{G_b}(w), and W_b = sum_{i<j in I_b} m_i*m_j, the approved bootstrap weighted-mean objective is
+
+    J_b(w;Delta,m) =
+      (1/W_b) * sum_{i<j in I_b}
+      (m_i*m_j) * [S_i^b(u_ij;u,m)+S_j^b(u_ij;u,m)] / (2*Delta_ij).
+
+When all active multiplicities equal one, this reduces to D01 on that active vertex set. W_b must be positive for the formula to apply; minimum distinct-observation reliability and precise unsuccessful-fit mapping are still governed by separately specified protocol/failure rules. Do not invent a code here.
+
+Duplicate-induced within-identity zero distances do not create reciprocal denominators. For *distinct* original identities, the existing input admissibility/near-zero-distance convention remains applicable, including DEGENERATE_DISTANCE where currently prescribed; do not floor, jitter or silently remove a distinct pair. Zero *optimized* ultrametric edges are not zero input denominators.
+
+Full-pipeline fidelity: repeated bootstrap occurrences must retain their frequency effects in any train-estimated preprocessing, geometry transformation, selection and fitting stages to which the frozen bootstrap pipeline applies. If a distinct-row weighted representation replaces repeated-row computations upstream of the fitter, demonstrate exact equivalence for each affected algorithm or obtain separate authorization. The current checked pipeline still feeds repeated rows and has not been scientifically adapted to this D06 method; this decision does not assert integration success.
+
+Outstanding mathematical/engineering work: verify the exact source-backed sigmoid/soft-area convention for the adopted D01 objective; derive and test the ordinary and multiplicity-weighted full-objective gradients including D04 ties; establish W_b=0 and low-distinct-count outcomes under approved reliability/failure rules; reconcile distinct-pair normalized dissimilarities with the complete bootstrap preprocessing/geometry pipeline; implement the approved identity/mass interface; and validate under actual Python 3.14 with synthetic golden cases. No full Common Fitter selection, implementation certification, pilot freeze, or locked-test authorization is asserted.
 
 ## Input and graph
 

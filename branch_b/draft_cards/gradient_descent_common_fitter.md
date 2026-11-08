@@ -64,16 +64,20 @@ Outstanding mathematical/engineering work: verify the exact source-backed sigmoi
 
 ## Optimizer and stopping
 
-- Optimizer: AMSGrad.
-- Learning rate: `0.01`.
-- Relative objective improvement:
-  `r_t = |J_(t-1) - J_t| / max(|J_(t-1)|, epsilon_J)`.
-- Convergence tolerance: `1e-8`.
-- Convergence patience: require the tolerance condition for 10 consecutive iterations.
-- Maximum iterations: 1000.
-- Non-finite objective/optimizer state: `NUMERICAL_FIT`.
-- Iteration-limit behavior: record nonconvergence as a numerical fit failure unless the later pilot/freeze record explicitly revises that convention.
+Approved D03 and D05 decisions (2026-11-08; candidate settings, not final Common Fitter freeze):
+
+- Working weights initialized to fixed input edge weights; AMSGrad moments initialized to zero.
+- Direct nonnegative working weights, projected after each *complete* optimizer update; do not artificially zero gradients on boundary weights.
+- Bias-corrected AMSGrad, beta1=0.9, beta2=0.999, epsilon=1e-8, learning rate=0.01; no random restarts.
+- Compute the finite objective after each complete projected update. Relative change at iteration t:
+  r_t = abs(J_t - J_(t-1)) / max(abs(J_(t-1)), abs(J_0), 1e-12).
+- Converged after 5 consecutive completed updates with r_t < 1e-6; reset the consecutive counter otherwise.
+- Maximum 1000 completed optimizer updates. A cap reached without convergence is NUMERICAL_FIT with distinct iteration-cap/nonconvergence diagnostic; runtime deadline expiry is TIMEOUT. Keep numerical calculation errors under NUMERICAL_FIT with distinct diagnostics, subject to failure-code registry reconciliation.
+- Retain objective/relative-change history, iterations, elapsed time, convergence status and failure diagnostics. Timeout duration remains pilot-dependent.
+- D04 exact tie-averaged gradient remains mathematically and computationally unverified; approximate averaging is not approved.
 - Global optimum guarantee: none.
+
+Historical development code in `branch_b/fitters/gradient_descent.py` still contains the superseded 1e-8/10-iteration settings and `ConfigurationRequired` stub; it must be reconciled and verified under actual Python 3.14 before any scientific execution. Do not claim that this card update changes executable behavior.
 
 ## Reciprocal-weight safety
 
@@ -103,6 +107,6 @@ Timeout remains pilot-dependent under the controlling protocol and is not numeri
 
 ## Remaining implementation item
 
-The project-specific settings already approved remain unchanged. A source-conformance review found that the authors' public reference implementation uses a Dasgupta soft-area sigmoid parameter with default value 5, while its default optimizer initialization differs from paper Algorithm 1 and it also applies an explicit non-negativity projection. These findings are recorded in `branch_b/decision_proposals/common_fitter_source_conformance_2026-10-02.md`. The sigmoid value, initialization choice, and positivity parameterization remain subject to explicit project review before executable freeze. The remaining engineering task is an executable Python 3.14 implementation of the approved Dasgupta soft-cardinal/min-max optimizer kernel, followed by source-conformance and golden testing.
+The source-conformance review in `branch_b/decision_proposals/common_fitter_source_conformance_2026-10-02.md` documents differences between paper Algorithm 1 and the authors' software defaults. Subsequent team decisions select input-weight initialization, direct nonnegative weights with projection, and fixed sigmoid beta=5. The exact source-to-method sigmoid/soft-area expression must still be verified, as must the D01/D06 objective and D04 tie-gradient under actual Python 3.14; an executable scientific kernel and golden test evidence do not yet exist.
 
 The final Common-Fitter selection remains geometry-neutral, ground-truth-free, and subject to its later protocol freeze.

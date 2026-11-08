@@ -79,6 +79,14 @@ Approved D03 and D05 decisions (2026-11-08; candidate settings, not final Common
 
 Historical development code in `branch_b/fitters/gradient_descent.py` still contains the superseded 1e-8/10-iteration settings and `ConfigurationRequired` stub; it must be reconciled and verified under actual Python 3.14 before any scientific execution. Do not claim that this card update changes executable behavior.
 
+## D04 exact dynamic-programming decision (2026-11-08; team-approved method, not full fitter freeze)
+
+For *every* tied edge-weight level and connected tie problem, independently of the number of tied vertices, use exact dynamic programming to compute the approved two-level average: equal total weight per distinct infinitesimal-perturbation-realizable complete labeled rooted hierarchy T, and conditional equal weight over each T's admissible strict edge orderings. Preserve strict order across distinct existing weight levels. At each tied level, the proposed implementation state records the processed tied-edge subset and a canonical labeled rooted-forest structure, together with exact integer prefix counts and summed min-max Jacobian contributions. An edge that merges components contributes its new cross-component pair-to-edge Jacobian entries; an edge within a connected component changes no min-max Jacobian entry. At terminal states, aggregate counts/Jacobian sums by canonical complete hierarchy, average within each hierarchy, then average these hierarchy-conditioned values equally. Multiply the averaged min-max Jacobian transpose by the smooth full-objective gradient at the unperturbed ultrametric.
+
+Do not impose the previous six-vertex trigger or a seven-vertex hard cap. Do not abort because of estimated infeasibility, state count, vertex count, or predicted time/memory use. No approximate sampling or random tie breaking is permitted. Run the exact method until it completes or the actual applicable runtime deadline expires; report TIMEOUT only when that deadline has actually elapsed. Other genuine failures must follow the separately approved failure registry, not be mislabeled TIMEOUT. Keep partial-work/state diagnostics and the same output multifurcation convention. Seven tied vertices is an unverified feasibility expectation, not a promised throughput threshold or a new termination criterion.
+
+Before scientific use, prove the DP state-aggregation invariant, including handling of all admissible strict orderings and canonical equality of hierarchies; compare its exact results to exhaustive small-graph enumeration, verify D04 full-objective and D06 weighted gradients, and benchmark on actual Python 3.14. Exact DP implementation, efficiency, deadline value, and full Common Fitter certification remain pending.
+
 ## Reciprocal-weight safety
 
 The Dasgupta objective uses reciprocal input weights.

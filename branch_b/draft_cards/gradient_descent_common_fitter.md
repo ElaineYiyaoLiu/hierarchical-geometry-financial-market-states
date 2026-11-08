@@ -22,7 +22,14 @@ For ordinary, unweighted observations with the complete undirected edge set E={(
 
 The reciprocal denominator is the **fixed input** Delta_ij (never the fitted u_ij); soft cardinalities are symmetrically averaged across endpoints; contributions are averaged over undirected edges. The existing input admissibility/near-zero-denominator convention remains in force pending D06 reconciliation. No additional regularization is implied by the source paper's discussion of other objectives.
 
-The exact executable definition of S_i (including sigmoid and self-contribution conventions), beta-selection rule (beta=5 remains an initial candidate, not a frozen final setting), D06 bootstrap multiplicities and zero-distance behavior, and complete tied-gradient derivation remain open. Do not silently fix them from this baseline formula. The registered candidate is not selected or frozen, and the complete Python 3.14 scientific fitter remains unimplemented.
+The exact executable definition of S_i (including sigmoid and self-contribution conventions), beta-selection rule (now fixed at beta=5 by the 2026-11-08 team decision), D06 bootstrap multiplicities and zero-distance behavior, and complete tied-gradient derivation remain open. Do not silently fix them from this baseline formula. The registered candidate is not selected or frozen, and the complete Python 3.14 scientific fitter remains unimplemented.
+
+## D02 sigmoid beta decision (2026-11-08)
+
+- Branch B team-selected and fixed soft-cardinality sigmoid parameter: **beta = 5**.
+- This is the candidate's fixed method parameter, not a calibration search starting point. Do not manually retune beta using development, pilot, hierarchy-support calibration, blind-validation, independent-null, or locked-test performance without an authorized protocol revision.
+- The team decision is frozen for this candidate's development specification. The full Common Fitter Card, implementation, and applicable project-level freeze gate remain pending; this record does not claim that the complete fitter is formally frozen or selected.
+- Exact sigmoid/self-contribution and bootstrap soft-mass implementation details remain open and require consistency with beta = 5.
 
 ## Input and graph
 

@@ -11,6 +11,19 @@ Status: candidate; not selected; project-specific development settings approved;
 - Initialization: working edge weights equal the input edge weights.
 - Common application: the same fitter configuration applies to every registered primary geometry.
 
+## D01 objective decision (2026-11-08; approved direction, not complete fitter freeze)
+
+Branch B approves retaining the registered **Dasgupta-only soft-cardinality relaxation**. No separate cluster-size penalty or nonzero cluster-size lambda term is added to this candidate. This is a method choice, not an inference from scientific performance.
+
+For ordinary, unweighted observations with the complete undirected edge set E={(i,j): i<j}, M=|E|, commonly normalized fixed input dissimilarity Delta, working weights w>=0, and u=Phi_G(w), the approved baseline structure is:
+
+    J_D01(w; Delta, beta) =
+        (1/M) * sum_{i<j} [S_i(u_ij;u,beta) + S_j(u_ij;u,beta)] / (2*Delta_ij).
+
+The reciprocal denominator is the **fixed input** Delta_ij (never the fitted u_ij); soft cardinalities are symmetrically averaged across endpoints; contributions are averaged over undirected edges. The existing input admissibility/near-zero-denominator convention remains in force pending D06 reconciliation. No additional regularization is implied by the source paper's discussion of other objectives.
+
+The exact executable definition of S_i (including sigmoid and self-contribution conventions), beta-selection rule (beta=5 remains an initial candidate, not a frozen final setting), D06 bootstrap multiplicities and zero-distance behavior, and complete tied-gradient derivation remain open. Do not silently fix them from this baseline formula. The registered candidate is not selected or frozen, and the complete Python 3.14 scientific fitter remains unimplemented.
+
 ## Input and graph
 
 - Input: the commonly normalized pairwise dissimilarity matrix.

@@ -1,4 +1,13 @@
 Branch B environment record
+
+November 9, 2026 supplemental mathematical-reference execution:
+Actual CPython 3.14.9, NumPy 2.5.3, pytest 8.4.2.
+25 Week 9 reference checks and 656 full-repository tests passed locally.
+Exact source fingerprints, environment, dependency freeze, JUnit reports and
+checksums: branch_b/reviews/2026-11-09/.
+Scope: development and mathematical reference only, not optimizer certification.
+The earlier CI/environment record below retains its original dated scope.
+
 Status: Week 1 environment verification complete for repository CI
 
 Required Python version: 3.14

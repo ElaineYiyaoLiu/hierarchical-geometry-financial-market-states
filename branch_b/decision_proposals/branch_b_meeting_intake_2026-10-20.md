@@ -1,5 +1,7 @@
 # Branch B scientific decision intake — 2026-10-20
 
+Historical intake. The November 8 candidate-card decisions supersede the provisional D01-D06 entries below where explicitly specified, including fixed beta=5, product multiplicity weights, all-size exact D04 DP and D05 stopping. See [the current PL reconciliation](week9_pl_completion_2026-11-08.md). This history is retained; its unresolved-choice wording is not the current decision status.
+
 Status: **meeting selections received; not an approved protocol revision, executable freeze, or processing authorization**.
 
 This is a faithful record of the Branch B team's choices against the 19 October 2026 scientific-decision discussion brief. The numbered options refer to that brief. Scientific implementation is limited to choices that can be reconciled with the controlling Version 2 Branch B Packet, existing approved freeze records, and the applicable timing gates. Do not treat an option label alone as an executable specification.

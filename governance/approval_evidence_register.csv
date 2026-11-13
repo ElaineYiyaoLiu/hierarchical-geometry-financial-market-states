@@ -1,5 +1,5 @@
 gate_id,owner,evidence_ref,evidence_sha256,status,approval_authority,approval_ref,freeze_id,approval_sha256
-BOUNDARY,PL,pilot_access_audit.md,38283ad59642b443e2d98fa32590aed4c26b712fe75138a4b3f4d096d8d279c3,RECORDED_REVERIFY,access auditor,,,
+BOUNDARY,PL,pilot_access_audit.md,d1ab9b723904a1656e3c734a4cbef52ac91ed2f5b9fe2e9695d081b085aa6073,RECORDED_REVERIFY,access auditor,,,
 SENTINELS,PL,pilot_sentinel_registry.csv,cf0ce9dfd2e2836f467ced63db0a158f701f7048c4c08e769abb8d4bdac0a575,RECORDED_REVERIFY,PL,,,
 A_READINESS,A,governance/branch_a_execution_attestation_2026-11-05.json,8561784a4a4a8bb1d7c7b81d471c9c54eb7978bda16484a8e9d3c13f0c258071,PASS_SCOPED,PL,,,
 A_ALL_FAMILY_RUNNER,A,restricted attestation pending,,PENDING,PL,,,

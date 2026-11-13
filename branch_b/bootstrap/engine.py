@@ -87,6 +87,8 @@ def run_full_pipeline_bootstrap(
             result = evaluate_replicate(
                 train_idx.copy(), validation_idx.copy(), test_idx.copy(), replicate_seed
             )
+            if result is None:
+                raise ValueError("bootstrap evaluator returned None without a result")
             failure = None
         except Exception as exc:
             result = None

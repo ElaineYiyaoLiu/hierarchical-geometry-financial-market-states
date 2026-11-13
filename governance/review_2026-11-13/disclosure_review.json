@@ -1,0 +1,9 @@
+{
+  "approval_or_freeze_status_changed": false,
+  "date_client": "2026-11-13",
+  "record": "shared_content_disclosure_review",
+  "restricted_branch_a_information_included": false,
+  "reviewed_actual_content": true,
+  "scope": "Aggregate development and public-source CI evidence, scoped evidence-reference refresh, checklist, pending inputs and resulting audit reports",
+  "status": "PERMITTED_FOR_BRANCH_B_AND_PUBLIC_DISCLOSURE"
+}

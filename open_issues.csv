@@ -5,11 +5,11 @@ W3-PL-SENTINEL,Project Lead,3,closed,pilot_exchange,Seven-sentinel public-safe r
 W3-PL-ACCESS,Project Lead,3,closed,pilot_exchange,Observable-only boundary raw-truth prohibition and sealed-service/custodian path recorded
 W3-B-CORR,Branch B,3,proposal_ready_for_review,pilot_exchange,Correlation-distance admissibility rule requires explicit Branch B decision and freeze
 W3-B-NUMTOL,Branch B,3,proposal_ready_for_review,pilot_exchange,General numerical comparison tolerances require explicit Branch B decision and freeze
-W3-B-SIGMOID,Branch B,3,decision_required,pilot_exchange,Dasgupta soft-area sigmoid parameter requires explicit decision before executable freeze
-W3-B-INIT,Branch B,3,decision_required,pilot_exchange,Common-Fitter initialization rule requires explicit decision before executable freeze
-W3-B-POSITIVITY,Branch B,3,decision_required,pilot_exchange,Common-Fitter non-negativity parameterization requires explicit decision before executable freeze
+W3-B-SIGMOID,Branch B,3,decision_recorded_implementation_pending,pilot_exchange,November 8 fixes beta=5 in the candidate card; exact soft-area source conformance and executable freeze remain pending
+W3-B-INIT,Branch B,3,decision_recorded_implementation_pending,pilot_exchange,November 8 retains input-weight initialization and zero moments; executable verification and freeze remain pending
+W3-B-POSITIVITY,Branch B,3,decision_recorded_implementation_pending,pilot_exchange,November 8 specifies direct nonnegative weights projected after each complete optimizer update; executable verification and freeze remain pending
 W3-B-VALSANITY,Branch B,3,decision_required,pilot_exchange,Valuation favorable-feature sanity invariant and minimum passing criterion must be prespecified
-W3-B-FITTER-IMPL,Branch B,3,blocked_on_decisions,pilot_exchange,Executable Python 3.14 Common-Fitter kernel source-conformance tests and compatible dependency evidence remain
+W3-B-FITTER-IMPL,Branch B,3,implementation_and_validation_pending,pilot_exchange,Core candidate decisions recorded November 8; full optimizer D06 pipeline integration source conformance and scientific certification remain pending
 W3-B-BOOTSTRAP-CI,Branch B,3,pending_python314_ci,pilot_exchange,Bootstrap original-identity LCA integration implemented and awaits Python 3.14 CI verification
 W3-FACULTY-CONCEPT,Faculty Advisor,2,pending_external,week2_concept,Faculty concept and governance approval not yet recorded
 W3-FACULTY-EXCHANGE,Faculty Advisor,3,pending_external,pilot_exchange,Faculty pilot-exchange approval not yet recorded

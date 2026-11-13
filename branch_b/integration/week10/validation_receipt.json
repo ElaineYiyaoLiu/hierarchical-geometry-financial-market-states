@@ -1,0 +1,32 @@
+{
+  "source_baseline": "a0b2a8d60cc1e1254333913e780725c37157caad",
+  "origin": "local Python 3.14 host; not GitHub Actions",
+  "checks": {
+    "python": "3.14.6",
+    "numpy": "2.4.6",
+    "valid_observable_files": 9,
+    "negative_loader_cases": 7,
+    "train_only_geometry_checks": 6,
+    "constant_correlation_rejected": true,
+    "worked_cases_mechanically_checked": 8,
+    "scientific_authorization": false,
+    "status": "pass"
+  },
+  "test_runs": [
+    {
+      "scope": "kit and Week 9 exact mathematical references",
+      "passed": 26
+    },
+    {
+      "scope": "validator and Branch B support/recovery/failure tests",
+      "passed": 527
+    },
+    {
+      "scope": "full repository",
+      "passed": 657
+    }
+  ],
+  "fixture_generation_python": "3.14.7",
+  "validation_python": "3.14.6",
+  "scientific_authorization": false
+}

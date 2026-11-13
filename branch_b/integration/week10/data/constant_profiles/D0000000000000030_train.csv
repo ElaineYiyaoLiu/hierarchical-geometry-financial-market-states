@@ -1,0 +1,9 @@
+sample_id,3M,6M,1Y,2Y,3Y,5Y,7Y,10Y,15Y,20Y,30Y,AUX
+fixture_train_00,0,0,0,0,0,0,0,0,0,0,0,0
+fixture_train_01,1,1,1,1,1,1,1,1,1,1,1,1
+fixture_train_02,2,2,2,2,2,2,2,2,2,2,2,2
+fixture_train_03,3,3,3,3,3,3,3,3,3,3,3,3
+fixture_train_04,4,4,4,4,4,4,4,4,4,4,4,4
+fixture_train_05,5,5,5,5,5,5,5,5,5,5,5,5
+fixture_train_06,6,6,6,6,6,6,6,6,6,6,6,6
+fixture_train_07,7,7,7,7,7,7,7,7,7,7,7,7

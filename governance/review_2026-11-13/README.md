@@ -6,6 +6,8 @@ Only A_READINESS, B_CURRENT_TESTS and B_CURRENT_CI evidence references/checksums
 
 Start with the updated [PL signoff checklist](../pl_pilot_exchange_signoff_checklist.md) and [remaining inputs](../a_pl_pending_inputs_2026-11-13.md). Branch B must complete the executable method, exact-control consumer and sanity criterion. Separate PL/access/custodian/Advisor and original chronology evidence remain required. No collaborator was contacted.
 
+A [standalone D04 resource probe](../../branch_b/reviews/2026-11-13/README.md) also supplies bounded, predetermined synthetic measurements under actual Python 3.14.7. A seven-equal-edge example completed; all-equal six/seven-vertex complete graphs reached the development memory guard. No larger-case feasibility guarantee or scientific timeout/failure decision follows from those outcomes.
+
 The actual changed payload was reviewed for Branch B/public disclosure. It contains aggregate engineering status, existing public source/CI evidence and governance requirements only. No private implementation, hidden configuration, seeds, mappings, labels, hierarchy, truth, private source identifiers or revealing paths are included.
 
 Project Boundary: this reconciliation changes no scientific rule, formal approval, freeze or release authority.

@@ -4,6 +4,6 @@
   "record": "shared_content_disclosure_review",
   "restricted_branch_a_information_included": false,
   "reviewed_actual_content": true,
-  "scope": "Aggregate development and public-source CI evidence, scoped evidence-reference refresh, checklist, pending inputs and resulting audit reports",
+  "scope": "Aggregate engineering/public CI evidence, unchanged-authority governance reconciliation, and predetermined synthetic D04 resource-probe source/results",
   "status": "PERMITTED_FOR_BRANCH_B_AND_PUBLIC_DISCLOSURE"
 }

@@ -1,0 +1,23 @@
+{
+  "record": "branch_a_execution_attestation",
+  "date_client": "2026-11-04",
+  "status": "PASS_SCOPED",
+  "scope": "approved dependency readiness, development package reproduction and read-only checkpoint validation",
+  "execution_origin": "workspace host; not GitHub Actions",
+  "python": "3.14.7",
+  "numpy": "2.5.3",
+  "tests_passed": 152,
+  "checkpoint_regressions_added": 12,
+  "malformed_checkpoint_regressions_reproduced_before_fix": 10,
+  "approved_dependency_readiness_passed": true,
+  "development_byte_reproduction_passed": true,
+  "development_package_audit_passed": true,
+  "checkpoint_inspection_passed": true,
+  "checkpoint_inspection_nonmutating": true,
+  "resume_authorized": false,
+  "all_family_formal_runner_certified": false,
+  "formal_pilot_generated": false,
+  "pilot_exchange_authorized": false,
+  "protocol_lock_approved": false,
+  "restricted_provenance": "Detailed code, current source, execution evidence and remaining contract review are retained privately. This summary grants no scientific execution or final readiness approval."
+}

@@ -1,0 +1,24 @@
+{
+  "record": "branch_a_execution_attestation",
+  "date_client": "2026-11-04",
+  "status": "PASS_SCOPED",
+  "scope": "approved dependency revision, development verification and candidate archive portability only",
+  "execution_origin": "workspace host; not GitHub Actions",
+  "python": "3.14.7",
+  "numpy": "2.5.3",
+  "tests_passed": 140,
+  "dependency_revision_explicitly_approved": true,
+  "dependency_revision_readiness_verified": true,
+  "historical_environment_records_preserved": true,
+  "development_byte_reproduction_passed": true,
+  "development_package_audit_passed": true,
+  "candidate_archive_byte_reproduction_passed": true,
+  "candidate_extraction_development_audit_passed": true,
+  "full_transitive_environment_lock_approved": false,
+  "all_family_formal_runner_certified": false,
+  "formal_pilot_generated": false,
+  "pilot_exchange_authorized": false,
+  "protocol_lock_approved": false,
+  "restricted_provenance": "Approval scope, source, environment revision and detailed execution evidence are retained privately. This summary does not grant scientific execution or final readiness approval."
+}
+

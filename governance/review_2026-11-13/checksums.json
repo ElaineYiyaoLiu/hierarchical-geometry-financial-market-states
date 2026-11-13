@@ -1,8 +1,8 @@
 {
-  "branch_b/benchmarks/d04_resource_probe.py": "86b3ed7387182884bb15208e3229c77530f75e847fa21a9b47459ed934c0d899",
+  "branch_b/benchmarks/d04_resource_probe.py": "0f2793e5ca3622b0c3e19fb12f1c9f7058d850b9173308628d63efdbb24fc749",
   "branch_b/fitters/exact_tie_dp.py": "44cd0ad318b6f31a0383bb17e6b35055c8903b6476adb697511ab37af801743e",
-  "branch_b/reviews/2026-11-13/README.md": "fd05aba13135236118a199dde3ba9a1abf06f8c295c80580cd96545ec12f8df0",
-  "branch_b/reviews/2026-11-13/d04-resource-probe.json": "02183e2bc3b530dd2f1fa3bfed199a93cb5e8b54b33ee22571dde975fbff2e58",
+  "branch_b/reviews/2026-11-13/README.md": "3f75489e956c97b3f36c07c846b14390a107edc3cbfbd058042b541360d1d240",
+  "branch_b/reviews/2026-11-13/d04-resource-probe.json": "fb09781a11f4cc5772283843956de24bd3099d104331b3b1dbf304ef0f3182ae",
   "governance/a_pl_pending_inputs_2026-11-13.md": "f51476f201d8cedeca9a655913aa747ab883d88d07b4232f7b6ca18b3bd85c1a",
   "governance/approval_evidence_register.csv": "a4a38beffa18576c3a78add72d40470ea5ffbe16ac22c6faa73121912eda5a60",
   "governance/branch_a_execution_attestation_2026-11-13.json": "df83dd8f740e60a6c37a3bb216e3da3e5c3ea1fd705a27a47f62c0006b5f5733",
@@ -13,5 +13,6 @@
   "governance/review_2026-11-13/disclosure_review.json": "360259e960abb944042c0a854507816dba8918752fb1419b52d7f1ac1984e433",
   "governance/review_2026-11-13/freeze_reconciliation.json": "87f2b4a3f37dac818bcdab26772d43e124ca65a8dd2fb210e57f4cd57fd7b859",
   "governance/review_2026-11-13/gates.json": "55ecc49d69d3bb67a1aab6eeeff804d969f007822c1230e8940b184efe15795e",
-  "governance/review_2026-11-13/pl_queue.json": "26fde28c29b872aeebb0392b0879b83ec5784d72696f3613ad056be4a1e664c2"
+  "governance/review_2026-11-13/pl_queue.json": "26fde28c29b872aeebb0392b0879b83ec5784d72696f3613ad056be4a1e664c2",
+  "tests/test_d04_resource_probe.py": "6d0401bf4554c7b5cc4cdefb8ef7b9f6daa93c2f17613285fe83c6e267fa0fa8"
 }

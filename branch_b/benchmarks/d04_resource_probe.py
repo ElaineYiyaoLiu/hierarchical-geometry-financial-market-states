@@ -81,6 +81,8 @@ def probe(engine, case, seconds, memory_bytes, watchdog_grace):
     try:
         while child.poll() is None:
             rss = current_rss(child.pid)
+            if rss is None and child.poll() is None:
+                raise RuntimeError("Live worker memory monitoring unavailable")
             if rss is not None:
                 maximum = max(maximum, rss)
                 samples += 1
@@ -137,7 +139,8 @@ def main():
         return
     if args.seconds <= 0 or args.memory_mib < 64 or args.output is None:
         raise ValueError("positive development deadline, practical memory guard and output required")
-    current_rss(os.getpid())  # Refuse to start if live memory monitoring is unavailable.
+    if current_rss(os.getpid()) is None:
+        raise RuntimeError("Live memory monitoring unavailable; no workers started")
     before = digest(args.engine)
     results = []
     for case in CASES:

@@ -1,0 +1,30 @@
+{
+  "actual_payload_files_reviewed": [
+    "README.md",
+    "capacity_model.template.csv",
+    "claim_matrix_template.csv",
+    "closure_queue.json",
+    "dummy_transport/dummy_public_key.hex",
+    "dummy_transport/report.json",
+    "dummy_transport/signature_verification.json",
+    "dummy_transport/signed_dummy_release.json",
+    "execution.json",
+    "figure_spec.yaml",
+    "freeze_reconciliation.json",
+    "gate_audit.json",
+    "locked_batch_plan.template.csv",
+    "tests.xml"
+  ],
+  "content_scope": [
+    "shared governance requirements",
+    "aggregate development tests",
+    "dummy transport records",
+    "empty operational templates"
+  ],
+  "date_client": "2026-11-01",
+  "existing_scientific_and_approval_records_changed": false,
+  "permitted_for_branch_b_and_public": true,
+  "restricted_branch_a_implementation_parameters_seeds_mappings_truth_or_revealing_paths_present": false,
+  "review_note": "Read actual new text and XML payloads. Shared disclosure review does not authorize scientific execution or website release.",
+  "scope": "new shared review directory only"
+}

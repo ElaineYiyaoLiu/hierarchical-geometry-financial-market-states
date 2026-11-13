@@ -1,0 +1,40 @@
+{
+  "date_client": "2026-11-01",
+  "environment": {
+    "dependencies": [
+      "attrs==26.1.0",
+      "cffi==2.1.1",
+      "cryptography==50.0.2",
+      "iniconfig==2.3.1",
+      "jsonschema==4.26.0",
+      "jsonschema-specifications==2025.9.1",
+      "numpy==2.5.3",
+      "packaging==26.3",
+      "pluggy==1.7.0",
+      "pycparser==3.12",
+      "pygments==2.21.0",
+      "pytest==8.4.2",
+      "pyyaml==6.0.3",
+      "referencing==0.37.0",
+      "rfc3339-validator==0.1.4",
+      "rpds-py==2026.9.1",
+      "six==1.17.0"
+    ],
+    "numpy": "2.5.3",
+    "origin": "local workspace host, not GitHub Actions",
+    "python": "3.14.7"
+  },
+  "evidence_checksums_verified": 13,
+  "formal_generation_authorized": false,
+  "gate_count": 20,
+  "pilot_exchange_authorized": false,
+  "protocol_lock_approved": false,
+  "source_commit": "eeeeeffc6c268328f9759ce8a7a3e22aca89de21",
+  "source_files_git_blob_verified": 257,
+  "tests": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 631
+  }
+}

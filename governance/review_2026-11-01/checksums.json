@@ -1,0 +1,17 @@
+{
+  "README.md": "45a7f51c1273ae2432ed39725392079fa910de78a7801b076baa07196e12c4f2",
+  "capacity_model.template.csv": "dae47bddb93ab4cbae170a6ebb2098140380baa2ab8d16dd254c9125e8dcaa57",
+  "claim_matrix_template.csv": "2e5a0309825d3247c63389ce047cac454be640cd5c98d8a43676b4f794b6de50",
+  "closure_queue.json": "750b97ce1dd0e89b440f7a8b4f29840f475e916046095a32de081a944b702b98",
+  "disclosure_review.json": "a5041c92ad92d7ae9c823d897c6cea71104ff12803f4d8c25e580d5473908679",
+  "dummy_transport/dummy_public_key.hex": "3440dc74928322d51be6791a1b098777afe15efeb37fe0b623eb9799c3869cb1",
+  "dummy_transport/report.json": "bcca83ecc203aa3a519b33c98733851dc48ae2e75cedccc877b4ebc8c0930692",
+  "dummy_transport/signature_verification.json": "87d34093179751e597859b647458d678b81dfe5fc8ceeb73d40b94cf97a8a513",
+  "dummy_transport/signed_dummy_release.json": "0cf8ba9af3786c784262af640a84faab2e7fe2fd70416a62c3dfbe83cc9f7184",
+  "execution.json": "d3210bf0f18dd8a4c2edadbb5fc1a8801cfb7fd73493d80d0111cfb9df4fe4bc",
+  "figure_spec.yaml": "6bc8d3a4118ddb4ede72018e76f75c815f750badd275e29609cd68b00fe31900",
+  "freeze_reconciliation.json": "ac8802ec050978b11cb1355177e23f564e9fdb58c70d398eb85d84a01fc7c6d2",
+  "gate_audit.json": "bebfd87480b456b45221ce58ceabf39ec30ce537e40f59fba50963a110d6461f",
+  "locked_batch_plan.template.csv": "537f10c128b9fff24bee784e3a3e0586f780698a24fb924aea121220917855de",
+  "tests.xml": "c539ef563c8d38ca9b56bfedb5d1c8010e78a3136061be6021cf2bab964e8cf1"
+}

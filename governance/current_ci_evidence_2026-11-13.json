@@ -1,0 +1,28 @@
+{
+  "record": "shared_current_ci_execution",
+  "date_client": "2026-11-13",
+  "status": "PASS_SCOPED",
+  "execution_origin": "GitHub Actions; inspected completed job and decoded log",
+  "source_commit": "1ae098265d37b0f1b67e8ef415a8188933ef6cb6",
+  "workflow": "validate",
+  "run_id": 43380516057,
+  "job_id": 131736950152,
+  "run_url": "https://github.com/ElaineYiyaoLiu/hierarchical-geometry-financial-market-states/actions/runs/43380516057",
+  "conclusion": "success",
+  "python": "3.14.10",
+  "numpy": "2.5.3",
+  "pytest": "8.4.2",
+  "command": "python -m pytest -q",
+  "tests_passed": 656,
+  "source_checkout_verified_in_log": true,
+  "verified_log_lines": [
+    "2026-11-13T06:42:08.8710145Z 1ae098265d37b0f1b67e8ef415a8188933ef6cb6",
+    "2026-11-13T06:42:09.1873902Z Python 3.14.10",
+    "2026-11-13T06:42:16.7442962Z Successfully installed numpy-2.5.3 rfc3339-validator-0.1.4 six-1.17.0",
+    "2026-11-13T06:42:18.9454349Z 656 passed in 1.28s"
+  ],
+  "scope": "Full shared synthetic, interface and governance regression suite at the recorded public source; no complete scientific fitter or experimental-bank processing certification",
+  "approval_granted": false,
+  "formal_generation_authorized": false,
+  "pilot_exchange_authorized": false
+}

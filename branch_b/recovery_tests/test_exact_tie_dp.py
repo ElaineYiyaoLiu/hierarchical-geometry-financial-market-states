@@ -126,3 +126,44 @@ def test_zero_weights_are_admissible_without_jitter():
     assert result.jacobian[0] == (
         Fraction(2, 3), Fraction(1, 6), Fraction(1, 6)
     )
+
+
+def test_vertex_relabeling_invariance():
+    n = 4
+    weights = (0.1, 0.1, 0.3, 0.3, 0.4, 0.4)
+    permutation = (2, 0, 3, 1)
+
+    edges = tuple(combinations(range(n), 2))
+    edge_index = {edge: i for i, edge in enumerate(edges)}
+    original = exact_average_minmax_jacobian(n, weights)
+
+    def old_edge_index(new_edge):
+        a, b = new_edge
+        old_pair = tuple(sorted((permutation[a], permutation[b])))
+        return edge_index[old_pair]
+
+    indices = tuple(old_edge_index(edge) for edge in edges)
+    relabeled_weights = tuple(weights[i] for i in indices)
+    relabeled = exact_average_minmax_jacobian(n, relabeled_weights)
+
+    for new_row, old_row in enumerate(indices):
+        for new_col, old_col in enumerate(indices):
+            assert (
+                relabeled.jacobian[new_row][new_col]
+                == original.jacobian[old_row][old_col]
+            )
+
+    assert relabeled.hierarchy_count == original.hierarchy_count
+    assert relabeled.strict_order_count == original.strict_order_count
+
+
+def test_multiple_tied_components_exact_oracle():
+    # Canonical edge order: AB, AC, AD, BC, BD, CD.
+    weights = (0.1, 0.5, 0.5, 0.5, 0.5, 0.1)
+    expected, trees, strict_orders = _oracle(4, weights)
+    result = exact_average_minmax_jacobian(4, weights)
+
+    assert result.jacobian == expected
+    assert result.hierarchy_count == trees
+    assert result.strict_order_count == strict_orders
+    assert all(sum(row) == 1 for row in result.jacobian)

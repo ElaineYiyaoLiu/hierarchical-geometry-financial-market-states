@@ -10,6 +10,7 @@ from time import monotonic
 import pytest
 
 import branch_b.fitters.development_optimizer as loop
+from branch_b.fitters.development_optimizer import DevelopmentOptimizerDeadlineExpired
 from branch_b.fitters.exact_tie_dp import ExactD04DeadlineExpired
 
 
@@ -62,7 +63,7 @@ def test_full_1000_completed_updates_produce_iteration_cap(monkeypatch):
 
 
 def test_expired_deadline_is_not_iteration_cap():
-    with pytest.raises(ExactD04DeadlineExpired):
+    with pytest.raises(DevelopmentOptimizerDeadlineExpired):
         loop.run_development_optimizer(
             (0.8,), (1, 1), deadline_monotonic=monotonic() - 1.0
         )

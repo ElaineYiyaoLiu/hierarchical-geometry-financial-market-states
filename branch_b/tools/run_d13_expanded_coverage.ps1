@@ -17,13 +17,27 @@ if ([string]::IsNullOrWhiteSpace($EvidenceDir)) {
     $EvidenceDir = Join-Path (Split-Path -Parent $root) "local-d13-expanded-coverage"
 }
 $EvidenceDir = [System.IO.Path]::GetFullPath($EvidenceDir)
-$repoPrefix = [System.IO.Path]::GetFullPath($root).TrimEnd('\','/') + [System.IO.Path]::DirectorySeparatorChar
+$repoPrefix = [System.IO.Path]::GetFullPath($root).TrimEnd([char]92, [char]47) + [System.IO.Path]::DirectorySeparatorChar
 if ($EvidenceDir.StartsWith($repoPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
     throw "EvidenceDir must be outside the public shared repository."
 }
 New-Item -ItemType Directory -Path $EvidenceDir -Force | Out-Null
 $runLog = Join-Path $EvidenceDir "runs.log"
 $manifest = Join-Path $EvidenceDir "local-machine-provenance.txt"
+if (Test-Path $manifest) {
+    $savedVersion = Select-String -Path $manifest -Pattern '^python_version=' | Select-Object -First 1
+    if ($null -eq $savedVersion -or $savedVersion.Line -ne "python_version=$version") {
+        throw "Python version differs from the original study run."
+    }
+    $savedChecksums = Join-Path $EvidenceDir "source-sha256.txt"
+    if (-not (Test-Path $savedChecksums)) { throw "Original source checksums missing." }
+    foreach ($line in Get-Content $savedChecksums) {
+        $parts = $line -split '\\s+', 2
+        if ($parts.Count -ne 2 -or (Get-FileHash -Algorithm SHA256 -Path $parts[1].Trim()).Hash -ne $parts[0]) {
+            throw "Source changed during resumed study; preserve results for review."
+        }
+    }
+}
 if (-not (Test-Path $manifest)) {
     "python_version=$version" | Set-Content $manifest
     "git_head=$(& git rev-parse HEAD)" | Add-Content $manifest

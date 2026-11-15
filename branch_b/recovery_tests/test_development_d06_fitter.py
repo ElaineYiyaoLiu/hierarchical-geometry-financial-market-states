@@ -8,7 +8,7 @@ import pytest
 from branch_b.bootstrap.d06_identity_boundary import build_d06_draw_boundary
 from branch_b.failures import BranchBFailure, ConfigurationRequired, FailureCode
 from branch_b.fitters.development_d06_fitter import D06DevelopmentFitter
-from branch_b.fitters.exact_tie_dp import ExactD04DeadlineExpired
+from branch_b.fitters.development_optimizer import DevelopmentOptimizerDeadlineExpired
 from branch_b.recovery_pipeline.d06_checked_handoff import checked_d06_distinct_fit
 
 
@@ -40,7 +40,7 @@ def test_two_identity_weighted_development_fit_is_structurally_checked():
 
 
 def test_actual_expired_deadline_is_propagated():
-    with pytest.raises(ExactD04DeadlineExpired):
+    with pytest.raises(DevelopmentOptimizerDeadlineExpired):
         checked_d06_distinct_fit(
             [[0., 1.], [1., 0.]],
             boundary=boundary([0, 1]),

@@ -32,7 +32,7 @@ if (Test-Path $manifest) {
     $savedChecksums = Join-Path $EvidenceDir "source-sha256.txt"
     if (-not (Test-Path $savedChecksums)) { throw "Original source checksums missing." }
     foreach ($line in Get-Content $savedChecksums) {
-        $parts = $line -split '\\s+', 2
+        $parts = $line -split '\s+', 2
         if ($parts.Count -ne 2 -or (Get-FileHash -Algorithm SHA256 -Path $parts[1].Trim()).Hash -ne $parts[0]) {
             throw "Source changed during resumed study; preserve results for review."
         }

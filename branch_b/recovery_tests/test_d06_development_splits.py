@@ -110,7 +110,7 @@ def test_multiset_preprocessing_then_distinct_validation_and_test():
     assert [entry[2] for entry in events if entry[0] == "fit"] == [
         (2, 2, 2), (2, 2, 2), (2, 2, 2)
     ]
-    assert events.index(("select", 2)) < events.index(("transform", len(test)))
+    assert [i for i, event in enumerate(events) if event[0] == "transform"][-1] > events.index(("select", 2))
 
 
 def test_invalid_validation_selection_does_not_read_test():

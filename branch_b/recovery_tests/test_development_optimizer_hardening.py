@@ -35,7 +35,7 @@ def test_full_1000_completed_updates_produce_iteration_cap(monkeypatch):
         # First call is J0. Subsequent completed-update objectives alternate
         # between 1 and 2 so the five-small-change stopping rule never fires.
         calls["objective"] += 1
-        value = 1.0 if calls["objective"] % 2 else 2.0
+        value = 1.0 if ((calls["objective"] - 1) // 2) % 2 == 0 else 2.0
         return value, (0.0,)
 
     def zero_gradient(n, weights, upstream, *, deadline_monotonic):

@@ -27,7 +27,15 @@ For `N` eligible, usable calibration score observations of a prespecified nonhie
 
 This is the inverse empirical-CDF / nearest-rank rule; it selects an observed value without interpolation and preserves equal repeated values. As required by the controlling protocol, the project threshold is the maximum of the family-specific 95th percentiles across prespecified nonhierarchical families for the same geometry × candidate fitter. Equality with a threshold remains indeterminate.
 
-**Pending:** pre-calibration approval/freeze of minimum usable calibration count, missing and failed-score handling, complete family inventory and any required seed/score-level details. No calibration was performed and no numerical threshold was calculated.
+**Further team approval (November 15, 2026) — D15 failure and missing-score policy:**
+
+- Preserve **all** attempted calibration records, including successful and unsuccessful attempts, failure diagnostics and Branch B-owned provenance. Never silently erase failed attempts from the attempt count.
+- Preserve the **entire prespecified required nonhierarchical null-family inventory**. No family may be removed from the threshold maximum because it has missing or failed results.
+- Within each required family and geometry x registered fitter, apply the approved inverse empirical-CDF quantile **only to eligible finite successful Q scores**. Missing, nonfinite, undefined or failed-fit outcomes are unusable and remain recorded with their observed failure information; do not invent a replacement score.
+- If any required family has fewer than its **approved minimum usable calibration count**, mark calibration **incomplete** and do not emit a valid final geometry/fitter support threshold or use the incomplete calibration for confirmatory classification.
+- Retain the originally approved strict comparison rule: threshold equality is **indeterminate**. No score, family, or attempt is silently excluded to improve the threshold.
+
+**Still pending:** The **numerical minimum usable count**, failure-code/eligibility semantics where not already protocol-defined, exact required family inventory and permitted tier provenance, seed/score-level details, and the applicable **pre-calibration** Project Lead authorization and freeze. This new team decision does not choose numerical limits or authorize calibration execution. No calibration was performed and no numerical threshold was calculated.
 
 ## Other decisions unchanged
 

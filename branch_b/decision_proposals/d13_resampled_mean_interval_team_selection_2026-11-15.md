@@ -6,7 +6,9 @@
 
 **Additional Branch B team selection (November 15, 2026):** Exactly **10,000 secondary resamples**, using the **inverse empirical-CDF / nearest-rank percentile rule without interpolation** for nominal two-sided **95%** endpoints. This selects computation settings for the proposed interval; it does not establish statistical coverage, approve seed derivation, or complete the required pilot-dependent freeze.
 
-**Status:** Branch B team-approved proposed method, level, secondary-resampling count, and percentile endpoint convention. Not demonstrated coverage, Project Lead authorization, an executable scientific freeze, permission to calculate scientific support intervals, or approval for calibration/locked-test processing.
+**Additional team confirmation (November 15, 2026):** Branch B selects **conditional Monte Carlo uncertainty in the mean successful-bootstrap support score** as the **proposed inferential interpretation**. This is conditional on the observed dataset, the fixed reference fit/procedure, and successful primary attempts. It is **not** a claim of population-level sampling coverage. The 10,000-resample, nominal two-sided 95%, nearest-rank 250th/9750th endpoint calculation remains unchanged. This interpretation is subject to statistical coverage review, protocol-conformance approval and the authorized post-pilot freeze.
+
+**Status:** Branch B team-approved proposed method, level, secondary-resampling count, percentile endpoint convention, and conditional Monte Carlo interpretation. Not demonstrated coverage, Project Lead/statistical authorization, an executable scientific freeze, permission to calculate scientific support intervals, or approval for calibration/locked-test processing.
 
 ## Statistical target fixed by the protocol
 
@@ -30,6 +32,12 @@ The target of the candidate confidence interval is the **conditional mean of suc
 
 **Selected computational rule:** Generate exactly `R = 10_000` secondary samples, each of size `B_success` drawn uniformly with replacement from the successful primary `Q_b` values. Compute one mean per secondary sample. Sort the 10,000 secondary means in ascending order as `qstar_(1) <= ... <= qstar_(10000)`. Report the candidate interval `[qstar_(ceil(0.025*10000)), qstar_(ceil(0.975*10000))]`, i.e. **the 250th and 9750th order statistics** using one-based indices. Repeated equal values are retained unchanged; no interpolation is applied. Keep the primary `Qhat` as the point estimate, distinct from the distribution of resampled means. This fixes the proposed count and endpoint order statistic, not coverage or an approved seed/reliability rule.
 
+## Inferential target and limits of selected method
+
+For fixed observable data and the frozen reference procedure, the proposed inferential target is the conditional expectation of `Q_b` **given successful execution of a primary bootstrap attempt**. The primary estimate is the empirical mean among successful primary attempts. A secondary empirical bootstrap of successful scores estimates finite-primary-replicate Monte Carlo uncertainty only if the successful primary scores satisfy the relevant conditional exchangeability/independence and stable procedure assumptions. Common fixed input data/reference do not alone establish or refute these assumptions.
+
+A nominal 95% percentile interval is **not automatically exact finite-sample 95% coverage**, especially for small successful counts, discrete/tied/degenerate scores, skewness, or success depending on score-related observables. Empirical synthetic coverage is diagnostic evidence, not a substitute for a justified inferential guarantee. Any need to switch inferential targets or intervals requires another authorized decision.
+
 ## Required statistical review before execution or freeze
 
 - **Dependence:** Primary-bootstrap Q scores share the full-split reference fit and common observable data. Conditional independence/exchangeability sufficient for naive resampling of scores and coverage for the intended mean has **not** been established. A statistically appropriate review must determine whether the proposed secondary-resampling unit/design is valid; changes needing a different method require a separately approved D13 revision.
@@ -40,6 +48,6 @@ The target of the candidate confidence interval is the **conditional mean of suc
 
 ## Next permitted steps
 
-Prepare a technical protocol-conformance/statistical assessment and Python 3.14 **synthetic-only** interface tests for the candidate interval, without freezing numerical settings or activating scientific support decisions. Present the dependence issue, selected nominal confidence level, 10,000-resample count, and nearest-rank endpoint rule for review at the authorized pilot-dependent freeze. Specify independent, recorded Branch B-owned secondary-resampling seed derivation before any authorized scientific execution. The registered Common Fitter remains fail-closed.
+Prepare a technical protocol-conformance/statistical assessment and Python 3.14 **synthetic-only** conditional-coverage diagnostics for the selected interval and target, without freezing numerical settings or activating scientific support decisions. Present the dependence issue, selected nominal confidence level, 10,000-resample count, and nearest-rank endpoint rule for review at the authorized pilot-dependent freeze. Specify independent, recorded Branch B-owned secondary-resampling seed derivation before any authorized scientific execution. The registered Common Fitter remains fail-closed.
 
 **Public Branch B pre-write verification:** This record contains only the user's selected observable-side interval methodology, protocol-defined public formulas, previously reviewed development decisions, and review requirements. It contains no restricted generating information, hidden conditions, generator-owned seeds, latent labels, true hierarchy, sealed evaluation values, true-hierarchy-dependent tests, or side-channel inference. Safe for the shared public review branch.

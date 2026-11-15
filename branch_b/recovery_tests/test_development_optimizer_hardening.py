@@ -92,3 +92,30 @@ def test_deadline_expiration_inside_d04_is_propagated(monkeypatch):
             (0.8,), (1, 1), deadline_monotonic=monotonic() + 30.0
         )
     assert captured.value.maximum_stage_states == 7
+
+
+
+def test_deadline_after_objective_evaluation_prevents_update_acceptance(monkeypatch):
+    # Deterministic synthetic clock only: the runtime policy still uses the
+    # supplied actual monotonic deadline in unmocked scientific execution.
+    ticks = iter((0.0, 1.0, 2.0, 4.0))
+    monkeypatch.setattr(loop, "monotonic", lambda: next(ticks))
+    monkeypatch.setattr(
+        loop, "exact_d04_weight_gradient",
+        lambda n, weights, upstream, *, deadline_monotonic: (0.0,),
+    )
+    with pytest.raises(DevelopmentOptimizerDeadlineExpired):
+        loop.run_development_optimizer(
+            (0.8,), (1, 1), deadline_monotonic=3.0
+        )
+
+
+def test_memory_failure_is_never_mislabeled_as_timeout(monkeypatch):
+    def memory_failure(n, weights, upstream, *, deadline_monotonic):
+        raise MemoryError("synthetic D04 memory exhaustion")
+
+    monkeypatch.setattr(loop, "exact_d04_weight_gradient", memory_failure)
+    with pytest.raises(MemoryError, match="synthetic D04 memory exhaustion"):
+        loop.run_development_optimizer(
+            (0.8,), (1, 1), deadline_monotonic=monotonic() + 30.0
+        )

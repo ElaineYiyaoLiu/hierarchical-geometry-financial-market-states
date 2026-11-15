@@ -4,8 +4,9 @@ from time import monotonic
 
 import pytest
 
-from branch_b.fitters.development_optimizer import run_development_optimizer
-from branch_b.fitters.exact_tie_dp import ExactD04DeadlineExpired
+from branch_b.fitters.development_optimizer import (
+    DevelopmentOptimizerDeadlineExpired, run_development_optimizer,
+)
 
 
 def test_two_vertex_composite_converges_and_keeps_last_iterate():
@@ -31,7 +32,7 @@ def test_weighted_two_vertex_composite_converges():
 
 
 def test_actual_expired_deadline_propagates_unchanged():
-    with pytest.raises(ExactD04DeadlineExpired):
+    with pytest.raises(DevelopmentOptimizerDeadlineExpired):
         run_development_optimizer(
             (0.8,), (1, 1), deadline_monotonic=monotonic() - 1.0
         )

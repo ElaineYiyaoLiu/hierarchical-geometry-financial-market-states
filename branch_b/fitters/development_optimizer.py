@@ -22,8 +22,11 @@ from branch_b.fitters.d04_gradient_adapter import exact_d04_weight_gradient
 from branch_b.fitters.d05_stopping import (
     D05_MAX_COMPLETED_UPDATES, initialize_d05, record_completed_d05_update,
 )
-from branch_b.fitters.exact_tie_dp import ExactD04DeadlineExpired
 from branch_b.fitters.minmax_operator import subdominant_ultrametric
+
+
+class DevelopmentOptimizerDeadlineExpired(TimeoutError):
+    """Actual deadline reached outside the exact D04 engine (development only)."""
 
 
 @dataclass(frozen=True)
@@ -53,8 +56,8 @@ def run_development_optimizer(
 ) -> DevelopmentOptimizerResult:
     """Optimize from Delta using approved components, until convergence/cap/deadline.
 
-    The caller provides an actual monotonic deadline. An expired deadline raises
-    ExactD04DeadlineExpired, never a synthetic TIMEOUT result. No approximate
+    The caller provides an actual monotonic deadline. Expiry outside D04 raises
+    DevelopmentOptimizerDeadlineExpired; D04 expiry keeps its own exception. No approximate
     D04 fallback, early state-count guard, best-so-far replacement, or
     iteration-count override is introduced.
 
@@ -90,8 +93,8 @@ def run_development_optimizer(
 
     def check_deadline() -> None:
         if monotonic() >= deadline_monotonic:
-            raise ExactD04DeadlineExpired(
-                processed_weight_levels=0, maximum_stage_states=0
+            raise DevelopmentOptimizerDeadlineExpired(
+                "optimizer reached the actual monotonic deadline outside D04"
             )
 
     while progress.completed_updates < D05_MAX_COMPLETED_UPDATES:
@@ -112,6 +115,9 @@ def run_development_optimizer(
         current, _ = soft_cardinality_objective_gradient(
             next_ultrametric, delta, masses
         )
+        # The approved deadline is checked before accepting this completed
+        # update or returning its converged tree, not only before D04.
+        check_deadline()
         # Count only completed projected steps with a finite evaluated J.
         update = record_completed_d05_update(progress, current)
         weights, states, progress = next_weights, next_states, update.progress

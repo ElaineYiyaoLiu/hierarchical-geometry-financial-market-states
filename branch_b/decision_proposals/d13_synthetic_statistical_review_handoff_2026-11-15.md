@@ -28,6 +28,12 @@ In the score-dependent toy model, `Q~Uniform(-1,1)` and `P(success|Q=q)=(q+1)/2`
 
 The shared-shift model deliberately introduces a random offset common to all primary scores within each outer trial. The 20.5% figure is coverage of a **marginal across-shift mean of zero**; it **cannot** be used to claim 20.5% coverage of the target conditional on a fixed shared shift. Under conditioning on that shift, the expected mean changes to the shift. The experiment is a warning about mixing conditioning levels, not a direct falsification of the approved fixed-data conditional Monte Carlo estimand.
 
+## Latest local Python 3.14 validation report
+
+**User report (November 15, 2026):** After running the new read-only `d13_evidence_audit.py` checks and latest full regression command, the team reports **all passing**. This is a team-reported execution outcome, not a claim that the reviewer has directly inspected the original `local-d13-evidence-audit.json`, latest JUnit XML, interpreter/dependency provenance, source hashes, or run-specific failure logs. The previously reported expanded and sensitivity study numerical summaries, including skewed-small-sample undercoverage, remain unchanged.
+
+**Next reproducibility gate:** retain the original two evidence directories and the separately generated audit JSON and JUnit locally. Before certification, verify that both audits explicitly report `AUDIT_PASSED` with the expected 2,400/600 records, inspect original run provenance and hashes, and link approved evidence without indiscriminately copying machine-local artifacts to the public repository. This status is not statistical acceptance, project-level authorization, a pilot exit, or a post-pilot freeze.
+
 ## Statistical reviewer questions
 
 1. Does the controlling protocol's intended interval target coincide with finite-primary-attempt Monte Carlo uncertainty for `E[Q|success, fixed original data and reference procedure]`? Confirm that the team-selected target is sufficient.

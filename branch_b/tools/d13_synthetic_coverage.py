@@ -52,7 +52,13 @@ def wilson_95_interval(successes: int, trials: int) -> tuple[float, float]:
     denom = 1.0 + z * z / trials
     center = (p + z * z / (2.0 * trials)) / denom
     radius = z * sqrt(p * (1.0 - p) / trials + z * z / (4.0 * trials * trials)) / denom
-    return center - radius, center + radius
+    # Floating subtraction can give a tiny positive lower endpoint at
+    # successes=0 (or a slightly sub-unit upper endpoint at successes=trials).
+    # The exact Wilson score interval touches those parameter boundaries.
+    # This affects diagnostic coverage-count uncertainty ONLY, not D13 Q CIs.
+    lower = 0.0 if successes == 0 else max(0.0, center - radius)
+    upper = 1.0 if successes == trials else min(1.0, center + radius)
+    return lower, upper
 
 
 def synthetic_coverage_diagnostics(*, trials: int, sample_size: int,

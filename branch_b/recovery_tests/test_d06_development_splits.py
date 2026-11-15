@@ -83,10 +83,13 @@ def configure(events, selector=None, geometry=None):
 
 def inputs():
     # Original A=1, B=2, C=4, D=8. Training includes repeated B.
-    train = np.array([[1.], [2.], [2.], [4.], [2.]])
+    # The registered observable input schema requires exactly 12 features.
+    # Repeating each row value across features keeps the synthetic first-column
+    # geometry and identity/multiplicity assertions unchanged.
+    originals = np.repeat(np.array([[1.], [2.], [4.], [8.]]), 12, axis=1)
+    train = originals[[0, 1, 1, 2, 1]].copy()
     validation_idx = [2, 1, 2, 0, 1, 0]
     test_idx = [0, 0, 2, 1, 2, 1]
-    originals = np.array([[1.], [2.], [4.], [8.]])
     return (
         train, originals[validation_idx], originals[test_idx],
         bound(validation_idx, "V"), bound(test_idx, "T"),

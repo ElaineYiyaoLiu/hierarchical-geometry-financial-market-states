@@ -13,6 +13,10 @@ def test_wilson_coverage_uncertainty_has_valid_bounds():
         lower, upper = wilson_95_interval(successes, 10)
         assert 0.0 <= lower <= upper <= 1.0
         assert lower <= successes / 10 <= upper
+        if successes == 0:
+            assert lower == 0.0
+        if successes == 10:
+            assert upper == 1.0
 
 
 @pytest.mark.parametrize("successes,trials", [(-1, 10), (11, 10), (1, 0)])

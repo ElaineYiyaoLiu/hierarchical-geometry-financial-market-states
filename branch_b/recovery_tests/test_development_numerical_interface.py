@@ -51,7 +51,8 @@ def test_development_fitter_handoff_uses_canonical_upper_triangle(monkeypatch):
         observed["pairs"] = tuple(pairs)
         observed["masses"] = tuple(masses)
         observed["order"] = list(original_sample_order)
-        return "synthetic-only-sentinel"
+        from types import SimpleNamespace
+        return SimpleNamespace(diagnostics={})
 
     monkeypatch.setattr(dev, "run_checked_development_tree_fit", capture)
     matrix = np.array([
@@ -61,14 +62,12 @@ def test_development_fitter_handoff_uses_canonical_upper_triangle(monkeypatch):
     ])
     snapshot = matrix.copy()
     fitter = dev.D06DevelopmentFitter(deadline_monotonic=monotonic() + 30.)
-    # This characterization intentionally stops before objective/optimization.
-    # The fitter's normal return is replaced by a sentinel to observe the
-    # exact validated Delta vector submitted to the optimizer.
-    with pytest.raises(AttributeError):
-        fitter.fit_with_original_multiplicities(
-            matrix, original_sample_order=["A", "B", "C"],
-            multiplicities=[2, 1, 3], random_seed=7,
-        )
+    # Stop before objective/optimization; inspect the exact Delta vector.
+    sentinel = fitter.fit_with_original_multiplicities(
+        matrix, original_sample_order=["A", "B", "C"],
+        multiplicities=[2, 1, 3], random_seed=7,
+    )
+    assert sentinel.diagnostics["branch_b_seed"] == 7
     assert observed == {
         "pairs": (0.4, 0.8, 0.6),
         "masses": (2, 1, 3),
@@ -80,12 +79,12 @@ def test_development_fitter_handoff_uses_canonical_upper_triangle(monkeypatch):
 def test_upper_triangle_reciprocal_guard_is_not_lower_triangle_guard():
     # Both entries are positive, close enough to satisfy the existing
     # symmetry check, but only the upper entry is checked against 1e-12.
-    matrix = [[0., 1.5e-12], [0.5e-12, 0.]]
+    matrix = [[0., 1.4e-12], [0.6e-12, 0.]]
     accepted = GradientDescentUltrametricFitter().validate_normalized_input(matrix)
     assert accepted[0, 1] > 1e-12
     assert accepted[1, 0] <= 1e-12
 
-    reversed_matrix = [[0., 0.5e-12], [1.5e-12, 0.]]
+    reversed_matrix = [[0., 0.6e-12], [1.4e-12, 0.]]
     with pytest.raises(BranchBFailure) as caught:
         GradientDescentUltrametricFitter().validate_normalized_input(reversed_matrix)
     assert caught.value.code == FailureCode.DEGENERATE_DISTANCE

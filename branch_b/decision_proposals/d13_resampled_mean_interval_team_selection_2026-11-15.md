@@ -2,6 +2,8 @@
 
 **Team response (November 15, 2026):** Branch B selects the **third method** from the November 15 D13 discussion: a percentile interval based on *resampling the successful bootstrap support scores and computing a mean for each secondary resample*.
 
+**Further Branch B team confirmation (November 15, 2026):** The team also selects the recommended **nominal two-sided 95% confidence level** for this candidate method. This selects equal nominal tail probabilities of 0.025 and 0.975, not a particular finite-sample quantile algorithm, number of secondary resamples or coverage claim.
+
 **Status:** Branch B team-selected **method direction**, not an operationally complete interval procedure, demonstrated coverage, Project Lead authorization, pilot-dependent freeze, permission to calculate scientific support intervals, or approval for calibration/locked-test processing.
 
 ## Statistical target fixed by the protocol
@@ -29,13 +31,13 @@ This records the intended method family. It does not determine interval coverage
 ## Required statistical review before execution or freeze
 
 - **Dependence:** Primary-bootstrap Q scores share the full-split reference fit and common observable data. Conditional independence/exchangeability sufficient for naive resampling of scores and coverage for the intended mean has **not** been established. A statistically appropriate review must determine whether the proposed secondary-resampling unit/design is valid; changes needing a different method require a separately approved D13 revision.
-- **Confidence level and endpoints:** A two-sided 95% interval was recommended but not explicitly selected in this team response. Its level, endpoint quantile rule, handling of ties, finite-sample conventions, and secondary-resample count remain open.
+- **Confidence level and endpoints:** Nominal two-sided 95% was selected by Branch B, with nominal 0.025/0.975 tails. Endpoint quantile rule, handling of ties, finite-sample conventions, and secondary-resample count remain open. The level is not a demonstrated coverage guarantee.
 - **D12 reliability:** Minimum number of successful fits, minimum distinct common observations, permissible failure fraction, and full sensitivity treatment remain governed by the pilot/bounded revision gate; the method does not create new defaults for them.
 - **D15 separation:** The team-selected inverse empirical-CDF order statistic in D15 applies to **calibration score thresholds**. It does not automatically prescribe D13 interval endpoint quantiles or their finite-sample rule.
 - **Blinded evaluation:** No fit failures may be reclassified to improve coverage or support; no hidden labels, true hierarchy, null truth, independent-validation or locked-test outcomes may be used to choose the interval rule.
 
 ## Next permitted steps
 
-Prepare a technical protocol-conformance/statistical assessment and Python 3.14 **synthetic-only** interface tests for the candidate interval, without freezing numerical settings or activating scientific support decisions. Present the dependence issue, confidence level, resampling count and endpoint rule for review at the authorized pilot-dependent freeze. The registered Common Fitter remains fail-closed.
+Prepare a technical protocol-conformance/statistical assessment and Python 3.14 **synthetic-only** interface tests for the candidate interval, without freezing numerical settings or activating scientific support decisions. Present the dependence issue, team-selected nominal confidence level, resampling count and endpoint rule for review at the authorized pilot-dependent freeze. The registered Common Fitter remains fail-closed.
 
 **Public Branch B pre-write verification:** This record contains only the user's selected observable-side interval methodology, protocol-defined public formulas, previously reviewed development decisions, and review requirements. It contains no restricted generating information, hidden conditions, generator-owned seeds, latent labels, true hierarchy, sealed evaluation values, true-hierarchy-dependent tests, or side-channel inference. Safe for the shared public review branch.

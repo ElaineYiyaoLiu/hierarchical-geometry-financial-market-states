@@ -1,0 +1,18 @@
+{
+  "design_name": "d13-expanded-synthetic-2026-11-15-v1",
+  "development_seed": 314159,
+  "nominal_interval_level": 0.95,
+  "not_coverage_certification": true,
+  "outer_trials_per_cell": 400,
+  "purpose": "synthetic conditional Monte Carlo coverage diagnostic only",
+  "sample_sizes": [
+    24,
+    100
+  ],
+  "scenarios": [
+    "symmetric_uniform",
+    "two_point",
+    "skewed_beta"
+  ],
+  "secondary_resamples_per_interval": 10000
+}

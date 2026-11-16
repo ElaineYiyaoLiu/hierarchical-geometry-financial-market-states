@@ -1,0 +1,104 @@
+{
+  "all_cells_complete": true,
+  "cells": [
+    {
+      "complete": true,
+      "completed_trials": 400,
+      "covered_trials": 374,
+      "empirical_coverage": 0.935,
+      "mean_width": 0.45045637823750306,
+      "planned_trials": 400,
+      "sample_size": 24,
+      "scenario": "symmetric_uniform",
+      "wilson_95_lower": 0.9064647858253625,
+      "wilson_95_upper": 0.9552595181037997,
+      "zero_width_count": 0
+    },
+    {
+      "complete": true,
+      "completed_trials": 400,
+      "covered_trials": 386,
+      "empirical_coverage": 0.965,
+      "mean_width": 0.22484914106040918,
+      "planned_trials": 400,
+      "sample_size": 100,
+      "scenario": "symmetric_uniform",
+      "wilson_95_lower": 0.9421148604670819,
+      "wilson_95_upper": 0.9790387058020222,
+      "zero_width_count": 0
+    },
+    {
+      "complete": true,
+      "completed_trials": 400,
+      "covered_trials": 384,
+      "empirical_coverage": 0.96,
+      "mean_width": 0.3327083333333334,
+      "planned_trials": 400,
+      "sample_size": 24,
+      "scenario": "two_point",
+      "wilson_95_lower": 0.9360177522821589,
+      "wilson_95_upper": 0.9752309369302883,
+      "zero_width_count": 1
+    },
+    {
+      "complete": true,
+      "completed_trials": 400,
+      "covered_trials": 383,
+      "empirical_coverage": 0.9575,
+      "mean_width": 0.167375,
+      "planned_trials": 400,
+      "sample_size": 100,
+      "scenario": "two_point",
+      "wilson_95_lower": 0.9329979456752499,
+      "wilson_95_upper": 0.9732983050088689,
+      "zero_width_count": 0
+    },
+    {
+      "complete": true,
+      "completed_trials": 400,
+      "covered_trials": 368,
+      "empirical_coverage": 0.92,
+      "mean_width": 0.3786616718212613,
+      "planned_trials": 400,
+      "sample_size": 24,
+      "scenario": "skewed_beta",
+      "wilson_95_lower": 0.8892454231693245,
+      "wilson_95_upper": 0.9427642495898665,
+      "zero_width_count": 0
+    },
+    {
+      "complete": true,
+      "completed_trials": 400,
+      "covered_trials": 380,
+      "empirical_coverage": 0.95,
+      "mean_width": 0.1899592163050016,
+      "planned_trials": 400,
+      "sample_size": 100,
+      "scenario": "skewed_beta",
+      "wilson_95_lower": 0.9240363649362803,
+      "wilson_95_upper": 0.9674025701628527,
+      "zero_width_count": 0
+    }
+  ],
+  "completed_trial_records": 2400,
+  "design": {
+    "design_name": "d13-expanded-synthetic-2026-11-15-v1",
+    "development_seed": 314159,
+    "nominal_interval_level": 0.95,
+    "not_coverage_certification": true,
+    "outer_trials_per_cell": 400,
+    "purpose": "synthetic conditional Monte Carlo coverage diagnostic only",
+    "sample_sizes": [
+      24,
+      100
+    ],
+    "scenarios": [
+      "symmetric_uniform",
+      "two_point",
+      "skewed_beta"
+    ],
+    "secondary_resamples_per_interval": 10000
+  },
+  "design_sha256": "bb57d87f4c274e732d31e832016b25d4a266546c853f20525c62a0ef35dc5039",
+  "total_planned_trial_records": 2400
+}

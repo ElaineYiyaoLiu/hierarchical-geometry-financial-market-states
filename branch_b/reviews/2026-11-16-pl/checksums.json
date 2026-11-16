@@ -1,0 +1,22 @@
+{
+  "branch_b/decision_proposals/d12_d14_pl_disposition_2026-11-15.md": "c8104d21f078eab83304ce92de23f6be813047f9e171e914dc71cb21aa082119",
+  "branch_b/reviews/2026-11-16-pl/README.md": "f0770369786698a80aab8ccfc862b9b230acf2a337e109b47cd4a48787a80d00",
+  "branch_b/reviews/2026-11-16-pl/ci-observation.json": "866befc35121fd614963cc180e600ac67d66bcf58def849c016dc06a03167e34",
+  "branch_b/reviews/2026-11-16-pl/disclosure-review.json": "85d9e18e56cb477891b416421fe75a4e3588a0b9282856a362924b9320f5e436",
+  "branch_b/reviews/2026-11-16-pl/environment.json": "c3878bc6f51483b954e02e91843322628c8ccd9c96016b44849aa76675dc1b2f",
+  "branch_b/reviews/2026-11-16-pl/evidence-audit.json": "4b556350f5d00b6402c0916a796a82b94051d5761a5c6bc3cf48d043cd2f4fd2",
+  "branch_b/reviews/2026-11-16-pl/expanded-run.log": "1a10e0da1517e97c87cddeee2a3fece914bd20ddaf0acac9be36e47cf1c480ea",
+  "branch_b/reviews/2026-11-16-pl/expanded/attempts.jsonl": "16efe5e3d9fdddc8ab41e66e9ac948764e03c34ec6c6f1fb98cc3d6e55cb6dda",
+  "branch_b/reviews/2026-11-16-pl/expanded/design.json": "c8d242422d1d86a61f7460b562a730b595413e37b2d06b4da57531f10826d197",
+  "branch_b/reviews/2026-11-16-pl/expanded/summary.json": "495076bfe7eb42786064075aa3b76e4b63db1eedb2a395c3baeb5f5e79087fe1",
+  "branch_b/reviews/2026-11-16-pl/full-junit.xml": "df3bc118d176305cecb011f75066931f35a54e6309542cbd9f8d84d385729f1b",
+  "branch_b/reviews/2026-11-16-pl/full-pytest.log": "72904d120639a0f33c6e5026d66af984ed67ae8403de8ee2fea0933b59548526",
+  "branch_b/reviews/2026-11-16-pl/independent-recount.json": "e067985a83650da0bed1c3ac7f99a2a807c6517230524766d7e26b468306ec8b",
+  "branch_b/reviews/2026-11-16-pl/pip-freeze.txt": "ea7863b7f6d229944bc1bdc18b775c7b4ee402d99f9277ac616d7c3720135b0a",
+  "branch_b/reviews/2026-11-16-pl/recount.py": "30230875cfd3f2a38fed57aa596fa078aae1615458d9926674ba6b0da41703c0",
+  "branch_b/reviews/2026-11-16-pl/sensitivity-run.log": "bb4d938f9270171b4fe88b2678dba52af85efb5a528178b655e60d48f8344add",
+  "branch_b/reviews/2026-11-16-pl/sensitivity/attempts.jsonl": "2007898de4cfb3d63fa2df4a643a7775201d06ccd3370e709fd8d37d0293333f",
+  "branch_b/reviews/2026-11-16-pl/sensitivity/design.json": "1f69a9229717a4e4e6aac800c4ec421255c63045d1c402257e418e8e2c9291e4",
+  "branch_b/reviews/2026-11-16-pl/sensitivity/summary.json": "95db6f1c2478031b27a3cdd82e1688af61c31bfe9091750012abc8107227ad06",
+  "branch_b/reviews/2026-11-16-pl/source-sha256.json": "ad69e0dc6396dd38da338c667afe97be8837d245916b10cef1e7ce3a43326693"
+}

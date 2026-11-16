@@ -1,0 +1,29 @@
+{
+  "audits": [
+    {
+      "design_sha256": "bb57d87f4c274e732d31e832016b25d4a266546c853f20525c62a0ef35dc5039",
+      "file_sha256": {
+        "design": "c8d242422d1d86a61f7460b562a730b595413e37b2d06b4da57531f10826d197",
+        "journal": "16efe5e3d9fdddc8ab41e66e9ac948764e03c34ec6c6f1fb98cc3d6e55cb6dda",
+        "summary": "495076bfe7eb42786064075aa3b76e4b63db1eedb2a395c3baeb5f5e79087fe1"
+      },
+      "note": "read-only synthetic evidence consistency, NOT coverage certification",
+      "status": "AUDIT_PASSED",
+      "study": "expanded",
+      "trial_records": 2400
+    },
+    {
+      "design_sha256": "39aa9d47b51a92eee8b0493f4e2fdc3ec773be9d67c6998d1b25584bff37cdc0",
+      "file_sha256": {
+        "design": "1f69a9229717a4e4e6aac800c4ec421255c63045d1c402257e418e8e2c9291e4",
+        "journal": "2007898de4cfb3d63fa2df4a643a7775201d06ccd3370e709fd8d37d0293333f",
+        "summary": "95db6f1c2478031b27a3cdd82e1688af61c31bfe9091750012abc8107227ad06"
+      },
+      "note": "read-only synthetic evidence consistency, NOT coverage certification",
+      "status": "AUDIT_PASSED",
+      "study": "sensitivity",
+      "trial_records": 600
+    }
+  ],
+  "python_version": "3.14.10 (main, Oct 26 2026, 14:09:22) [Clang 23.1.3 ]"
+}

@@ -1,0 +1,17 @@
+{
+  "run_id": 43775952046,
+  "job_id": 133002174311,
+  "tested_commit": "74954ae5126e5967e700234a8ccd8d5379a8e9f6",
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/ElaineYiyaoLiu/hierarchical-geometry-financial-market-states/actions/runs/43775952046",
+  "observed_log_lines": [
+    "2026-11-15T23:39:08.6109938Z Python 3.14.10",
+    "2026-11-15T23:39:28.9187130Z numpy==2.5.3",
+    "2026-11-15T23:39:28.9188341Z pytest==9.1.1",
+    "2026-11-15T23:39:32.7745774Z 27 passed in 0.31s",
+    "2026-11-15T23:39:33.1745527Z 15 passed in 0.10s",
+    "2026-11-15T23:39:38.3421496Z 688 passed in 4.91s"
+  ],
+  "scope": "Original remote job log inspected. CI targeted/subset runs are separate from local full-repository execution."
+}

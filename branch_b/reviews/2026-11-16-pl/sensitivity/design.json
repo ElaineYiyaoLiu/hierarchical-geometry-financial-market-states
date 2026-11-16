@@ -1,0 +1,14 @@
+{
+  "attempts_per_trial": 60,
+  "development_seed": 271828,
+  "name": "d13-synthetic-sensitivity-2026-11-15-v1",
+  "nominal_level": 0.95,
+  "outer_trials": 200,
+  "scenarios": [
+    "independent_failure",
+    "score_dependent_failure",
+    "shared_random_shift"
+  ],
+  "secondary_resamples_per_interval": 10000,
+  "status": "synthetic sensitivity diagnostic, not a freeze or coverage certification"
+}

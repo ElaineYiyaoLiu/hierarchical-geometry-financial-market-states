@@ -1,0 +1,20 @@
+{
+  "at_utc": "2026-11-17T23:45:06.949694+00:00",
+  "python": "3.14.10 (main, Oct 26 2026, 14:09:22) [Clang 23.1.3 ]",
+  "base_commit": "9ca3d944f01222aac37ac6bce04e52892af7a088",
+  "review_scope": "documentary PL consolidation; Advisor actions excluded, gates not waived",
+  "local_links_verified": 7,
+  "previous_closeout_bindings_verified": 21,
+  "application_schemas_and_approval_registers_unchanged": true,
+  "new_test_execution": "none; documentation-only changes reuse the source-bound 833-pass run",
+  "disclosure_review": "actual changed files inspected; permitted Branch B/public observable-side records only",
+  "approval_granted": false,
+  "seed_or_evaluation_rule_adopted": false,
+  "sha256": {
+    "branch_b/draft_cards/correlation_distance.md": "55493d9f34dc07853d046022d9dc64bb4a51b13967187f309fb7c31e7e5aa0c4",
+    "branch_b/geometry_registry.md": "8fe1f0a26a2f2575231828e4a3f7002506297bc866866b9be0b66e22cf05450a",
+    "branch_b/draft_cards/gradient_descent_common_fitter.md": "cf9ca99005b1eae26a588fd7c98ed44e48fd921a6ff77edee30410ed100e3ffa",
+    "branch_b/draft_cards/support_and_calibration.md": "2436380f6e32cb9f5c3378d880e3cd74015f5d6fd4494df1e4b8a52a143a00b5",
+    "governance/pl_completion_2026-11-17.md": "7735459a075dbb8a39a6de681f3ad05f537a937c46da675ff17f77297d920e15"
+  }
+}

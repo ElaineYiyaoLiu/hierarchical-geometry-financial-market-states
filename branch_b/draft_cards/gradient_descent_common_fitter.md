@@ -1,6 +1,16 @@
 # Draft Common Fitter Card — gradient_descent_ultrametric
 
-Status: candidate; not selected; project-specific development settings approved; not frozen for pilot exchange.
+Status: sole team-selected development candidate under D11; formal scientific selection and pilot-exchange freeze pending.
+
+## November 17 PL Review Reconciliation
+
+The [November 15 D11 team record](../decision_proposals/d11_single_common_fitter_team_selection_2026-11-15.md) specifies exactly one candidate. PL documentary review confirms the singleton eligibility rule is compatible in principle with a common, geometry-neutral fitter: use the same eligible candidate/configuration for every registered primary geometry; an ineligible candidate blocks the workflow without a fallback. No competitive ranking is required for this proposal. The registry and card now describe the same team choice.
+
+The [completed method-conformance review](../decision_proposals/week10_method_conformance_2026-11-16.md) verifies the recorded development formulas, update order and D04 state-aggregation argument against the inspected sources. New Python 3.14.10 full regression evidence records 833 passes. These findings supersede historical statements below that all D04 mathematics or optimizer components remain unverified; those statements retain their dated context.
+
+Outstanding certification concerns the actual D07 canonicalization path, D05 production-default reconciliation, full identity/mass-aware D06 bootstrap integration, numerical tree/grouping interpretation, registered failure export and exact-D04 scientific workload feasibility. The official fitter remains fail-closed. The prototype/production distinction and required gates remain explicit.
+
+This update consolidates existing records without changing a scientific setting, implementation, approval or freeze. Actual content was inspected and is permitted for Branch B/public disclosure.
 
 ## Source and role
 

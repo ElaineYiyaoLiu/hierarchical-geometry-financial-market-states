@@ -1,0 +1,151 @@
+{
+  "status": "REVIEW_REFERENCE_CHECKS_PASSED",
+  "python": "3.14.10 (main, Oct 26 2026, 14:09:22) [Clang 23.1.3 ]",
+  "numpy": "2.5.3",
+  "existing_bundle_bindings_verified": 20,
+  "seed_contract_status": "unadopted development candidate, root 17 is public fixture only",
+  "reference_vectors": [
+    {
+      "namespace": [
+        "HMG-B-SEED-CANDIDATE-v1",
+        17,
+        "public_fixture",
+        "PUBLIC-SEED-VECTOR",
+        3,
+        "train_draw"
+      ],
+      "encoded_utf8": "[\"HMG-B-SEED-CANDIDATE-v1\",17,\"public_fixture\",\"PUBLIC-SEED-VECTOR\",3,\"train_draw\"]",
+      "sha256": "105a000fda628a1bcb68c8b0fbadf8b9baef7591c980283331f9612a08ba7b86",
+      "entropy_uint32_be": [
+        274333711,
+        3663890971,
+        3412641968,
+        4222482617,
+        3136255377,
+        3380619315,
+        838426922,
+        146439046
+      ],
+      "first_four_raw_uint64": [
+        2297142451957381535,
+        1658242378560986550,
+        16564589020166456478,
+        2992025038106883684
+      ]
+    },
+    {
+      "namespace": [
+        "HMG-B-SEED-CANDIDATE-v1",
+        17,
+        "public_fixture",
+        "PUBLIC-SEED-VECTOR",
+        3,
+        "validation_draw"
+      ],
+      "encoded_utf8": "[\"HMG-B-SEED-CANDIDATE-v1\",17,\"public_fixture\",\"PUBLIC-SEED-VECTOR\",3,\"validation_draw\"]",
+      "sha256": "1f275a112834fcb5f9105ae673f2bc71de1c14d4aa22972deb3f51a5905bf4b7",
+      "entropy_uint32_be": [
+        522672657,
+        674561205,
+        4178598630,
+        1945287793,
+        3726382292,
+        2854393645,
+        3946795429,
+        2421945527
+      ],
+      "first_four_raw_uint64": [
+        624758760473411933,
+        10648561346513531369,
+        104925234499739250,
+        11553139260241835095
+      ]
+    },
+    {
+      "namespace": [
+        "HMG-B-SEED-CANDIDATE-v1",
+        17,
+        "public_fixture",
+        "PUBLIC-SEED-VECTOR",
+        3,
+        "test_draw"
+      ],
+      "encoded_utf8": "[\"HMG-B-SEED-CANDIDATE-v1\",17,\"public_fixture\",\"PUBLIC-SEED-VECTOR\",3,\"test_draw\"]",
+      "sha256": "834cb75f01140cf84bf8bbdbcf84a4a5dfeadc33b233011ca3553861f4d89aff",
+      "entropy_uint32_be": [
+        2202842975,
+        18091256,
+        1274592219,
+        3481576613,
+        3756710963,
+        2989687068,
+        2740271201,
+        4107836159
+      ],
+      "first_four_raw_uint64": [
+        1316220284633434641,
+        4113999770397532539,
+        8663395894587933247,
+        883761964385943872
+      ]
+    },
+    {
+      "namespace": [
+        "HMG-B-SEED-CANDIDATE-v1",
+        17,
+        "public_fixture",
+        "PUBLIC-SEED-VECTOR",
+        3,
+        "evaluator"
+      ],
+      "encoded_utf8": "[\"HMG-B-SEED-CANDIDATE-v1\",17,\"public_fixture\",\"PUBLIC-SEED-VECTOR\",3,\"evaluator\"]",
+      "sha256": "6cb59c229ea40cfcce050780ce68c8b141ad8890aeabbd0b01a473d0fa329154",
+      "entropy_uint32_be": [
+        1823841314,
+        2661551356,
+        3456436096,
+        3462973617,
+        1101891728,
+        2930490635,
+        27554768,
+        4197618004
+      ],
+      "first_four_raw_uint64": [
+        6249882972146048188,
+        17337962348764008346,
+        6656345066208575908,
+        1119228145598659965
+      ]
+    },
+    {
+      "namespace": [
+        "HMG-B-SEED-CANDIDATE-v1",
+        17,
+        "public_fixture",
+        "PUBLIC-SEED-VECTOR",
+        3,
+        "secondary_mean"
+      ],
+      "encoded_utf8": "[\"HMG-B-SEED-CANDIDATE-v1\",17,\"public_fixture\",\"PUBLIC-SEED-VECTOR\",3,\"secondary_mean\"]",
+      "sha256": "5610e3ff5eeeec9c5358d7e721cb6db618038a2fda6413b24a2d5eb491552c3f",
+      "entropy_uint32_be": [
+        1443947519,
+        1592716444,
+        1398331367,
+        566980022,
+        402885167,
+        3663991730,
+        1244487348,
+        2438278207
+      ],
+      "first_four_raw_uint64": [
+        5842810016852481147,
+        13051831305353214755,
+        9154106088716174900,
+        11988303503506580237
+      ]
+    }
+  ],
+  "scientific_approval": false,
+  "production_rule_changed": false
+}

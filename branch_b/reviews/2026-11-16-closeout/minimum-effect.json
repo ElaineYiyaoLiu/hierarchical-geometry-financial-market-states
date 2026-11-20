@@ -1,0 +1,22 @@
+{
+  "approval_granted": false,
+  "blockers": [
+    "primary_metric_definition: relative evidence file inside the public repository required",
+    "substantive_rationale: relative evidence file inside the public repository required",
+    "original_decision: relative evidence file inside the public repository required",
+    "approval_signature: relative evidence file inside the public repository required",
+    "inspection_chronology_attestation: relative evidence file inside the public repository required",
+    "positive finite substantive effect value required from original decision",
+    "effect_orientation_and_units missing",
+    "approval_authority missing",
+    "freeze_id missing",
+    "chronology: UTC timestamp required"
+  ],
+  "historical_chronology_independently_verified": false,
+  "input_sha256": "e29f17608498a978caccaa574bbaf5b140ead501726c301523e3738da13a2685",
+  "note": "Exact-byte references and recorded dates are checked. Reviewer must verify original decision contents, signatures, authority and earliest-inspection completeness. A present-day approval cannot establish a historical freeze.",
+  "pilot_exchange_authorized": false,
+  "record": "minimum_effect_provenance_consistency_check",
+  "recorded_chronology_consistent": false,
+  "status": "BLOCKED"
+}

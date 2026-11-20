@@ -1,0 +1,20 @@
+{
+  "reviewed_at_utc": "2026-11-17T00:58:43.924780+00:00",
+  "actual_content_reviewed": true,
+  "branch_b_public_disclosure_permitted": true,
+  "scope": "new docs, generic arithmetic reference utility, test records, public-source fingerprints, existing gate audits",
+  "excluded": [
+    "packet PDFs",
+    "mailbox message bodies or identifiers",
+    "private repository source or paths",
+    "hidden configurations or mappings",
+    "generator-owned seeds",
+    "latent labels or true hierarchy",
+    "sealed results"
+  ],
+  "production_scientific_source_diff": "",
+  "approval_registers_unchanged": true,
+  "all_approval_flags_remain_false": true,
+  "new_interval_and_seed_text_status": "proposal only; no execution/adoption in scientific workflow",
+  "notification_sent": false
+}

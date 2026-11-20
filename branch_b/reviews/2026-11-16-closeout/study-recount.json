@@ -1,0 +1,7 @@
+{
+  "status": "INDEPENDENT_RECOUNT_PASSED",
+  "expanded_records": 2400,
+  "sensitivity_records": 600,
+  "checks": "coverage recomputed from endpoints and analytic toy targets; failure status counts recounted",
+  "shared_shift_warning": "zero is the marginal across-shift target, not the mean conditional on a fixed realized shift"
+}

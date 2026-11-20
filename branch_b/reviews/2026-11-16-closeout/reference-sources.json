@@ -1,0 +1,11 @@
+{
+  "paper_url": "https://arxiv.org/pdf/1905.10566v3",
+  "paper_sha256": "fa637bced9e806633efd5ecbcdcf39a1169b29f57697d0d60221e8d86c031e4e",
+  "authors_repo": "https://github.com/PerretB/ultrametric-fitting",
+  "authors_commit": "6c233e2842af3c1e56b989059fa503091f646a31",
+  "authors_files": {
+    "ultrametric/optimization.py": "7b2b57152493187902aa948cc9a9899ea06cec31ce729bbeca5d6d28de769c15",
+    "ultrametric/loss.py": "a18d52d8c513348a7145cf025a00fb904c77135c126d5ef13f13412876c0a09f"
+  },
+  "scope": "source inspection only; authors runtime not executed; no copyrighted PDF copied into shared repository"
+}

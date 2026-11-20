@@ -1,0 +1,23 @@
+{
+  "branch_b/decision_proposals/week10_pl_closeout_2026-11-16.md": "5f6f6dd904c731bf9ed4257d9890c694ad5aec76c5d009a55fe6c3ce85dee3bb",
+  "branch_b/decision_proposals/week10_method_conformance_2026-11-16.md": "da34a2b940a4fa5feec2d3f5372c8605d0e4a4524896d7a12a4fadc9c1ab0bf2",
+  "branch_b/decision_proposals/week10_analysis_operations_draft_2026-11-16.md": "d63723296eac884e8df534d7969fdbba0f44f3be80638b98a35f0d7965e0bdb7",
+  "governance/pl_external_inputs_2026-11-16.md": "f4a3fbf51aec792356d068bb365d77e6e699f54180940f758c2f3e3b950f161b",
+  "branch_b/reviews/2026-11-16-closeout/README.md": "657337a6ffeadc89653c416d1b45a21ea8652c7776ba0c9cbc251e25cd984d41",
+  "branch_b/reviews/2026-11-16-closeout/dependency-check.txt": "07ce841bcffeb2e0973ffd6be0fe9b69c36d1105251b755058f0c579c74c5548",
+  "branch_b/reviews/2026-11-16-closeout/disclosure-review.json": "e769db64b7b65daf5d92f198f93e9486e38aee36bf626eeea92fa6bfd4383dda",
+  "branch_b/reviews/2026-11-16-closeout/environment.json": "a2589cd5edb9422449fd0170a93690f070deeeb3e26eeb52390b93a08364d67e",
+  "branch_b/reviews/2026-11-16-closeout/freezes.json": "947aeec7154f9ebd11d028f6a6088af358bad2cef9e716b88db7e526243fb51f",
+  "branch_b/reviews/2026-11-16-closeout/full-junit.xml": "f8fb690972c3cacf9d165458555121820490007a256802e10fe9abb387a17213",
+  "branch_b/reviews/2026-11-16-closeout/full-pytest.log": "ab8c556b2b4f413a42aa5e14244bf2fa3864f39ba524706362b7280ca7c3f234",
+  "branch_b/reviews/2026-11-16-closeout/minimum-effect.json": "e28a4c74919556296a27f4b6f8e6d3a1faf9f0aa1cf90339577152ca0ccecd29",
+  "branch_b/reviews/2026-11-16-closeout/pip-freeze.txt": "a2520e76a1bbef82dbc0403dd7b3b9c00fe1de946ca96bec18fb9f72ee456960",
+  "branch_b/reviews/2026-11-16-closeout/pre-pilot.json": "5f255deb8766e757064813e3755b98f3066335709980cebd989c1ce7cc5e6396",
+  "branch_b/reviews/2026-11-16-closeout/queue.json": "56cefdd795fe5f80e6660c47f2c51136a9ba78c258e82e1c5e33f4786d549076",
+  "branch_b/reviews/2026-11-16-closeout/reference-checks.json": "c5034084b21c929575a0bf6142fa7d0cbe1c05ae46ed16b2f191d74184373228",
+  "branch_b/reviews/2026-11-16-closeout/reference-sources.json": "a6cbb976418ca1d52f39beb59348b6ba3322dfc354dc0195e3c856233876615f",
+  "branch_b/reviews/2026-11-16-closeout/reference_checks.py": "14ce6fdfd739ad5d57175b45f6189d6f6f283bf2ecd0c19eeebb60feb265bea5",
+  "branch_b/reviews/2026-11-16-closeout/source-sha256.json": "e1999fd6e84386a0b4b0d4b2505884ae558b62bd13e10ff0de2f016db23f51cc",
+  "branch_b/reviews/2026-11-16-closeout/study-audit.json": "4b556350f5d00b6402c0916a796a82b94051d5761a5c6bc3cf48d043cd2f4fd2",
+  "branch_b/reviews/2026-11-16-closeout/study-recount.json": "e067985a83650da0bed1c3ac7f99a2a807c6517230524766d7e26b468306ec8b"
+}
